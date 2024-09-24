@@ -7,14 +7,14 @@ import { Link } from 'react-router-dom';
 const ProductCard01 = () => {
     return (
         <div className='w-[270px] group'>
-            <div className="image relative overflow-hidden">
+            <div className="image w-[270px] h-[236px] relative overflow-hidden">
                 <div className="icons absolute top-[11px] -left-full group-hover:left-[11px] flex gap-2 transition-all duration-500">
                     <Link className='w-[30px] h-[30px] rounded-full text-[#2F1AC4] bg-[#EEEFFB] flex justify-center items-center'><IoCartOutline /></Link>
                     <Link className='w-[30px] h-[30px] rounded-full text-[#1389FF] bg-[#EEEFFB] flex justify-center items-center'><FaRegHeart /></Link>
                     <Link className='w-[30px] h-[30px] rounded-full text-[#1DB4E7] bg-[#EEEFFB] flex justify-center items-center'><MdOutlineReviews /></Link>
                 </div>
-                <div className='bg-[#F6F7FB] flex justify-center items-center p-6'>
-                    <img src="/Chair1.png" alt="" />
+                <div className='w-full h-full bg-[#F6F7FB] flex justify-center items-center p-6'>
+                    <img src="/Chair1.png" alt="" className='w-full h-full object-contain'/>
                     </div>
                 
                 <button className='absolute -bottom-full group-hover:bottom-[10px] left-1/2 -translate-x-1/2 capitalize bg-[#08D15F] py-2 px-3 transition-all duration-500'>View Details</button>

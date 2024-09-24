@@ -13,7 +13,6 @@ const Featured = () => {
                     <ProductCard01></ProductCard01>
                     <ProductCard01></ProductCard01>
                     <ProductCard01></ProductCard01>
-                    <ProductCard01></ProductCard01>
                 </div>
             </Container>
         </div>
