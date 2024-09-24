@@ -6,6 +6,10 @@ import Featured from '../../components/Home/Featured';
 import Leatest from '../../components/Home/Leatest';
 import Support from '../../components/Home/Support';
 import Trending from '../../components/Home/Trending';
+import Categories from '../../components/Home/Categories';
+import SingleBanner from '../../components/Home/SingleBanner';
+import Company from '../../components/Home/Company';
+import Blogs from '../../components/Home/Blogs';
 
 const Home = () => {
     return (
@@ -15,6 +19,10 @@ const Home = () => {
            <Leatest></Leatest>
            <Support></Support>
            <Trending></Trending>
+           <Categories></Categories>
+           <SingleBanner></SingleBanner>
+           <Company></Company>
+           <Blogs></Blogs>
            
         </div>
     );

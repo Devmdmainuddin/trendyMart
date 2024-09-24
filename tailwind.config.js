@@ -12,6 +12,7 @@ export default {
     extend: {
       boxShadow: {
         'customshadow': '0px 8px 40px 0px rgba(49, 32, 138, 0.05)', // Define custom shadow
+        'cusshadow': '0px 12px 40px 0px rgba(49, 32, 138, 0.05)', 
       },
     },
   },
