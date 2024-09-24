@@ -11,6 +11,8 @@ import SingleBanner from '../../components/Home/SingleBanner';
 import Company from '../../components/Home/Company';
 import Blogs from '../../components/Home/Blogs';
 import Banner03 from '../../components/Home/Banner03';
+import FeaturesBanner from '../../components/Home/FeaturesBanner';
+import DiscountItem from '../../components/Home/DiscountItem';
 
 const Home = () => {
     return (
@@ -19,8 +21,10 @@ const Home = () => {
            <Featured></Featured>
            <Leatest></Leatest>
            <Support></Support>
+           <FeaturesBanner></FeaturesBanner>
            <Trending></Trending>
            <Banner03></Banner03>
+           <DiscountItem></DiscountItem>
            <Categories></Categories>
            <SingleBanner></SingleBanner>
            <Company></Company>
