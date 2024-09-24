@@ -7,8 +7,8 @@ const Featured = () => {
     return (
         <div>
             <Container>
-                <Heading text='Featured Products' className='text-center'></Heading>
-                <div className='flex gap-[30px] flex-wrap mx-auto'>
+                <Heading text='Featured Products ' className='text-center mt-[129px]'></Heading>
+                <div className='flex gap-[30px] flex-wrap mx-auto mt-12'>
                     <ProductCard01></ProductCard01>
                     <ProductCard01></ProductCard01>
                     <ProductCard01></ProductCard01>

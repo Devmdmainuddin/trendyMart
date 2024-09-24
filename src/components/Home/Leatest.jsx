@@ -7,8 +7,8 @@ const Leatest = () => {
     return (
         <div>
             <Container>
-                <Heading text='Leatest Products' className='text-center'></Heading>
-                <div className='flex justify-center'>
+                <Heading text='Leatest Products' className='text-center mt-[129px]'></Heading>
+                <div className='flex justify-center mt-[18px]'>
                     <ul className='flex gap-[60px] mt-5 items-center'>
                         <li className='text-lg font-bold leading-[22px]  text-[#151875] hover:text-[#FB2E86] transition-all duration-500'> <button>New Arrival</button></li>
                         <li className='text-lg font-bold leading-[22px]  text-[#151875] hover:text-[#FB2E86] transition-all duration-500'> <button>Best Seller</button></li>

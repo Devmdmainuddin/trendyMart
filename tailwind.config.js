@@ -9,7 +9,11 @@ export default {
       'josefin': ["Josefin Sans", 'sans-serif'],
      
     },
-    extend: {},
+    extend: {
+      boxShadow: {
+        'customshadow': '0px 8px 40px 0px rgba(49, 32, 138, 0.05)', // Define custom shadow
+      },
+    },
   },
   plugins: [
     require('daisyui'),

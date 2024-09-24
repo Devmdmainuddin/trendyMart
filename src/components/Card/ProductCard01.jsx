@@ -17,7 +17,7 @@ const ProductCard01 = () => {
                     <img src="/Chair1.png" alt="" className='w-full h-full object-contain'/>
                     </div>
                 
-                <button className='absolute -bottom-full group-hover:bottom-[10px] left-1/2 -translate-x-1/2 capitalize bg-[#08D15F] py-2 px-3 transition-all duration-500'>View Details</button>
+                <button className='absolute -bottom-full group-hover:bottom-[10px] left-1/2 -translate-x-1/2 capitalize text-white bg-[#08D15F] py-2 px-3 transition-all duration-500'>View Details</button>
                 
             </div>
             <div className="content text-center py-4 group-hover:bg-[#2F1AC4] text-white transition-all duration-500">
