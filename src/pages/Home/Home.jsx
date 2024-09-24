@@ -10,6 +10,7 @@ import Categories from '../../components/Home/Categories';
 import SingleBanner from '../../components/Home/SingleBanner';
 import Company from '../../components/Home/Company';
 import Blogs from '../../components/Home/Blogs';
+import Banner03 from '../../components/Home/Banner03';
 
 const Home = () => {
     return (
@@ -19,6 +20,7 @@ const Home = () => {
            <Leatest></Leatest>
            <Support></Support>
            <Trending></Trending>
+           <Banner03></Banner03>
            <Categories></Categories>
            <SingleBanner></SingleBanner>
            <Company></Company>
