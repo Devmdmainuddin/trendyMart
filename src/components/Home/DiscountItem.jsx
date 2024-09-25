@@ -7,9 +7,9 @@ const DiscountItem = () => {
     return (
         <div>
             <Container>
-                <Heading text='Discount Item' className='text-center mt-[129px]'></Heading>
-                <div className='flex justify-center mt-[18px]'>
-                    <ul className='flex gap-6 mt-5 items-center'>
+                <Heading text='Discount Item' className='text-center mt-6 md:mt-[129px]'></Heading>
+                <div className='flex justify-center md:mt-[18px]'>
+                    <ul className='flex gap-6 md:mt-5 items-center'>
                         <li className='text-lg font-bold leading-[22px]  text-[#151875] hover:text-[#FB2E86] transition-all duration-500'> <button>Wood Chair</button></li>
                         <li className='text-lg font-bold leading-[22px]  text-[#151875] hover:text-[#FB2E86] transition-all duration-500'> <button>Plastic Chair</button></li>
                         <li className='text-lg font-bold leading-[22px]  text-[#151875] hover:text-[#FB2E86] transition-all duration-500'> <button>Sofa Colletion</button></li>
@@ -17,7 +17,7 @@ const DiscountItem = () => {
 
                     </ul>
                 </div>
-                <div className='mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-between'>
+                <div className='mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-between'>
                     <div className="content">
                         <h2 className='text-[26px] text-[#151875] font-josefin font-semibold leading-[26px] '>23% off in all products</h2>
                         <h3 className='text-[#FB2E86] text-[21px] font-josefin font-normal mt-4'>Eams Sofa Compact</h3>

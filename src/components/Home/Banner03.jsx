@@ -6,26 +6,26 @@ const Banner03 = () => {
 
         <div className='mt-10'>
             <Container>
-                <div className='flex flex-wrap gap-[30px] items-center justify-between'>
+                <div className='flex flex-wrap justify-center gap-[30px] items-center md:justify-between'>
                     <div className='bg-[#FFF6FB] w-[420px]'>
-                    <div className="content pl-6 pt-[34px]">
-                            <h2 className='text-[26px] text-[#151875] font-josefin font-semibold leading-[26px] '>23% off in all products</h2>
-                            <button className='text-[#FB2E86] font-josefin font-semibold mt-3 capitalize  inline-block underline' >Shop Now</button>
-                        </div>
-                        <div className="image w-[312px] h-[173px]  ml-auto ">
-                            <img src="/ban01.png" alt="" className='w-full h-full object-contain'/>
-                        </div>
-
-                    </div>
-                    <div  className='bg-[#EEEFFB]  w-[420px]'>
-                    
-                       
                         <div className="content pl-6 pt-[34px]">
                             <h2 className='text-[26px] text-[#151875] font-josefin font-semibold leading-[26px] '>23% off in all products</h2>
                             <button className='text-[#FB2E86] font-josefin font-semibold mt-3 capitalize  inline-block underline' >Shop Now</button>
                         </div>
                         <div className="image w-[312px] h-[173px]  ml-auto ">
-                            <img src="/ban02.png" alt="" className='w-full h-full object-cover'/>
+                            <img src="/ban01.png" alt="" className='w-full h-full object-contain' />
+                        </div>
+
+                    </div>
+                    <div className='bg-[#EEEFFB]  w-[420px]'>
+
+
+                        <div className="content pl-6 pt-[34px]">
+                            <h2 className='text-[26px] text-[#151875] font-josefin font-semibold leading-[26px] '>23% off in all products</h2>
+                            <button className='text-[#FB2E86] font-josefin font-semibold mt-3 capitalize  inline-block underline' >Shop Now</button>
+                        </div>
+                        <div className="image w-[312px] h-[173px]  ml-auto ">
+                            <img src="/ban02.png" alt="" className='w-full h-full object-cover' />
                         </div>
 
                     </div>

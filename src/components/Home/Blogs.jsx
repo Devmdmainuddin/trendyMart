@@ -5,10 +5,10 @@ import ProductCard05 from '../Card/ProductCard05';
 
 const Blogs = () => {
     return (
-        <div className='mt-[96px]'>
+        <div className='mt-6 md:mt-16 lg:mt-[96px]'>
             <Container>
                 <Heading text='Leatest Blog' className='text-center'></Heading>
-                <div className='flex gap-[40px] flex-wrap mx-auto mt-[80px] justify-between'>
+                <div className='flex gap-[40px] justify-center flex-wrap mx-auto mt-9 md:mt-[80px] md:justify-between'>
                     <ProductCard05></ProductCard05>
                     <ProductCard05></ProductCard05>
                     <ProductCard05></ProductCard05>

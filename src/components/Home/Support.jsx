@@ -7,7 +7,7 @@ const Support = () => {
         <section>
             <Container>
                 <Heading text='What Shopex Offer!' className='text-center my-[58px]'></Heading>
-                <div className='flex gap-[30px] flex-wrap mx-auto '>
+                <div className='flex gap-[30px] justify-center flex-wrap mx-auto '>
                     {/* card-01 */}
                     <div className='w-[270px] shadow-customshadow p-7 hover:bg-[#5699f0] group  transition-all duration-500'>
                         <div className="image w-[65px] h-[65px] mx-auto flex justify-center items-center mt-[61px] mb-[22px]">

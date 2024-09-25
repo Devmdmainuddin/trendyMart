@@ -1,8 +1,11 @@
 import React from 'react';
+import Bredcumb from '../../components/Shared/Bredcumb';
 
 const Contact = () => {
     return (
         <div>
+            <Bredcumb></Bredcumb>
+
             <section className="flex w-[70%] mx-auto mt-[70px] mb-[70px] justify-between">
                 <div className="sect2a w-[50%] mr-[20px] ml-[15px]">
                     <h3 className="text-[#151875] font-[Josefin Sans] text-[30px] mb-[20px] mt-[30px]">Information About Us</h3>

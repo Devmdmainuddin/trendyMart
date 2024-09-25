@@ -6,13 +6,13 @@ const Categories = () => {
     return (
         <div>
             <Container>
-            <Heading text='Top Categories' className='text-center mt-[128px]'></Heading>
-            <div className='flex gap-[30px] flex-wrap mx-auto mt-12'>
-                <ProductCard04></ProductCard04>
-                <ProductCard04></ProductCard04>
-                <ProductCard04></ProductCard04>
-                <ProductCard04></ProductCard04>
-            </div>
+                <Heading text='Top Categories' className='text-center mt-6 md:mt-[128px]'></Heading>
+                <div className='flex gap-[30px] flex-wrap justify-center mx-auto mt-12'>
+                    <ProductCard04></ProductCard04>
+                    <ProductCard04></ProductCard04>
+                    <ProductCard04></ProductCard04>
+                    <ProductCard04></ProductCard04>
+                </div>
             </Container>
         </div>
     );

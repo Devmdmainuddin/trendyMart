@@ -21,9 +21,9 @@ const ProductCard02 = () => {
 
             </div>
             <div className="content flex justify-between items-baseline py-4">
-                <h2 className='text-lg font-bold leading-[22px]  text-[#151875] hover:text-[#FB2E86] transition-all duration-500'>cantilever chair</h2>
+                <h2 className='text-lg font-bold leading-[22px]  text-[#151875] hover:text-[#FB2E86] transition-all duration-500 capitalize'>cantilever chair</h2>
                 <div className='text-sm font-josefin font-normal flex gap-2'><p>$ <span >42.00</span></p>
-                <p className='text-sm font-josefin font-normal text-[#FB2E86]'>$ <span>65.00</span></p>
+                <p className='text-sm font-josefin font-normal text-[#FB2E86] line-through'>$ <span>65.00</span></p>
                 </div>
             </div>
         </div>

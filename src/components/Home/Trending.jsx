@@ -8,7 +8,7 @@ const Trending = () => {
         <div>
             <Container>
                 <Heading text='trending products' className='text-center mt-[128px]'></Heading>
-                <div className='flex gap-[30px] flex-wrap mx-auto mt-10'>
+                <div className='flex gap-[30px] justify-center flex-wrap mx-auto mt-10'>
                 <ProductCard03></ProductCard03>
                 <ProductCard03></ProductCard03>
                 <ProductCard03></ProductCard03>

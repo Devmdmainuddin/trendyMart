@@ -12,7 +12,7 @@ const Footer = () => {
                         <div className='flex flex-wrap gap-[70px]'>
                             <div className='md:w-2/5'>
                                 <img src="/Hekto.png" alt="" className='w-[110px] h-[38px]' />
-                                <div className='mt-8 w-[377px]'>
+                                <div className='mt-8 w-auto md:w-[377px]'>
                                     <input type="email" name="" id="" placeholder='Enter Email Address' className='py-[14px] text-[#8A8FB9] bg-[] px-6 border-0 outline-0' />
                                     <button className='capitalize bg-[#FB2E86] text-white text-[17px] font-semibold py-[14px] px-6 '>sign up</button>
 
