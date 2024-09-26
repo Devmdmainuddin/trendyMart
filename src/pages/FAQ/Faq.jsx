@@ -72,7 +72,7 @@ const Faq = () => {
                 navigation={true}
                 thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
                 modules={[Navigation, Thumbs]}
-                className="mySwiper  w-[375px] h-[487px] "
+                className="mySwiper w-[355px] h-[457px] md:w-[375px] md:h-[487px] "
               >
                 <SwiperSlide className='w-full h-full '><Image src='/th01.png'></Image></SwiperSlide>
                 <SwiperSlide className=' w-full h-full  '><Image src='/th02.png'></Image></SwiperSlide>

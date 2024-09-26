@@ -19,6 +19,10 @@ const Navbar = () => {
                         <li class="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/about">About</NavLink></li>
                         <li class="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/contact">Contact</NavLink></li>
                         <li class="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/FAQ">FAQ</NavLink></li>
+                        <li class="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/cart">cart</NavLink></li>
+                        <li class="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/orderComplete">orderComplete</NavLink></li>
+                        <li class="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/checkout">checkout</NavLink></li>
+                        <li class="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/myAccount/login">My Account</NavLink></li>
                     </ul>
                 </div>
                 <div className='flex items-center h-10'>
