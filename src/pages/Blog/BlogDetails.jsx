@@ -1,9 +1,11 @@
-import { FaFacebook, FaInstagramSquare, FaPenNib, FaSearch, FaTwitterSquare } from "react-icons/fa";
+import { FaFacebook, FaInstagramSquare, FaLongArrowAltLeft, FaLongArrowAltRight, FaPenNib, FaSearch, FaTwitterSquare } from "react-icons/fa";
 import Bredcumb from "../../components/Shared/Bredcumb";
 import Container from "../../components/Shared/Container";
 import { IoCalendarOutline } from "react-icons/io5";
 import Image from "../../components/Shared/Image";
 import { Link } from "react-router-dom";
+import ProductCart09 from "../../components/Card/ProductCart09";
+import Company from "../../components/Home/Company";
 
 
 const BlogDetails = () => {
@@ -40,17 +42,44 @@ const BlogDetails = () => {
 
                                         toamk risusu” </p>
 
-                                    <div className="flex gap-8">
+                                    <div className="flex gap-8 mt-[43px] flex-col md:flex-row">
                                         <div>
-                                            <img src="" alt="" />
+                                            <img src="/blog01.jpg" alt="" />
                                         </div>
                                         <div>
-                                            <img src="" alt="" />
+                                            <img src="blog02.jpg" alt="" />
                                         </div>
                                     </div>
+                                    <p className='max-w-[852px] mt-[63px] text-[#8A8FB9] font-josefin font-normal text-[16px]' >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, </p>
                                 </div>
 
                             </div>
+                            <div className='flex gap-3 flex-wrap justify-center mx-auto mt-[58px]'>
+
+                                <ProductCart09></ProductCart09>
+                                <ProductCart09></ProductCart09>
+                                <ProductCart09></ProductCart09>
+                                <ProductCart09></ProductCart09>
+                            </div>
+                            <p className='max-w-[852px] text-[#8A8FB9] font-josefin font-normal text-[16px] py-12 border-b border-[#e3e4e4]' >
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc,
+                            </p>
+                            <div className="flex justify-center items-center">
+
+                                <div className='flex gap-2  items-center  mt-7'>
+                                    <Link><FaFacebook className='text-[#5625DF] text-2xl p-1' /></Link>
+                                    <Link><FaInstagramSquare className='text-[#FF27B7] text-2xl p-1' /></Link>
+                                    <Link><FaTwitterSquare className='text-[#37DAF3] text-2xl p-1' /></Link>
+                                </div>
+                            </div>
+
+                            <div className="mt-6 bg-[#F7F8FB] flex justify-between p-3 rounded-[3px]">
+                                <p className="text-[#8A8FB9] text-[16px] font-josefin font-medium flex gap-1 items-center"> <FaLongArrowAltLeft /> Previous Post</p>
+                                <p className="text-[#8A8FB9] text-[16px] font-josefin font-medium flex gap-1 items-center"> Next Post  <FaLongArrowAltRight /></p>
+
+                            </div>
+
+
                         </div>
                     </main>
                     <aside className='w-[270px] pb-6'>
@@ -223,6 +252,65 @@ const BlogDetails = () => {
                 </div>
 
             </Container>
+
+            <Company></Company>
+            <Container>
+                <div>
+                    <div className="w-[668px] shadow-customshadow p-[14px] flex gap-[14px] items-center">
+                        <div>
+                        <div className="image w-[103px] h-[106px]">
+                            <img src="/tas.png" alt="" className="w-full h-full object-cover" />
+                        </div>
+                        </div>
+                        
+                        <div className="content">
+                            <div className="flex justify-between">
+                                <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
+                                <span className="text-[#A3A2B6] text-[12px] font-normal">Jan 09 2020</span>
+                            </div>
+                            <p className="text-[12px] font-normal font-josefin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At in vitae rutrum vulputate consectetur.</p>
+                            <p className="text-[12px] font-normal font-josefin">consectetur</p>
+                        </div>
+
+                    </div>
+                    <div className="w-[668px] shadow-customshadow p-[14px] flex gap-[14px] items-center">
+                        <div>
+                        <div className="image w-[103px] h-[106px]">
+                            <img src="/tas.png" alt="" className="w-full h-full object-cover" />
+                        </div>
+                        </div>
+                        
+                        <div className="content">
+                            <div className="flex justify-between">
+                                <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
+                                <span className="text-[#A3A2B6] text-[12px] font-normal">Jan 09 2020</span>
+                            </div>
+                            <p className="text-[12px] font-normal font-josefin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At in vitae rutrum vulputate consectetur.</p>
+                            <p className="text-[12px] font-normal font-josefin">consectetur</p>
+                        </div>
+
+                    </div>
+                    <div className="w-[668px] shadow-customshadow p-[14px] flex gap-[14px] items-center">
+                        <div>
+                        <div className="image w-[103px] h-[106px]">
+                            <img src="/tas.png" alt="" className="w-full h-full object-cover" />
+                        </div>
+                        </div>
+                        
+                        <div className="content">
+                            <div className="flex justify-between">
+                                <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
+                                <span className="text-[#A3A2B6] text-[12px] font-normal">Jan 09 2020</span>
+                            </div>
+                            <p className="text-[12px] font-normal font-josefin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At in vitae rutrum vulputate consectetur.</p>
+                            <p className="text-[12px] font-normal font-josefin">consectetur</p>
+                        </div>
+
+                    </div>
+                </div>
+            </Container>
+
+
 
         </div>
     );
