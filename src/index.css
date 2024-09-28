@@ -6,3 +6,30 @@
 .active{
     @apply text-[#FB2E86]
   }
+
+  /* Hide the content for all slides */
+/* .slider-content {
+  display: none;
+} */
+
+/* Display the content for the center slide */
+/* .slick-center .slider-content {
+  display: block !important;
+} */
+
+/* Make the image of the center slide slightly transparent (optional) */
+/* .slick-center img {
+  opacity: 0.5;
+  transition: opacity 0.5s ease-in-out;
+} */
+
+/* Ensure the opacity for non-center images remains normal */
+/* .slick-slide img {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+} */
+/* .slider-item{
+
+  display:block
+
+} */

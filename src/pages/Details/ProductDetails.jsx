@@ -18,9 +18,8 @@ import { MdOutlineArrowOutward } from 'react-icons/md';
 import Heading from '../../components/Shared/Heading'
 import ProductCard08 from '../../components/Card/ProductCard08';
 import Company from '../../components/Home/Company'
-
-const Faq = () => {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+const ProductDetails = () => {
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [swiperDirection, setSwiperDirection] = useState('horizontal'); // Default direction is horizontal
 
 
@@ -41,8 +40,8 @@ const Faq = () => {
     };
   }, []);
 
-  return (
-    <div>
+    return (
+        <div>
       <Bredcumb />
       <Container>
         <div className='flex flex-col lg:flex-row justify-center items-center  gap-8  my-[121px]'>
@@ -162,7 +161,7 @@ const Faq = () => {
 
 
     </div>
-  );
+    );
 };
 
-export default Faq;
+export default ProductDetails;

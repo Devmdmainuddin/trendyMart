@@ -12,6 +12,7 @@ import Checkout from "../pages/checkOut/Checkout";
 import Login from "../pages/Authentication/Login";
 import Registation from "../pages/Authentication/Registation";
 import Error from "../pages/Error/Error";
+import ProductDetails from "../pages/Details/ProductDetails";
 
 
 
@@ -29,6 +30,12 @@ export const router = createBrowserRouter([
                 path: "/products",
                 element: <Products />,
               },
+              {
+                path: "/product/:id",
+                element: <ProductDetails />,
+                loader: ({ params }) => fetch(`https://shop-fusion-server-one.vercel.app/product/${params.id}`)
+              },
+
               {
                 path: "/blogs",
                 element: <Blogs />,

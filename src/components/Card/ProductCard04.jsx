@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductCard04 = () => {
+const ProductCard04 = ({product}) => {
     return (
         <div className='w-[269px] group '>
             {/* <div className='relative w-[269px] h-[269px] bg-[#9877E7]   rounded-full'>

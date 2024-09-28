@@ -7,7 +7,7 @@ const Leatest = () => {
     return (
         <div>
             <Container>
-                <Heading text='Leatest Products' className='text-center mt-6 md:mt-[129px]'></Heading>
+                <Heading text='Leatest Products' className='text-center mt-16 md:mt-[129px]'></Heading>
                 <div className='flex justify-center md:mt-[18px]'>
                     <ul className='flex gap-4 lg:gap-[60px] flex-wrap mt-5 items-center'>
                         <li className='text-lg font-bold leading-[22px]  text-[#151875] hover:text-[#FB2E86] transition-all duration-500'> <button>New Arrival</button></li>
