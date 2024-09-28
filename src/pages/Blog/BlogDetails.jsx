@@ -1,35 +1,57 @@
-import React from 'react';
-import ProductCard06 from '../../components/Card/ProductCard06';
-import ProductCard07 from '../../components/Card/ProductCard07';
-import ProductCard08 from '../../components/Card/ProductCard08';
-import Bredcumb from '../../components/Shared/Bredcumb';
-import Sidebar from '../../components/Shared/Sidebar';
-import FilterBar from '../../components/Shared/FilterBar';
-import Container from '../../components/Shared/Container';
-import BlogCard from '../../components/Card/BlogCard';
-import { FaFacebook, FaInstagramSquare, FaSearch, FaTwitterSquare } from 'react-icons/fa';
-import Image from '../../components/Shared/Image';
-import { Link } from 'react-router-dom';
-import Company from '../../components/Home/Company';
+import { FaFacebook, FaInstagramSquare, FaPenNib, FaSearch, FaTwitterSquare } from "react-icons/fa";
+import Bredcumb from "../../components/Shared/Bredcumb";
+import Container from "../../components/Shared/Container";
+import { IoCalendarOutline } from "react-icons/io5";
+import Image from "../../components/Shared/Image";
+import { Link } from "react-router-dom";
 
-const Blogs = () => {
+
+const BlogDetails = () => {
     return (
         <div>
             <Bredcumb></Bredcumb>
-            {/* <FilterBar></FilterBar> */}
             <Container>
-
-
                 <div className='flex gap-6 flex-col md:flex-row mt-16 md:mt-[125px]'>
                     <main className='flex flex-col gap-8'>
-                        
-                        <BlogCard></BlogCard>
-                        <BlogCard></BlogCard>
-                        <BlogCard></BlogCard>
-                        <BlogCard></BlogCard>
+                        <div>
+                            <div>
+                                <div className="image">
+                                    <img src="/blogs.jpg" alt="" />
+                                </div>
+                                <div className="content mt-7">
+                                    <div className='flex gap-6'>
+                                        <div className='flex gap-2 items-center'>
+                                            <span><FaPenNib className='text-[#FB2E86]' /></span>
+                                            <p className='text-sm font-josefin font-normal #151875 bg-[#FFE7F9] px-3'>Surf Auxion </p>
+                                        </div>
+                                        <div className='flex gap-2 items-center'>
+                                            <span> <IoCalendarOutline className='text-[#f8bb9a]' /></span>
+                                            <p className='text-sm font-josefin font-normal #151875 bg-[#FFECE2] px-3'>Aug 09 2020 </p>
+                                        </div>
 
-                        {/* <BlogCard></BlogCard> */}
 
+                                    </div>
+                                    <h2 className='mt-7 text-[#151875] text-[30px] font-josefin font-bold'>Mauris at orci non vulputate diam tincidunt nec.</h2>
+                                    <p className='max-w-[852px] text-[#8A8FB9] font-josefin font-normal text-[16px]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit facilisis quis auctor pretium ipsum, eu rutrum. Condimentum eu malesuada vitae ultrices in in neque, porta dignissim. Adipiscing purus, cursus vulputate id id dictum at.</p>
+                                    <p className='max-w-[852px] mt-[63px] text-[#8A8FB9] font-josefin font-normal text-[16px]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, </p>
+                                    <p className='max-w-[852px] text-[#8A8FB9] bg-[#FAFAFB] mt-[43px] pt-9 pb-4 px-5 border-l-2 border-[#FC45A0] font-josefin font-normal text-[16px] '>“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dictum sapien, amet, consequat.
+
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dictum sapien, amet, consequat
+
+                                        toamk risusu” </p>
+
+                                    <div className="flex gap-8">
+                                        <div>
+                                            <img src="" alt="" />
+                                        </div>
+                                        <div>
+                                            <img src="" alt="" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </main>
                     <aside className='w-[270px] pb-6'>
                         <h2 className='text-[#151875] text-[22px] font-josefin font-semibold'>Search</h2>
@@ -178,13 +200,13 @@ const Blogs = () => {
                                     <p className='text-[#8A8FB9] text-[12px] font-semibold font-josefin mt-1'>$12.00 - $15.00</p>
                                 </div>
                             </div>
-                          
+
                         </div>
                         <h2 className='text-[#151875] text-[22px] font-josefin font-semibold my-9'>Follow</h2>
                         <div className='flex gap-2  items-center'>
-                            <Link><FaFacebook className='text-[#5625DF] text-2xl'/></Link>
-                            <Link><FaInstagramSquare className='text-[#FF27B7] text-2xl'/></Link>
-                            <Link><FaTwitterSquare className='text-[#37DAF3] text-2xl'/></Link>
+                            <Link><FaFacebook className='text-[#5625DF] text-2xl' /></Link>
+                            <Link><FaInstagramSquare className='text-[#FF27B7] text-2xl' /></Link>
+                            <Link><FaTwitterSquare className='text-[#37DAF3] text-2xl' /></Link>
                         </div>
                         <h2 className='text-[#151875] text-[22px] font-josefin font-semibold mt-[52px] mb-6'>Tags</h2>
                         <div>
@@ -198,21 +220,12 @@ const Blogs = () => {
                         </div>
 
                     </aside>
-                    {/* <Sidebar></Sidebar>
-                    <div>
-                        <h2>blog page</h2>
-                        <ProductCard06></ProductCard06>
-                        <ProductCard07></ProductCard07>
-                        <ProductCard08></ProductCard08>
-                    </div> */}
-
                 </div>
-                <Company></Company>
-            </Container>
 
+            </Container>
 
         </div>
     );
 };
 
-export default Blogs;
+export default BlogDetails;

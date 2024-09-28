@@ -120,37 +120,40 @@ const Featured = () => {
                     */}
 
                 {/* </div> */}
+                <div className='mt-12 '>
+                    <Swiper
+                        modules={[Pagination]}
+                        loop={true}
+                        breakpoints={{
+                            320: {
+                                slidesPerView: 1,
+                                slidesPerGroup: 1,
+                            },
+                            615: {
+                                slidesPerView: 2,
+                                slidesPerGroup: 1,
+                            },
+                            872: {
+                                slidesPerView: 3,
+                                slidesPerGroup: 1,
+                            },
+                            1145: {
+                                slidesPerView: 4,
+                                slidesPerGroup: 1,
+                            },
+                        }}
+                        spaceBetween={0}
+                        pagination={{ clickable: true }}
+                        className="mySwiper featured-products "
+                    >
+                        {data?.map((item, idx) => (
+                            <SwiperSlide key={idx}>
+                                <ProductCard01 item={item}></ProductCard01>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>
 
-                <Swiper
-                    modules={[Pagination]}
-                    breakpoints={{
-                        320: {
-                            slidesPerView: 1,
-                            slidesPerGroup: 1,
-                        },
-                        615: {
-                            slidesPerView: 2,
-                            slidesPerGroup: 1,
-                        },
-                        872: {
-                            slidesPerView: 3,
-                            slidesPerGroup: 1,
-                        },
-                        1145: {
-                            slidesPerView: 4,
-                            slidesPerGroup: 1,
-                        },
-                    }}
-                    spaceBetween={0}
-                    pagination={{ clickable: true }}
-                    className="mySwiper featured-products "
-                >
-                    {data?.map((item,idx) => (
-                        <SwiperSlide key={idx}>
-                           <ProductCard01  item={item}></ProductCard01>
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
 
             </Container>
         </div>

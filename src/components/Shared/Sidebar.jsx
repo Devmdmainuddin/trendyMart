@@ -105,7 +105,7 @@ const Sidebar = () => {
     };
     return (
         <div>
-            <div className='w-[225px]'>
+            <div className=' md:w-[225px] flex items-start justify-start gap-6  flex-wrap'>
 
 
                 {/* Brand */}
@@ -131,7 +131,7 @@ const Sidebar = () => {
                 </div>
                 {/* Offer */}
                 <div >
-                    <h2 className='text-xl text-[#151875] leading-7 font-josefin font-bold underline mt-10'>Discount Offer</h2>
+                    <h2 className='text-xl text-[#151875] leading-7 font-josefin font-bold underline md:mt-10'>Discount Offer</h2>
                     {discountOptions.map((item) => (
                         <div key={item} className='mt-2'>
                             <label className='flex items-center  text-[#7E81A2]'>
@@ -153,7 +153,7 @@ const Sidebar = () => {
 
                 {/* category */}
                 <div >
-                    <h2 className='text-xl text-[#151875] leading-7 font-josefin font-bold underline mt-10'>Categories</h2>
+                    <h2 className='text-xl text-[#151875] leading-7 font-josefin font-bold underline md:mt-10'>Categories</h2>
                     {Categories.map((item) => (
                         <div key={item} className='mt-2'>
                             <label className='flex items-center  text-[#7E81A2]'>
@@ -197,7 +197,7 @@ const Sidebar = () => {
 
                 </div> */}
                 <div>
-                    <h2 className='text-xl text-[#151875] leading-7 font-josefin font-bold underline mt-10'>Price Filter</h2>
+                    <h2 className='text-xl text-[#151875] leading-7 font-josefin font-bold underline md:mt-10'>Price Filter</h2>
                     {priceRanges.map((range, index) => (
                         <div key={index} className='mt-2'>
                             <label className='flex items-center text-[#7E81A2]'>
@@ -227,7 +227,7 @@ const Sidebar = () => {
 
                 {/* filter by color */}
                 <div>
-                    <h2 className='text-xl text-[#151875] leading-7 font-josefin font-bold underline mt-10'>Filter by Color</h2>
+                    <h2 className='text-xl text-[#151875] leading-7 font-josefin font-bold underline md:mt-10'>Filter by Color</h2>
                     {colors.map((color, index) => (
                         <div key={index} className='mt-2'>
                             <label className='flex items-center text-[#7E81A2]'>

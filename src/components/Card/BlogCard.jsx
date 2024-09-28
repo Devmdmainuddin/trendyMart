@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaPenNib } from 'react-icons/fa';
 import { IoCalendarOutline } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 
 const BlogCard = () => {
     return (
@@ -23,10 +24,13 @@ const BlogCard = () => {
                 </div>
                 <h2 className='mt-7 text-[#151875] text-[30px] font-josefin font-bold'>Mauris at orci non vulputate diam tincidunt nec.</h2>
                 <p className='max-w-[852px] text-[#8A8FB9] font-josefin font-normal text-[16px]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit facilisis quis auctor pretium ipsum, eu rutrum. Condimentum eu malesuada vitae ultrices in in neque, porta dignissim. Adipiscing purus, cursus vulputate id id dictum at.</p>
-                <button className='mt-7 text-[#151875] text-ld font-josefin capitalize font-semibold underline'> Read More </button>
+              <Link to='/blogDetails'>
+              
+              <button className='mt-7 text-[#151875] text-ld font-josefin capitalize font-semibold underline'> Read More </button>
+              </Link>  
             </div>
 
-        </div>
+        </div>                                    
     );
 };
 

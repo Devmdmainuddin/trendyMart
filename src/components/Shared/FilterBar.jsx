@@ -8,8 +8,7 @@ const FilterBar = () => {
     return (
         <div>
             <Container>
-                <div className='flex flex-col md:flex-row
-                 justify-between items-center mt-6 md:16 lg:my-[124px] gap-6'>
+                <div className='flex flex-col md:flex-row justify-between items-center mt-6 md:16 lg:my-[124px] gap-6'>
                     <div className="category">
                         <div>
                             <h2 className='text-[#151875] capitalize text-[22px] font-josefin font-bold'>Ecommerce Acceories & Fashion item </h2>

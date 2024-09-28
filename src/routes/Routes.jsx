@@ -13,6 +13,10 @@ import Login from "../pages/Authentication/Login";
 import Registation from "../pages/Authentication/Registation";
 import Error from "../pages/Error/Error";
 import ProductDetails from "../pages/Details/ProductDetails";
+import DefaultProducts from "../pages/Products/DefaultProducts";
+import ShopList from "../pages/Products/ShopList";
+import ShopLeftSidebar from "../pages/Products/ShopLeftSidebar";
+import BlogDetails from "../pages/Blog/BlogDetails";
 
 
 
@@ -35,10 +39,26 @@ export const router = createBrowserRouter([
                 element: <ProductDetails />,
                 loader: ({ params }) => fetch(`https://shop-fusion-server-one.vercel.app/product/${params.id}`)
               },
+              {
+                path: "/ShopGridDefault",
+                element: <DefaultProducts />,
+              },
+              {
+                path: "/shopList",
+                element: <ShopList />,
+              },
+              {
+                path: "/shop_Left_Sidebar",
+                element: <ShopLeftSidebar />,
+              },
 
               {
                 path: "/blogs",
                 element: <Blogs />,
+              },
+              {
+                path: "/blogDetails",
+                element: <BlogDetails />,
               },
               {
                 path: "/about",

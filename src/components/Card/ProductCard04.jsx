@@ -2,6 +2,7 @@ import React from 'react';
 
 const ProductCard04 = ({product}) => {
     return (
+        
         <div className='w-[269px] group '>
             {/* <div className='relative w-[269px] h-[269px] bg-[#9877E7]   rounded-full'>
             <div className='w-[269px] h-[269px] z-50 bg-[#F6F7FB] flex justify-center items-center absolute  group-hover:-top-2 group-hover:-right-2  rounded-full transition-all duration-500 '>

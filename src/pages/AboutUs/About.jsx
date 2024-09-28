@@ -4,59 +4,69 @@ import Container from '../../components/Shared/Container';
 import Image from '../../components/Shared/Image';
 import Heading from '../../components/Shared/Heading';
 import Company from '../../components/Home/Company';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "../../styles/swipers.css";
+import client1 from "/tas.png";
+import client2 from "/tas01.png";
+import client3 from "/tas02.png";
+
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 
 
 const About = () => {
-    const [activeSlide, setActiveSlide] = useState(0);
+    const [commentSlide, setCommentSlide] = useState(1);
+    // const [activeSlide, setActiveSlide] = useState(0);
 
-    const settings = {
+    // const settings = {
+    //     centerMode: true,
+    //     centerPadding: "60px",
+    //     dots: true,
+    //     infinite: true,
+    //     autoplay: true,
+    //     speed: 2000,
+    //     autoplaySpeed: 6000,
+    //     slidesToShow: 3,
+    //     swipeToSlide: true,
+    //     focusOnSelect: true,
 
-        centerMode: true,
-        centerPadding: "60px",
-        dots: true,
-        infinite: true,
-        autoplay: true,
-        speed: 2000,
-        autoplaySpeed: 6000,
-        slidesToShow: 3,
-        swipeToSlide: true,
-        focusOnSelect: true,
+    //     afterChange: (current) => setActiveSlide(current),
 
-        afterChange: (current) => setActiveSlide(current),
+    //     customPaging: (i) => (
+    //         <div
+    //             style={
+    //                 i == activeSlide
+    //                     ? {
+    //                         background: "#FB2E86",
+    //                         width: '27px',
+    //                         height: '3px',
 
-        customPaging: (i) => (
-            <div
-                style={
-                    i == activeSlide
-                        ? {
-                            background: "#FB2E86",
-                            width: '27px',
-                            height: '3px',
+    //                     } : {
+    //                         background: "#FF75B0",
+    //                         width: '27px',
+    //                         height: '3px',
+    //                     }
+    //             }
+    //         >
 
-                        } : {
-                            background: "#FF75B0",
-                            width: '27px',
-                            height: '3px',
-                        }
-                }
-            >
-
-            </div>
-        ),
+    //         </div>
+    //     ),
 
 
-        responsive: [
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                },
-            },
-        ],
-    };
+    //     responsive: [
+    //         {
+    //             breakpoint: 768,
+    //             settings: {
+    //                 slidesToShow: 1,
+    //             },
+    //         },
+    //     ],
+    // };
+
     const slides = [
         {
             img: "/tas.png",
@@ -76,12 +86,7 @@ const About = () => {
             subtitle: "Ceo At Webecy Digital",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non duis ultrices quam vel dui sollicitudin aliquet id arcu. Nam vitae a enim nunc, sed sapien egestas ac nam. Tristique ultrices dolor aliquam lacus volutpat praesent."
         },
-        {
-            img: "/tas01.png",
-            title: "Selina Gomez",
-            subtitle: "Ceo At Webecy Digital",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non duis ultrices quam vel dui sollicitudin aliquet id arcu. Nam vitae a enim nunc, sed sapien egestas ac nam. Tristique ultrices dolor aliquam lacus volutpat praesent."
-        },
+       
     ];
 
     // var settings = {
@@ -177,7 +182,66 @@ const About = () => {
                     <Heading text='Our Client Say!' className='text-center'></Heading>
                     <div className='mt-16'>
                         <div className="slider-container ">
-                            <Slider {...settings} className=''>
+
+                            {/* .............................. */}
+
+                            <div className="flex items-center justify-center w-full mb-7 r">
+                                <img
+                                    src={client1}
+                                    className={`w-[55px] h-[55px] duration-150 ease-in-out ${commentSlide === 0 && "-mt-5"
+                                        }`}
+                                    alt="Sam Bankman-Fried"
+                                />
+                                <img
+                                    src={client2}
+                                    className={`w-[55px] h-[55px] duration-150 ease-in-out mx-7 ${commentSlide === 1 && "-mt-5"
+                                        }`}
+                                    alt="Selina Gomez"
+                                />
+                                <img
+                                    src={client3}
+                                    className={`w-[55px] h-[55px] duration-150 ease-in-out ${commentSlide === 2 && "-mt-5"
+                                        }`}
+                                    alt="Guy Gershon"
+                                />
+
+
+                            </div>
+
+                            <Swiper
+                                modules={[Pagination]}
+                                initialSlide={commentSlide}
+                                slidesPerView={1}
+                                slidesPerGroup={1}
+                                // loop={true}
+                                onRealIndexChange={(element) =>
+                                    setCommentSlide(element.activeIndex)
+                                }
+                                pagination={{ clickable: true }}
+                                className="mySwiper about-us"
+                            >
+                                {slides.map((client, idx) => (
+                                    <SwiperSlide
+                                        className="flex flex-col items-center text-center"
+                                        key={idx}
+                                    >
+                                        <h4 className="font-Lato text-2xl font-semibold text-black mb-1">
+                                            {client.title}
+                                        </h4>
+                                        <h5 className="text-[#8A8FB9] font-Lato text-[14px] mb-5">
+                                            {client.subtitle}
+                                        </h5>
+                                        <p className="text-[#8A8FB9] font-base font-bold text-base font-Lato leading-6 w-7/12">
+                                            {client.description}
+                                        </p>
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+
+
+                            {/* .............................. */}
+
+                            {/* <Slider {...settings} className=''>
                                 {slides.map((slide, index) => (
                                     <div key={index} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} className={` flex flex-col justify-center items-center`}>
 
@@ -202,7 +266,7 @@ const About = () => {
                                         )}
                                     </div>
                                 ))}
-                            </Slider>
+                            </Slider> */}
                         </div>
                         {/* <div className="max-w-5xl mx-auto mt-10">
                             <Slider {...settings}>
