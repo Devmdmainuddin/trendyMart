@@ -11,6 +11,8 @@ import {
 } from '@headlessui/react'
 import toast from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
+import Swal from 'sweetalert2';
+
 
 
 
@@ -22,17 +24,27 @@ const PasswordResetModal = ({ setIsOpen, isOpen, }) => {
         e.preventDefault(); 
         const form = e.target;
         const email = form.email.value;
-    
-      
-
-
             try {
                 await resetPassword(email);
                 setLoading(false)
                 setIsOpen(false)
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "Password Send ! Pless Check Your Email",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
             } catch (error) {
-               
-                toast.error(error.message);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "Password Send ! Pless Check Your Email",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+              
             }
        
     };
@@ -71,7 +83,7 @@ const PasswordResetModal = ({ setIsOpen, isOpen, }) => {
                                 as='h3'
                                 className='text-lg font-medium text-center leading-6 text-gray-900'
                             >
-                                Update profile
+                                Password Send
                             </DialogTitle>
                             <IoClose onClick={() => setIsOpen(false)} className="text-3xl ml-auto bg-red-300 rounded" />
                             <form action="" onSubmit={handleSubmit}>

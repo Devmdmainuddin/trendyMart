@@ -140,8 +140,8 @@ const Navbar = () => {
                                         <div className="p-5">
                                             <p >Subtotal: <span className="text-[#262626] font-bold">${totalPrice}</span></p>
                                             <div className="flex  lg:gap-x-5 gap gap-x-1 mt-3">
-                                                <Link to='/cart' onClick={() => setCartOpen(!cartOpen)} className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </Link>
-                                                <Link to='/checkout' onClick={() => setCartOpen(!cartOpen)} className="w-full block lg:py-4 py-2 lg:px-10 px-3 bg-[#262626] text-white">Checkout</Link>
+                                                <Link to='/cart' onClick={() => setCartOpen(!cartOpen)} className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#FB2E86] border border-[#FB2E86]">View Cart </Link>
+                                                <Link to='/checkout' onClick={() => setCartOpen(!cartOpen)} className="w-full block lg:py-4 py-2 lg:px-10 px-3 bg-[#FB2E86] text-white">Checkout</Link>
                                             </div>
                                         </div>
 

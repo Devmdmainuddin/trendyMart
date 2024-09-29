@@ -98,7 +98,7 @@ const Contact = () => {
                             </form>
                         </div>
                         <div className=" lg:w-[683px] ">
-                            <img src="/public/contact.jpg" alt="" className="w-full h-full object-contain" />
+                            <img src="/contact.jpg" alt="" className="w-full h-full object-contain" />
                         </div>
                     </div>
 

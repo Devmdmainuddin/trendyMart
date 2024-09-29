@@ -17,9 +17,7 @@ const Registation = () => {
     const [showpassword, setshowpassword] = useState(null)
     const navigate = useNavigate()
     const { createUser, setLoading } = useAuth()
-    let [emailError, setEmailError] = useState("")
-    let [fullNameError, setFullNameError] = useState("")
-    let [passwordError, setPasswrdError] = useState("")
+
 
 
 
