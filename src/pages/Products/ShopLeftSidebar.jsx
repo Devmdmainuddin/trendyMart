@@ -2,10 +2,9 @@ import React from 'react';
 import Bredcumb from '../../components/Shared/Bredcumb';
 import FilterBar from '../../components/Shared/FilterBar';
 import Sidebar from '../../components/Shared/Sidebar';
-import ProductCard06 from '../../components/Card/ProductCard06';
 import ProductCard07 from '../../components/Card/ProductCard07';
-import ProductCard08 from '../../components/Card/ProductCard08';
 import Container from '../../components/Shared/Container';
+import Company from '../../components/Home/Company';
 
 const ShopLeftSidebar = () => {
     return (
@@ -30,6 +29,7 @@ const ShopLeftSidebar = () => {
 
             </div>
             </Container>
+            <Company></Company>
             
 
         </div>

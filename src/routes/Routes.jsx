@@ -17,6 +17,7 @@ import DefaultProducts from "../pages/Products/DefaultProducts";
 import ShopList from "../pages/Products/ShopList";
 import ShopLeftSidebar from "../pages/Products/ShopLeftSidebar";
 import BlogDetails from "../pages/Blog/BlogDetails";
+import Shop from "../pages/Products/Shop";
 
 
 
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
               {
                 path: "/products",
                 element: <Products />,
+              },
+              {
+                path: "/shop",
+                element: <Shop />,
               },
               {
                 path: "/product/:id",

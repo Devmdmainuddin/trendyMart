@@ -107,7 +107,7 @@ const About = () => {
                         <div className='w-full sm:w-[427px] lg:w-[555px] h-[409px] bg-[#2B3CAB] rounded-lg'>
 
                         </div>
-                        <div className='w-full sm:w-[427px] lg:w-[555px] h-[390px] z-50 absolute top-0 left-4'>
+                        <div className='w-full sm:w-[427px] lg:w-[555px] h-[390px] z-30 absolute top-0 left-4'>
                             {/* <Image scr='/ab.jpg'></Image> */}
                             <Image src='/ab.jpg'> </Image>
                         </div>

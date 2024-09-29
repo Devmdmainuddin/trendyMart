@@ -1,4 +1,4 @@
-import { FaFacebook, FaInstagramSquare, FaLongArrowAltLeft, FaLongArrowAltRight, FaPenNib, FaSearch, FaTwitterSquare } from "react-icons/fa";
+import { FaFacebook, FaInstagramSquare, FaLongArrowAltLeft, FaLongArrowAltRight, FaPenNib, FaSearch, FaTwitterSquare, FaUser } from "react-icons/fa";
 import Bredcumb from "../../components/Shared/Bredcumb";
 import Container from "../../components/Shared/Container";
 import { IoCalendarOutline } from "react-icons/io5";
@@ -6,9 +6,17 @@ import Image from "../../components/Shared/Image";
 import { Link } from "react-router-dom";
 import ProductCart09 from "../../components/Card/ProductCart09";
 import Company from "../../components/Home/Company";
+import { MdMarkEmailRead } from "react-icons/md";
+import { AiFillMessage } from "react-icons/ai";
+import { useState } from "react";
 
 
 const BlogDetails = () => {
+    const [isChecked, setIsChecked] = useState(false);
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked);
+    };
+
     return (
         <div>
             <Bredcumb></Bredcumb>
@@ -253,16 +261,16 @@ const BlogDetails = () => {
 
             </Container>
 
-            <Company></Company>
+           
             <Container>
-                <div>
-                    <div className="w-[668px] shadow-customshadow p-[14px] flex gap-[14px] items-center">
+                <div className=" mt-6 md:mt-[111px]">
+                    <div className="w-[668px] shadow-commentuserShadow p-[14px] flex gap-[14px] items-center">
                         <div>
-                        <div className="image w-[103px] h-[106px]">
-                            <img src="/tas.png" alt="" className="w-full h-full object-cover" />
+                            <div className="image w-[103px] h-[106px]">
+                                <img src="/tas.png" alt="" className="w-full h-full object-cover" />
+                            </div>
                         </div>
-                        </div>
-                        
+
                         <div className="content">
                             <div className="flex justify-between">
                                 <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
@@ -273,13 +281,13 @@ const BlogDetails = () => {
                         </div>
 
                     </div>
-                    <div className="w-[668px] shadow-customshadow p-[14px] flex gap-[14px] items-center">
+                    <div className="w-[668px] shadow-commentuserShadow p-[14px] my-[30px] flex gap-[14px] items-center">
                         <div>
-                        <div className="image w-[103px] h-[106px]">
-                            <img src="/tas.png" alt="" className="w-full h-full object-cover" />
+                            <div className="image w-[103px] h-[106px]">
+                                <img src="/tas.png" alt="" className="w-full h-full object-cover" />
+                            </div>
                         </div>
-                        </div>
-                        
+
                         <div className="content">
                             <div className="flex justify-between">
                                 <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
@@ -290,13 +298,13 @@ const BlogDetails = () => {
                         </div>
 
                     </div>
-                    <div className="w-[668px] shadow-customshadow p-[14px] flex gap-[14px] items-center">
+                    <div className="w-[668px] shadow-commentuserShadow p-[14px] flex gap-[14px] items-center">
                         <div>
-                        <div className="image w-[103px] h-[106px]">
-                            <img src="/tas.png" alt="" className="w-full h-full object-cover" />
+                            <div className="image w-[103px] h-[106px]">
+                                <img src="/tas.png" alt="" className="w-full h-full object-cover" />
+                            </div>
                         </div>
-                        </div>
-                        
+
                         <div className="content">
                             <div className="flex justify-between">
                                 <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
@@ -308,10 +316,46 @@ const BlogDetails = () => {
 
                     </div>
                 </div>
+                <div>
+                    <form className='mt-[46px] md:mt-[135px] max-w-[717px]'>
+                        <div className=" flex justify-between gap-6 items-center">
+                            <div className=" relative w-full">
+                                <FaUser className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
+                                <input className=" w-full   py-[13px] pl-[30px] border outline-0" type="text" placeholder="Your Name*" />
+                            </div>
+                            <div className=" relative w-full">
+                            <MdMarkEmailRead className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2'/>
+                                <input className=" w-full  py-[13px] pl-[30px] border outline-0" type="email" placeholder="Write Your Email*" />
+                            </div>
+
+                        </div>
+                        <div className='mt-[44px] relative '>
+                        <AiFillMessage className='text-sm text-[#8A8FB9] absolute left-2 top-5 '/>
+                            <textarea className="inputtext w-full  py-[13px] pl-[30px] border outline-0 resize-none" cols="30" rows="10" placeholder="Write your comment*"></textarea>
+                        </div>
+                        <div>
+                        <input
+                                        type="checkbox"
+                                        id="comment"
+                                        className={`w-2 h-2 mr-1 rounded-sm border-2 border-gray-500 cursor-pointer appearance-none 
+                    ${isChecked ? 'bg-[#19D16F] border-none' : ''}`}
+                                        checked={isChecked}
+                                        onChange={handleCheckboxChange}
+                                    />
+                                    <label htmlFor="comment" className='text-[#8A91AB] text-[12px] font-normal'>Save my name, email, and website in this browser for the next time I comment.</label>
+
+                        </div>
+                       
+
+
+
+                        <button className="w-full text-white bg-[#FB2E86] font-josefin text-[14px] rounded-[3px] border border-[#FB2E86] px-[20px] py-[10px] mt-[33px] capitalize">submit comment</button>
+                    </form>
+                </div>
             </Container>
 
 
-
+            <Company></Company>
         </div>
     );
 };

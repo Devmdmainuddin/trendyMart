@@ -1,15 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaRegHeart } from 'react-icons/fa';
 import { IoCartOutline } from 'react-icons/io5';
 import { MdOutlineReviews } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { addToCart } from '../../Featured/CartAPI/cartSlice';
 
 const ProductCard01 = ({item}) => {
+    let [Quantity, setQuantity] = useState(1);
+    const dispatch = useDispatch();
+
+    // add to cart
+    const handlecard = async i => {
+        try {
+            dispatch(addToCart({ ...i, qun: Quantity, }))
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your items has been add to cart",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+        catch (err) {
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: " product  cart not add  ",
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+
+    }
+
     return (
         <div className='w-[270px] group'>
             <div className="image w-[270px] h-[236px] relative overflow-hidden">
                 <div className="icons absolute top-[11px] -left-full group-hover:left-[11px] flex gap-2 transition-all duration-500">
-                    <Link className='w-[30px] h-[30px] rounded-full text-[#2F1AC4] bg-[#EEEFFB] flex justify-center items-center'><IoCartOutline /></Link>
+                    <button onClick={() => handlecard(item)} className='w-[30px] h-[30px] rounded-full text-[#2F1AC4] bg-[#EEEFFB] flex justify-center items-center'><IoCartOutline /></button>
                     <Link className='w-[30px] h-[30px] rounded-full text-[#1389FF] bg-[#EEEFFB] flex justify-center items-center'><FaRegHeart /></Link>
                     <Link className='w-[30px] h-[30px] rounded-full text-[#1DB4E7] bg-[#EEEFFB] flex justify-center items-center'><MdOutlineReviews /></Link>
                 </div>
