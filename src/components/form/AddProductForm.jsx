@@ -1,4 +1,9 @@
 import React from 'react';
+import Heading from '../Shared/Heading';
+import AddCategoryForm from './AddCategoryForm';
+import Container from '../Shared/Container';
+import AddSubCategoryForm from './AddSubCategoryForm';
+import Brand from './Brand';
 
 const AddProductForm = () => {
 
@@ -91,63 +96,78 @@ const AddProductForm = () => {
 
     return (
         <div>
-            <form action="" onSubmit={handleAddProduct} className="px-8">
 
-                <div className='mt-10 border-b pb-10'>
-                    <h2 className='text-3xl font-bold mb-10 uppercase'>add product</h2>
+            {/* add category*/}
+            <Container>
+                <AddCategoryForm></AddCategoryForm>
 
-                    <div className=" flex justify-between gap-6 items-center">
-                        <input name='title' type='text' placeholder='title ' className=" w-full py-[13px] px-[11px] border outline-0" />
-                        <input name='descaption' type='text' placeholder='description ' className='w-full py-[13px] px-[11px] border outline-0' />
-                        <input name='shipping_cost' type='number' placeholder='shipping cost' className='w-full py-[13px] px-[11px] border outline-0' />
-                        <input name='price' type='number' placeholder='product price ' className='w-full py-[13px] px-[11px] border outline-0' />
-                        <input name='dimensions' type='text' placeholder='product dimensions ' className='w-full py-[13px] px-[11px] border outline-0' />
-                        <input name='minimum_order_quantity' type='number' placeholder='minimum order quantity' className='w-full py-[13px] px-[11px] border outline-0' />
-                        <input name='discount' type='number' placeholder='product discount  ' className='w-full py-[13px] px-[11px] border outline-0' />
-                        <input name='image' type='file' multiple placeholder='image ' className='w-full py-[13px] px-[11px] border outline-0' />
-                        <input name='thumbnail' type='file' multiple placeholder='image ' className='w-full py-[13px] px-[11px] border outline-0' />
-                        <input name='return_policy' type='text' placeholder='return policy ' className='w-full py-[13px] px-[11px] border outline-0' />
-                        <input name='stock_levels' type='number' placeholder='stock levels' className='w-full py-[13px] px-[11px] border outline-0' />
-                        <input name='warranty_information' type='text' placeholder='warranty information' className='w-full py-[13px] px-[11px] border outline-0' />
-                        <input name='weight' type='number' placeholder='weight' className='block w-full pb-4 mt-4 outline-none bg-transparent' />
-                        <input name='tag01' type='text' placeholder='tag01' className='block w-full pb-4 mt-4 outline-none bg-transparent' />
-                        <input name='tag02' type='text' placeholder='tag02' className='block w-full pb-4 mt-4 outline-none bg-transparent' />
-                        <input name='tag03' type='text' placeholder='tag03' className='block w-full pb-4 mt-4 outline-none bg-transparent' />
-                        <input name='tag04' type='text' placeholder='tag04' className='block w-full pb-4 mt-4 outline-none bg-transparent' />
-                        <select name="availability_status" id="" className='block w-full pb-4 mt-4 outline-none bg-transparent'>
-                            <option value="In Stock">In Stock</option>
-                            <option value="Out Of Stock">Out Of Stock</option>
-                        </select>
-                        <select name="brand" id="" className='block w-full pb-4 mt-4 outline-none bg-transparent'>
-                            <option value="FlexFit">FlexFit</option>
-                            <option value="h&m">h&m</option>
-                            <option value="ChefMaster">ChefMaster</option>
-                            <option value="WristTech">WristTech</option>
-                            <option value="ComfyChair">ComfyChair</option>
-                        </select>
-                        <select name="category" id="" className='block w-full pb-4 mt-4 outline-none bg-transparent'>
-                            <option value="Health & Beauty">Health & Beauty</option>
-                            <option value="furniture">furniture</option>
-                            <option value="groceries">groceries</option>
-                            <option value="Women's & Girls' Fashion">Women{`'`}s & Girls{`'`} Fashion</option>
-                            <option value="Men's & Boys' Fashion">Men{`'`}s & Boys{`'`} Fashion</option>
-                            <option value="Electronic Accessories">Electronic Accessories</option>
-                            <option value="Home & Lifestyle">Home & Lifestyle</option>
-                            <option value="Watches, Bags, Jewellery">Watches, Bags, Jewellery</option>
-                            <option value="TV & Home Appliances">TV & Home Appliances</option>
-                            <option value="Mother & Baby">Mother & Baby</option>
-                            <option value="Sports & Outdoors">Sports & Outdoors</option>
-                        </select>
+                <AddSubCategoryForm></AddSubCategoryForm>
+                <Brand></Brand>
+                {/* add product */}
+                <form action="" onSubmit={handleAddProduct} className="">
+
+                    <div className='mt-10 border-b pb-10'>
+
+                        <h2 className='text-[#151875] text-[22px] font-josefin font-semibold my-9 capitalize'>add product</h2>
+                        <div className=" mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <input name='title' type='text' placeholder='title ' className=" w-full py-[13px] px-[11px] border outline-0" />
+                            <input name='descaption' type='text' placeholder='description ' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='shipping_cost' type='number' placeholder='shipping cost' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='price' type='number' placeholder='product price ' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='dimensions' type='text' placeholder='product dimensions ' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='minimum_order_quantity' type='number' placeholder='minimum order quantity' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='discount' type='number' placeholder='product discount  ' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='image' type='file' multiple placeholder='image ' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='thumbnail' type='file' multiple placeholder='image ' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='return_policy' type='text' placeholder='return policy ' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='stock_levels' type='number' placeholder='stock levels' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='warranty_information' type='text' placeholder='warranty information' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='weight' type='number' placeholder='weight' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='tag01' type='text' placeholder='tag01' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='tag02' type='text' placeholder='tag02' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='tag03' type='text' placeholder='tag03' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <input name='tag04' type='text' placeholder='tag04' className='w-full py-[13px] px-[11px] border outline-0' />
+                            <select name="availability_status" id="" className='w-full py-[13px] px-[11px] border outline-0'>
+                                <option value="In Stock">In Stock</option>
+                                <option value="Out Of Stock">Out Of Stock</option>
+                            </select>
+                            <select name="brand" id="" className='w-full py-[13px] px-[11px] border outline-0'>
+                                <option value="FlexFit">FlexFit</option>
+                                <option value="h&m">h&m</option>
+                                <option value="ChefMaster">ChefMaster</option>
+                                <option value="WristTech">WristTech</option>
+                                <option value="ComfyChair">ComfyChair</option>
+                            </select>
+                            <select name="category" id="" className='w-full py-[13px] px-[11px] border outline-0'>
+                                <option value="Health & Beauty">Health & Beauty</option>
+                                <option value="furniture">furniture</option>
+                                <option value="groceries">groceries</option>
+                                <option value="Women's & Girls' Fashion">Women{`'`}s & Girls{`'`} Fashion</option>
+                                <option value="Men's & Boys' Fashion">Men{`'`}s & Boys{`'`} Fashion</option>
+                                <option value="Electronic Accessories">Electronic Accessories</option>
+                                <option value="Home & Lifestyle">Home & Lifestyle</option>
+                                <option value="Watches, Bags, Jewellery">Watches, Bags, Jewellery</option>
+                                <option value="TV & Home Appliances">TV & Home Appliances</option>
+                                <option value="Mother & Baby">Mother & Baby</option>
+                                <option value="Sports & Outdoors">Sports & Outdoors</option>
+                            </select>
+
+                        </div>
+
+                        <div className=" mt-6">
+                            <input type="submit" value="Add product" className="text-white bg-[#FB2E86] font-josefin text-[14px] rounded-[3px] border border-[#FB2E86] px-[20px] py-[10px] mt-[33px]" />
+                        </div>
+
 
                     </div>
+                </form>
 
-                    <div className=" mt-6">
-                        <input type="submit"  value="Add product" className=" py-4 px-10 border border-[#262626] bg-[#262626] text-white hover:text-[#262626] hover:border-[#262626] hover:bg-transparent transition-all duration-500 ease-in-out" />
-                    </div>
+            </Container>
 
 
-                </div>
-            </form>
+            {/* add Subcategory*/}
+            {/* add brand*/}
+
         </div>
     );
 };

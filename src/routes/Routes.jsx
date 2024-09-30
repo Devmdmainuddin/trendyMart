@@ -18,6 +18,10 @@ import ShopList from "../pages/Products/ShopList";
 import ShopLeftSidebar from "../pages/Products/ShopLeftSidebar";
 import BlogDetails from "../pages/Blog/BlogDetails";
 import Shop from "../pages/Products/Shop";
+// import Dashboard from "../layout/Dashboard";
+import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import AddProductForm from "../components/form/AddProductForm";
 
 
 
@@ -102,4 +106,16 @@ export const router = createBrowserRouter([
 
           ],
     },
+    {
+      path: "/dashboard", 
+      element:<PrivateRoute><Dashboard/></PrivateRoute> ,
+      children:[
+        {
+          path: "/dashboard/addProduct",
+          element:<PrivateRoute><AddProductForm/></PrivateRoute>,
+        },
+      ]
+    },
+    
+
 ]);

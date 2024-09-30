@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
-import { PulseLoader } from 'react-spinners'
-const LoadingSpinner = () => {
+import { ClimbingBoxLoader, PulseLoader } from 'react-spinners'
+const LoadingSpinner = ({ smallHeight }) => {
     return (
         <div
             className={` ${smallHeight ? 'h-[250px]' : 'h-[70vh]'}
