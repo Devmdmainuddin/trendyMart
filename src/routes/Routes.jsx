@@ -44,6 +44,11 @@ export const router = createBrowserRouter([
                 element: <Shop />,
               },
               {
+                path: "/addProduct",
+                element:<AddProductForm/>,
+              },
+
+              {
                 path: "/product/:id",
                 element: <ProductDetails />,
                 loader: ({ params }) => fetch(`https://shop-fusion-server-one.vercel.app/product/${params.id}`)
@@ -112,7 +117,7 @@ export const router = createBrowserRouter([
       children:[
         {
           path: "/dashboard/addProduct",
-          element:<PrivateRoute><AddProductForm/></PrivateRoute>,
+          element:<AddProductForm/>,
         },
       ]
     },
