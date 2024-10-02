@@ -5,13 +5,7 @@ const ProductCard04 = ({product}) => {
     return (
         
         <div className='w-[269px] group '>
-            {/* <div className='relative w-[269px] h-[269px] bg-[#9877E7]   rounded-full'>
-            <div className='w-[269px] h-[269px] z-50 bg-[#F6F7FB] flex justify-center items-center absolute  group-hover:-top-2 group-hover:-right-2  rounded-full transition-all duration-500 '>
-                <div className="image w-[178px] h-[178px] bg-[#F6F7FB]">
-                    <img src="/Chair1.png" alt="" className=' w-full h-full object-cover bg-[#F6F7FB] rounded-full' />
-                </div>
-            </div>
-            </div> */}
+           
             
             {/* <div className='relative w-[269px] h-[269px] bg-[#9877E7] rounded-full group'>
                 <div className='w-[269px] h-[269px] z-50 bg-[#F6F7FB] flex justify-center items-center absolute top-0 right-0 group-hover:-top-2 group-hover:-right-2 rounded-full transition-all duration-500'>
