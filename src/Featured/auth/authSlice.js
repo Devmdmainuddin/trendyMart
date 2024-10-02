@@ -11,7 +11,7 @@ export const registerUser = createAsyncThunk(
     async (formData, { rejectWithValue }) => {
         try {
             const response = await axios.put(
-                "https://shop-fusion-server-one.vercel.app/user", 
+                `${import.meta.env.VITE_API_URL}/user`, 
                 formData,
                 {
                     withCredentials: true,

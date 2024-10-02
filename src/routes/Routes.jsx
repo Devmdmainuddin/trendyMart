@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
               {
                 path: "/product/:id",
                 element: <ProductDetails />,
-                loader: ({ params }) => fetch(`https://shop-fusion-server-one.vercel.app/product/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
               },
               {
                 path: "/ShopGridDefault",

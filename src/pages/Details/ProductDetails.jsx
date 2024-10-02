@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Bredcumb from '../../components/Shared/Bredcumb';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -13,14 +12,26 @@ import Image from '../../components/Shared/Image';
 import Container from '../../components/Shared/Container';
 import { FaFacebook, FaInstagramSquare, FaRegHeart, FaStar, FaTwitter } from 'react-icons/fa';
 import { IoCartOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { MdOutlineArrowOutward } from 'react-icons/md';
 import Heading from '../../components/Shared/Heading'
 import ProductCard08 from '../../components/Card/ProductCard08';
 import Company from '../../components/Home/Company'
+import { useGetproductsQuery } from '../../Featured/ProductAPI/productApi';
 const ProductDetails = () => {
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [swiperDirection, setSwiperDirection] = useState('horizontal'); // Default direction is horizontal
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [swiperDirection, setSwiperDirection] = useState('horizontal');
+  const products = useLoaderData();
+  const { data, error, isLoading, } = useGetproductsQuery()
+  const [relatedProducts, setRelatedProducts] = useState([]);
+
+  console.log(relatedProducts); 
+
+  useEffect(() => {
+    const relative = data?.filter(items => items.categorys.category);
+    setRelatedProducts(relative);
+  }, [data]);
+
 
 
   useEffect(() => {
@@ -40,8 +51,8 @@ const ProductDetails = () => {
     };
   }, []);
 
-    return (
-        <div>
+  return (
+    <div>
       <Bredcumb />
       <Container>
         <div className='flex flex-col lg:flex-row justify-center items-center  gap-8  my-[121px]'>
@@ -50,15 +61,17 @@ const ProductDetails = () => {
               <Swiper
                 //  direction={'vertical'}
                 direction={swiperDirection}
+                loop={true}
                 spaceBetween={10}
                 slidesPerView={3}
                 onSwiper={setThumbsSwiper}
                 className="mySwiper md:w-[151px] md:h-[487px]  "
               >
-                <SwiperSlide className=' h-[155px]'><Image src='/th01.png'></Image></SwiperSlide>
-                <SwiperSlide className='  h-[155px]'><Image src='/th02.png'></Image></SwiperSlide>
-                <SwiperSlide className='  h-[155px]'><Image src='/th03.png'></Image></SwiperSlide>
-                <SwiperSlide className='  h-[155px]'><Image src='/th04.png'></Image></SwiperSlide>
+
+                <SwiperSlide className=' h-[155px]'><Image src={products?.thumbnail?.thumbnail01}></Image></SwiperSlide>
+                <SwiperSlide className='  h-[155px]'><Image src={products?.thumbnail?.thumbnail02}></Image></SwiperSlide>
+                <SwiperSlide className='  h-[155px]'><Image src={products?.thumbnail?.thumbnail03}></Image></SwiperSlide>
+                <SwiperSlide className='  h-[155px]'><Image src={products?.thumbnail?.thumbnail04}></Image></SwiperSlide>
 
               </Swiper>
 
@@ -66,6 +79,7 @@ const ProductDetails = () => {
             <div>
               <Swiper
                 direction={'vertical'}
+                loop={true}
                 spaceBetween={10}
                 slidesPerView={1}
                 navigation={true}
@@ -73,16 +87,18 @@ const ProductDetails = () => {
                 modules={[Navigation, Thumbs]}
                 className="mySwiper w-[355px] h-[457px] md:w-[375px] md:h-[487px] "
               >
-                <SwiperSlide className='w-full h-full '><Image src='/th01.png'></Image></SwiperSlide>
-                <SwiperSlide className=' w-full h-full  '><Image src='/th02.png'></Image></SwiperSlide>
-                <SwiperSlide className=' w-full h-full  '><Image src='/th03.png'></Image></SwiperSlide>
-                <SwiperSlide className=' w-full h-full  '><Image src='/th04.png'></Image></SwiperSlide>
+                {/* {products?.map((img,idx)=><SwiperSlide key={idx} className='w-full h-full '><Image src={img.thumbnail}></Image></SwiperSlide>)} */}
+                
+                <SwiperSlide className=' w-full h-full  '><Image src={products?.thumbnail?.thumbnail01} alt="Product Thumbnail" /></SwiperSlide>
+                <SwiperSlide className=' w-full h-full  '><Image src={products?.thumbnail?.thumbnail02} alt="Product Thumbnail" /></SwiperSlide>
+                <SwiperSlide className=' w-full h-full  '><Image src={products?.thumbnail?.thumbnail03} alt="Product Thumbnail" /></SwiperSlide>
+                <SwiperSlide className=' w-full h-full  '><Image src={products?.thumbnail?.thumbnail04} alt="Product Thumbnail" /></SwiperSlide>
               </Swiper>
 
             </div>
           </div>
           <div className="right">
-            <h2 className='text-[#0D134E] text-[36px] font-josefin font-semibold capitalize'>Playwood arm chair</h2>
+            <h2 className='text-[#0D134E] text-[36px] font-josefin font-semibold capitalize'>{products.title}</h2>
             <div className='flex gap-2 items-center mt-3'>
               <div className='flex gap-1 '>
                 <span><FaStar className='text-[#FFC416] text-[10px]' /></span>
@@ -95,18 +111,18 @@ const ProductDetails = () => {
               <span className='text-sm'>22</span>
             </div>
             <div className='text-[13px] font-josefin font-normal flex gap-2 mt-3'>
-              <p className='text-[#151875] text-[16px]'>$ <span >42.00</span></p>
+              <p className='text-[#151875] text-[16px]'>$ <span >{products.price}</span></p>
               <p className='  text-[#FB2E86] line-through'>$ <span>65.00</span></p>
             </div>
-            <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-4'>Color : </h4>
+            <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-4'>Color : <span className={`w-10 h-10 rounded-full bg-[${products.color}]`}></span> </h4>
             <p className='max-w-[549px] text-[#A9ACC6] text-[16px] font-josefin font-semibold mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tellus porttitor purus, et volutpat sit.</p>
             <div className='flex gap-3 mt-8'>
               <button className='flex items-center gap-2 py-2 px-3 border text-[#151875] text-[16px] font-josefin font-normal capitalize '>Add To cart <IoCartOutline className='text-[16px]' /></button>
               <button className='flex items-center gap-2 py-2 px-3 border text-[#151875] text-[16px] font-josefin font-normal capitalize'> <FaRegHeart className='text-[16px]' /></button>
 
             </div>
-            <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-4'>Categories :</h4>
-            <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-2.5'>Tags :</h4>
+            <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-4'>Categories :{products?.categorys?.category} </h4>
+            <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-2.5'>Tags : {products?.tags?.tag01?products?.tags?.tag01:''},{products?.tags?.tag02?products?.tags?.tag02:''},{products?.tags?.tag03?products?.tags?.tag03:''}</h4>
             <div className='flex items-center gap-3 mt-2.5'>
               <h4 className='text-[#151875] text-[16px] font-josefin font-semibold '>Share :</h4>
               <ul className='flex gap-3 '>
@@ -161,7 +177,7 @@ const ProductDetails = () => {
 
 
     </div>
-    );
+  );
 };
 
 export default ProductDetails;

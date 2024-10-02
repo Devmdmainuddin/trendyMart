@@ -10,12 +10,15 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "../../styles/swipers.css";
+import useProducts from '../../hooks/useProducts';
 
 // import Slider from "react-slick";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
 
 const Featured = () => {
+    // const [products]=useProducts()
+    
     const { data, error, isLoading, } = useGetproductsQuery()
     // let [active, setActive] = useState(0)
 
@@ -146,7 +149,7 @@ const Featured = () => {
                         pagination={{ clickable: true }}
                         className="mySwiper featured-products "
                     >
-                        {data?.map((item, idx) => (
+                        {data?.slice(0,6).map((item, idx) => (
                             <SwiperSlide key={idx}>
                                 <ProductCard01 item={item}></ProductCard01>
                             </SwiperSlide>

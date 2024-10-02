@@ -32,32 +32,35 @@ const Dashboard = () => {
         <div>
             <Navbar></Navbar>
             <Container>
-                <div className="flex flex-wrap gap-6">
-                    <aside className='w-[270px] p-6  min-h-screen shadow-commentuserShadow'>
+                <div className="flex flex-col md:flex-row gap-6">
+                    <div>
+                        <aside className='w-[270px] p-6  min-h-screen shadow-commentuserShadow'>
 
 
-                        <div className="text-center py-6 bg-slate-100 relative mt-5">
-                            <img alt="" className=" w-12 h-12  object-cover rounded-full bg-slate-300 absolute -top-[30px] left-1/2 -translate-x-1/2" src={user?.photoURL ? user?.photoURL : '/user.png'} />
-                            <div className="">
-                                <p className="text-xl font-semibold leading-snug"> {user?.displayName}</p>
-                                <p>{role}</p>
+                            <div className="text-center py-6 bg-slate-100 relative mt-5">
+                                <img alt="" className=" w-12 h-12  object-cover rounded-full bg-slate-300 absolute -top-[30px] left-1/2 -translate-x-1/2" src={user?.photoURL ? user?.photoURL : '/user.png'} />
+                                <div className="">
+                                    <p className="text-xl font-semibold leading-snug"> {user?.displayName}</p>
+                                    <p>{role}</p>
+                                </div>
                             </div>
-                        </div>
-                        <ul className="mt-4 bg-slate-100 p-3">
-                            <li><NavLink to='/' className="capitalize  flex items-center gap-2 "> <ImProfile /> view profile</NavLink></li>
-                            <li className="my-2"><NavLink to='/' className="capitalize flex items-center gap-2 "> <GrDocumentUpdate /> update profile</NavLink></li>
-                            <li><NavLink to='/' className="capitalize  flex items-center gap-2"><TbPasswordUser /> password change</NavLink></li>
-                            
-                            {role === 'user' && <GuestMenu />}
-                            {role === 'Seller' && <SellerMenu />}
-                            {role === 'admin' && <AdminMenu />}
-                            <li className="my-2"><NavLink to='/'><button onClick={logOut} className="capitalize flex items-center gap-2"><BiLogOut /> logOut</button></NavLink></li>
-                        </ul>
+                            <ul className="mt-4 bg-slate-100 p-3">
+                                <li><NavLink to='/' className="capitalize  flex items-center gap-2 "> <ImProfile /> view profile</NavLink></li>
+                                <li className="my-2"><NavLink to='/' className="capitalize flex items-center gap-2 "> <GrDocumentUpdate /> update profile</NavLink></li>
+                                <li><NavLink to='/' className="capitalize  flex items-center gap-2"><TbPasswordUser /> password change</NavLink></li>
+
+                                {role === 'user' && <GuestMenu />}
+                                {role === 'Seller' && <SellerMenu />}
+                                {role === 'admin' && <AdminMenu />}
+                                <li className="my-2"><NavLink to='/'><button onClick={logOut} className="capitalize flex items-center gap-2"><BiLogOut /> logOut</button></NavLink></li>
+                            </ul>
 
 
 
 
-                    </aside>
+                        </aside>
+                    </div>
+
                     <main>
                         <Outlet></Outlet>
                     </main>

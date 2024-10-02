@@ -7,22 +7,18 @@ import { FaEye } from 'react-icons/fa';
 import { IoMdEyeOff } from 'react-icons/io';
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { registerUser } from '../../Featured/auth/authSlice';
 import Swal from 'sweetalert2';
+import { useAddUserMutation } from '../../Featured/auth/authApi';
 
 
 const Registation = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
+    const[AddUser]=useAddUserMutation();
     const [showpassword, setshowpassword] = useState(null)
     const navigate = useNavigate()
     const { createUser, setLoading } = useAuth()
-
-
-
-
-
-
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -149,7 +145,8 @@ const Registation = () => {
             console.log("ok");
             const result = await createUser(email, password)
             console.log(result);
-            dispatch(registerUser(userinfo))
+           await AddUser(userinfo)
+            // dispatch(registerUser(userinfo))
             Swal.fire({
                 position: "top-end",
                 icon: "success",

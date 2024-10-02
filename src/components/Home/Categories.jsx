@@ -15,11 +15,8 @@ const Categories = () => {
 
   const { data, error, isLoading, } = useGetproductsQuery()
   const [topCategories, setTopCategories] = useState();
-
-  console.log(topCategories);
-
   useEffect(() => {
-    const products = data?.filter(items => items.category === "Health & Beauty"
+    const products = data?.filter(items => items.categorys.category 
     );
     setTopCategories(products);
   }, [data]);
@@ -33,6 +30,7 @@ const Categories = () => {
         <div className='mt-12'>
         <Swiper
             modules={[Pagination]}
+            loop={true}
             breakpoints={{
               640: {
                 slidesPerView: 1,
@@ -55,7 +53,7 @@ const Categories = () => {
             pagination={{ clickable: true }}
             className="mySwiper top-categories px-2 py-6"
           >
-            {topCategories?.map((product, idx) => (
+            {topCategories?.slice(0,6).map((product, idx) => (
               <SwiperSlide key={idx}>
                 <ProductCard04 product={product}></ProductCard04>
                 {/* <TCCards data={product} /> */}

@@ -98,7 +98,7 @@ const Navbar = () => {
                                 <li className=' text-white '><button  ref={cartRef}  className='flex gap-1 items-center relative'><FaCartPlus className='text-white text-lg ' /> {carts?.length > 0 ? <span className="text-red-500 bg-white w-5 h-5 border p-1 rounded-full text-center absolute -top-3 -right-3 flex justify-center items-center">{carts?.length}</span> : ''}</button></li>
                                 {cartOpen && (
                                     <div className="block w-[360px]  absolute z-50 top-full right-0 bg-slate-50 border translate-y-6">
-                                        <div className="w-full h-[320px] overflow-y-scroll">
+                                        <div className={`w-full  overflow-y-scroll ${carts.length>0?'h-[320px]':''}`}>
                                             {carts.length ? <>
                                                 {carts.slice(0, 4).map(item =>
                                                     <div key={item._id} className="flex   gap-2 bg-[#F5F5F3] py-2 px-5">
@@ -133,9 +133,6 @@ const Navbar = () => {
                                             </> :
                                                 <h2 className='my-6 text-center'>Cart is Empty</h2>}
                                         </div>
-
-
-
 
                                         <div className="p-5">
                                             <p >Subtotal: <span className="text-[#262626] font-bold">${totalPrice}</span></p>

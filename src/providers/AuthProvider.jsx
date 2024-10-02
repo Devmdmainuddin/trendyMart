@@ -15,7 +15,6 @@ import {
    reauthenticateWithCredential
 } from 'firebase/auth'
 import { app } from '../firebase/firebase.config'
-// import useAxiosCommon from '../hooks/useAxiosCommon'
 import toast from 'react-hot-toast'
 import Swal from 'sweetalert2'
 import useAxiosCommon from '../hooks/useAxiosCommon'

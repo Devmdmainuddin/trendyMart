@@ -4,8 +4,8 @@ import AddCategoryForm from './AddCategoryForm';
 import Container from '../Shared/Container';
 import AddSubCategoryForm from './AddSubCategoryForm';
 import Brand from './Brand';
-import {imageUpload} from '../../utils/index'
-// import { useGetCategoryQuery } from '../../Featured/ProductAPI/categoryApi';
+import { imageUpload } from '../../utils/index'
+import { useGetCategoryQuery } from '../../Featured/ProductAPI/categoryApi';
 import { useGetSubcategoryQuery } from '../../Featured/ProductAPI/subCategoryApi';
 import { useGetBrandQuery } from '../../Featured/ProductAPI/brandApi';
 import useAuth from '../../hooks/useAuth';
@@ -14,10 +14,10 @@ import { useAddProductMutation } from '../../Featured/ProductAPI/productApi';
 
 const AddProductForm = () => {
     const { user } = useAuth() || {}
-    // const { data: category } = useGetCategoryQuery()
+    const { data: category } = useGetCategoryQuery()
     const { data: subcategory } = useGetSubcategoryQuery()
     const { data: brand } = useGetBrandQuery()
-    const [addProduct]=useAddProductMutation()
+    const [addProduct] = useAddProductMutation()
 
     const handleAddProduct = async (e) => {
         e.preventDefault();
@@ -37,10 +37,13 @@ const AddProductForm = () => {
         const title = form.title.value;
         const brand = form.brand.value;
         const category = form.category.value;
+        const subcategory = form.subcategory.value;
+        const maincategory = form.maincategory.value;
         const descaption = form.descaption.value;
         const dimensions = form.dimensions.value;
         const price = form.price.value;
         const discount = form.discount.value;
+        const color = form.color.value;
         const availability_status = form.availability_status.value;
         const minimum_order_quantity = form.minimum_order_quantity.value;
         const return_policy = form.return_policy.value;
@@ -59,7 +62,7 @@ const AddProductForm = () => {
         const userInfo = { name, email, userImage }
 
         const info = {
-            thumbnail:{
+            thumbnail: {
                 thumbnail01,
                 thumbnail02,
                 thumbnail03,
@@ -69,11 +72,14 @@ const AddProductForm = () => {
             title,
             brand,
             price,
+            color,
             descaption,
-            category,
-            subcategorys: {
-
+            categorys: {
+                category,
+                subcategory,
+                maincategory
             },
+
             createAt,
             availability_status,
             minimum_order_quantity,
@@ -164,7 +170,7 @@ const AddProductForm = () => {
                             {/* weight */}
                             <div>
                                 <label htmlFor="weight">weight</label>
-                                <input name='weight' type='number' placeholder='weight' className='mt-2 w-full py-[13px] px-[11px] border outline-0' />
+                                <input name='weight' type='text' placeholder='weight' className='mt-2 w-full py-[13px] px-[11px] border outline-0' />
                             </div>
 
                             {/* stock */}
@@ -188,6 +194,20 @@ const AddProductForm = () => {
 
                                 </div>
 
+                            </div>
+                            {/* color */}
+                            <div>
+                                <label htmlFor="color">brand</label>
+                                <select name="color" id="" className='mt-2 w-full py-[13px] px-[11px] border outline-0'>
+                                    <option value='#FF0000'>Red</option>
+                                    <option value='#FFFF00'>Yellow</option>
+                                    <option value='#0000FF'>Blue</option>
+                                    <option value='#FFA500'>Orange</option>
+                                    <option value='#A52A2A'>Brown</option>
+                                    <option value='#008000'>Green</option>
+                                    <option value='#800080'>Purple</option>
+                                    <option value='#87CEEB'>Sky</option>
+                                </select>
                             </div>
                             {/* tags */}
                             <div>
@@ -235,10 +255,13 @@ const AddProductForm = () => {
                             <div >
                                 <label htmlFor="category">category </label>
                                 <div className='flex mt-2'>
-                                    <select name="subcategory" id="" className=' w-[95px] py-[13px] px-[11px] border outline-0'>
-                                        {subcategory?.map((items, idx) => <option key={idx} value={items.category}>{items.category}</option>)}
+                                    <select name="category" id="" className=' w-[95px] py-[13px] px-[11px] border outline-0'>
+                                        {category?.map((items, idx) => <option key={idx} value={items.category}>{items.category}</option>)}
                                     </select>
-                                    <input name='category' type='text' placeholder='category ' className='w-full py-[13px] px-[11px] border outline-0' />
+                                    <select name="subcategory" id="" className=' w-[95px] py-[13px] px-[11px] border outline-0'>
+                                        {subcategory?.map((items, idx) => <option key={idx} value={items.subcategory}>{items.subcategory}</option>)}
+                                    </select>
+                                    <input name='maincategory' type='text' placeholder=' main category ' className='w-full py-[13px] px-[11px] border outline-0' />
                                 </div>
 
                             </div>

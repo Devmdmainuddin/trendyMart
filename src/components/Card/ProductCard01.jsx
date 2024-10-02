@@ -53,7 +53,7 @@ const ProductCard01 = ({item}) => {
                 
             </div>
             <div className="content text-center py-4 group-hover:bg-[#2F1AC4] text-white transition-all duration-500">
-                <h2 className='text-lg font-bold leading-[22px] text-[#FB2E86] group-hover:text-white transition-all duration-500'>cantilever chair</h2>
+                <h2 className='text-lg font-bold leading-[22px] text-[#FB2E86] group-hover:text-white transition-all duration-500'>{item.title}</h2>
                 <div className='flex justify-center gap-[5px] my-3'>
                     <span className='w-[14px] h-1 bg-[#05E6B7]'></span>
                     <span className='w-[14px] h-1 bg-[#F701A8]'></span>
