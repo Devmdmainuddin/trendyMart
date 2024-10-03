@@ -21,6 +21,10 @@ import { useGetproductsQuery } from '../../Featured/ProductAPI/productApi';
 import Swal from 'sweetalert2';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../Featured/CartAPI/cartSlice';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+
+
+
 const ProductDetails = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [swiperDirection, setSwiperDirection] = useState('horizontal');
@@ -29,7 +33,7 @@ const ProductDetails = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
-    const newpro = data?.filter(items => items.categorys.category === products.categorys.category );
+    const newpro = data?.filter(items => items.categorys.category === products.categorys.category);
     setRelatedProducts(newpro);
   }, [data]);
 
@@ -59,25 +63,25 @@ const ProductDetails = () => {
 
   // add to cart
   const handlecard = async i => {
-      try {
-          dispatch(addToCart({ ...i, qun: Quantity, }))
-          Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Your items has been add to cart",
-              showConfirmButton: false,
-              timer: 1500
-          });
-      }
-      catch (err) {
-          Swal.fire({
-              position: "top-end",
-              icon: "error",
-              title: " product  cart not add  ",
-              showConfirmButton: false,
-              timer: 1500
-          })
-      }
+    try {
+      dispatch(addToCart({ ...i, qun: Quantity, }))
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your items has been add to cart",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+    catch (err) {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: " product  cart not add  ",
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
 
   }
 
@@ -155,9 +159,9 @@ const ProductDetails = () => {
 
 
             }</span> </h4>
-            <p className='max-w-[549px] text-[#A9ACC6] text-[16px] font-josefin font-semibold mt-4'>{products.descaption.slice(0,150)}</p>
+            <p className='max-w-[549px] text-[#A9ACC6] text-[16px] font-josefin font-semibold mt-4'>{products.descaption.slice(0, 150)}</p>
             <div className='flex gap-3 mt-8'>
-              <button onClick={()=>handlecard(products)} className='flex items-center gap-2 py-2 px-3 border text-[#151875] hover:text-[#FB2E86] hover:border-[#FB2E86] text-[16px] font-josefin font-normal capitalize transition-all duration-500'>Add To cart <IoCartOutline className='text-[16px]' /></button>
+              <button onClick={() => handlecard(products)} className='flex items-center gap-2 py-2 px-3 border text-[#151875] hover:text-[#FB2E86] hover:border-[#FB2E86] text-[16px] font-josefin font-normal capitalize transition-all duration-500'>Add To cart <IoCartOutline className='text-[16px]' /></button>
               <button className='flex items-center gap-2 py-2 px-3 border text-[#151875] text-[16px] font-josefin font-normal capitalize'> <FaRegHeart className='text-[16px]' /></button>
 
             </div>
@@ -179,13 +183,16 @@ const ProductDetails = () => {
       </Container>
       <div className='bg-[#F9F8FE] py-[109px]'>
         <Container>
-          <ul className='flex gap-6 flex-wrap justify-center md:gap-[63px] '>
-            <li className='text-[#151875] text-2xl font-josefin font-semibold'>Description </li>
-            <li className='text-[#151875] text-2xl font-josefin font-semibold capitalize'>Additional Info </li>
-            <li className='text-[#151875] text-2xl font-josefin font-semibold'>Reviews </li>
-            <li className='text-[#151875] text-2xl font-josefin font-semibold'>Video </li>
-          </ul>
-          <div>
+          <Tabs>
+            <TabList className=" flex gap-16 items-center text-xl py-6 ">
+              <Tab className='text-[#151875] text-2xl font-josefin font-semibold outline-0 transition-all duration-300'>Description</Tab>
+              <Tab className='text-[#151875] text-2xl font-josefin font-semibold outline-0 transition-all duration-300'>Additional Info</Tab>
+              <Tab className='text-[#151875] text-2xl font-josefin font-semibold outline-0 transition-all duration-300'>Reviews</Tab>
+              <Tab className='text-[#151875] text-2xl font-josefin font-semibold outline-0 transition-all duration-300'>Video</Tab>
+            </TabList>
+
+            <TabPanel>
+              <h2>   <div>
             <h2 className='text-[#151875] text-[22px] font-josefin font-semibold mt-4 md:mt-[61px] '>Varius tempor.</h2>
             <p className='text-[#A9ACC6] text-[16px] font-josefin font-semibold leading-[29px] mt-2 md:mt-4'>Aliquam dis vulputate vulputate integer sagittis. Faucibus dolor ornare faucibus vel sed et eleifend habitasse amet. Montes, mauris varius ac est bibendum. Scelerisque a, risus ac ante. Velit consectetur neque, elit, aliquet. Non varius proin sed urna, egestas consequat laoreet diam tincidunt. Magna eget faucibus cras justo, tortor sed donec tempus. Imperdiet consequat, quis diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</p>
             <h2 className='text-[#151875] text-[22px] font-josefin font-semibold mt-4 md:mt-8'>More details</h2>
@@ -197,15 +204,30 @@ const ProductDetails = () => {
               <li className='flex gap-1 md:items-center text-[#A9ACC6] text-[16px] font-josefin font-semibold leading-[29px]'><span><MdOutlineArrowOutward className=' text-[16px] text-[#2F1AC4]' /></span> Aliquam dis vulputate vulputate integer sagittis. Faucibus ds diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</li>
 
             </ul>
-          </div>
+          </div></h2>
+            </TabPanel>
+            <TabPanel>
+              <p>{products.descaption}</p>
+            
+            </TabPanel>
+            <TabPanel>
+              
+            <h2>reviews</h2>
+            </TabPanel>
+            <TabPanel>
+              
+            <h2>{products.descaption}</h2>
+            </TabPanel>
+          </Tabs>
+       
         </Container>
       </div>
       <div className='mt-6 md:mt-16 lg:mt-[126px]'>
         <Container>
           <Heading text='Related Products'></Heading>
           <div className='flex gap-[30px] justify-center flex-wrap mx-auto mt-12'>
-          {relatedProducts.slice(0,4).map((item,idx)=> <ProductCard08 key={idx} item={item}></ProductCard08>)} 
-        
+            {relatedProducts?.slice(0, 4).map((item, idx) => <ProductCard08 key={idx} item={item}></ProductCard08>)}
+
           </div>
           <Company></Company>
         </Container>

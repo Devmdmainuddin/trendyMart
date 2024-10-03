@@ -33,3 +33,6 @@
   display:block
 
 } */
+ .react-tabs__tab--selected{
+  color:#FB2E86;
+ }
