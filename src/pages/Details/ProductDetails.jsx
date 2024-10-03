@@ -18,6 +18,9 @@ import Heading from '../../components/Shared/Heading'
 import ProductCard08 from '../../components/Card/ProductCard08';
 import Company from '../../components/Home/Company'
 import { useGetproductsQuery } from '../../Featured/ProductAPI/productApi';
+import Swal from 'sweetalert2';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../Featured/CartAPI/cartSlice';
 const ProductDetails = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [swiperDirection, setSwiperDirection] = useState('horizontal');
@@ -25,12 +28,11 @@ const ProductDetails = () => {
   const { data, error, isLoading, } = useGetproductsQuery()
   const [relatedProducts, setRelatedProducts] = useState([]);
 
-  console.log(relatedProducts); 
-
   useEffect(() => {
-    const relative = data?.filter(items => items.categorys.category);
-    setRelatedProducts(relative);
+    const newpro = data?.filter(items => items.categorys.category === products.categorys.category );
+    setRelatedProducts(newpro);
   }, [data]);
+
 
 
 
@@ -50,6 +52,34 @@ const ProductDetails = () => {
       window.removeEventListener('resize', updateSwiperDirection);
     };
   }, []);
+
+
+  let [Quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+
+  // add to cart
+  const handlecard = async i => {
+      try {
+          dispatch(addToCart({ ...i, qun: Quantity, }))
+          Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Your items has been add to cart",
+              showConfirmButton: false,
+              timer: 1500
+          });
+      }
+      catch (err) {
+          Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: " product  cart not add  ",
+              showConfirmButton: false,
+              timer: 1500
+          })
+      }
+
+  }
 
   return (
     <div>
@@ -88,7 +118,7 @@ const ProductDetails = () => {
                 className="mySwiper w-[355px] h-[457px] md:w-[375px] md:h-[487px] "
               >
                 {/* {products?.map((img,idx)=><SwiperSlide key={idx} className='w-full h-full '><Image src={img.thumbnail}></Image></SwiperSlide>)} */}
-                
+
                 <SwiperSlide className=' w-full h-full  '><Image src={products?.thumbnail?.thumbnail01} alt="Product Thumbnail" /></SwiperSlide>
                 <SwiperSlide className=' w-full h-full  '><Image src={products?.thumbnail?.thumbnail02} alt="Product Thumbnail" /></SwiperSlide>
                 <SwiperSlide className=' w-full h-full  '><Image src={products?.thumbnail?.thumbnail03} alt="Product Thumbnail" /></SwiperSlide>
@@ -114,15 +144,25 @@ const ProductDetails = () => {
               <p className='text-[#151875] text-[16px]'>$ <span >{products.price}</span></p>
               <p className='  text-[#FB2E86] line-through'>$ <span>65.00</span></p>
             </div>
-            <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-4'>Color : <span className={`w-10 h-10 rounded-full bg-[${products.color}]`}></span> </h4>
-            <p className='max-w-[549px] text-[#A9ACC6] text-[16px] font-josefin font-semibold mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tellus porttitor purus, et volutpat sit.</p>
+            <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-4 capitalize'>Color : <span className={`w-10 h-10 rounded-full bg-[${products.color}]`}>{products?.color === "#FF0000" ? 'red' : ''
+              || products?.color === "#FFFF00" ? 'Yellow' : ''
+                || products?.color === "#0000FF" ? 'Blue' : ''
+                  || products?.color === "#FFA500" ? 'Orange' : ''
+                    || products?.color === "#A52A2A" ? 'Brown' : ''
+                      || products?.color === "#008000" ? 'Green' : ''
+                        || products?.color === "#800080" ? 'Purple' : ''
+                          || products?.color === "#87CEEB" ? 'Sky' : ''
+
+
+            }</span> </h4>
+            <p className='max-w-[549px] text-[#A9ACC6] text-[16px] font-josefin font-semibold mt-4'>{products.descaption.slice(0,150)}</p>
             <div className='flex gap-3 mt-8'>
-              <button className='flex items-center gap-2 py-2 px-3 border text-[#151875] text-[16px] font-josefin font-normal capitalize '>Add To cart <IoCartOutline className='text-[16px]' /></button>
+              <button onClick={()=>handlecard(products)} className='flex items-center gap-2 py-2 px-3 border text-[#151875] hover:text-[#FB2E86] hover:border-[#FB2E86] text-[16px] font-josefin font-normal capitalize transition-all duration-500'>Add To cart <IoCartOutline className='text-[16px]' /></button>
               <button className='flex items-center gap-2 py-2 px-3 border text-[#151875] text-[16px] font-josefin font-normal capitalize'> <FaRegHeart className='text-[16px]' /></button>
 
             </div>
             <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-4'>Categories :{products?.categorys?.category} </h4>
-            <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-2.5'>Tags : {products?.tags?.tag01?products?.tags?.tag01:''},{products?.tags?.tag02?products?.tags?.tag02:''},{products?.tags?.tag03?products?.tags?.tag03:''}</h4>
+            <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-2.5'>Tags : {products?.tags?.tag01 ? products?.tags?.tag01 : ''},{products?.tags?.tag02 ? products?.tags?.tag02 : ''},{products?.tags?.tag03 ? products?.tags?.tag03 : ''}</h4>
             <div className='flex items-center gap-3 mt-2.5'>
               <h4 className='text-[#151875] text-[16px] font-josefin font-semibold '>Share :</h4>
               <ul className='flex gap-3 '>
@@ -164,10 +204,8 @@ const ProductDetails = () => {
         <Container>
           <Heading text='Related Products'></Heading>
           <div className='flex gap-[30px] justify-center flex-wrap mx-auto mt-12'>
-            <ProductCard08></ProductCard08>
-            <ProductCard08></ProductCard08>
-            <ProductCard08></ProductCard08>
-            <ProductCard08></ProductCard08>
+          {relatedProducts.slice(0,4).map((item,idx)=> <ProductCard08 key={idx} item={item}></ProductCard08>)} 
+        
           </div>
           <Company></Company>
         </Container>

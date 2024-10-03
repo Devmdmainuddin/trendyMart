@@ -16,8 +16,7 @@ const Categories = () => {
   const { data, error, isLoading, } = useGetproductsQuery()
   const [topCategories, setTopCategories] = useState();
   useEffect(() => {
-    const products = data?.filter(items => items.categorys.category 
-    );
+    const products = data?.filter(items => items.categorys.category);
     setTopCategories(products);
   }, [data]);
 

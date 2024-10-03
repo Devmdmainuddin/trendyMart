@@ -60,7 +60,7 @@ const ProductCard01 = ({item}) => {
                     <span className='w-[14px] h-1 bg-[#00009D] group-hover:bg-white transition-all duration-500'></span>
                 </div>
                 <p className='text-sm font-josefin font-normal text-[#151875] group-hover:text-white transition-all duration-500'>code <span>Y523201</span></p>
-                <p className='text-sm font-normal text-[#151875] group-hover:text-white transition-all duration-500'>$ <span>42</span></p>
+                <p className='text-sm font-normal text-[#151875] group-hover:text-white transition-all duration-500'>$ <span>{item.price}</span></p>
 
             </div>
         </div>

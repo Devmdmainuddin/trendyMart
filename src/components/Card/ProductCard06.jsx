@@ -55,8 +55,8 @@ const ProductCard06 = ({item}) => {
             <div className='w-[10px] h-[10px] rounded-full bg-[#EC42A2]'></div>
             <div className='w-[10px] h-[10px] rounded-full bg-[#8568FF]'></div>
            </div>
-            <div className='text-sm font-josefin font-normal flex gap-2'><p>$ <span >42.00</span></p>
-            <p className='text-sm font-josefin font-normal text-[#FB2E86] line-through'>$ <span>65.00</span></p>
+            <div className='text-sm font-josefin font-normal flex gap-2'><p>$ <span >{item.price}</span></p>
+            <p className='text-sm font-josefin font-normal text-[#FB2E86] line-through'>$ <span>{item.price}</span></p>
             </div>
         </div>
     </div>

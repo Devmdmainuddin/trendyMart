@@ -61,7 +61,7 @@ const ProductCard07 = ({item}) => {
                 <div className='flex items-center justify-between lg:justify-start gap-4'>
                     <div className='text-sm font-josefin font-normal flex gap-2'>
                         <p>$ <span >{item.price}</span></p>
-                        <p className='text-sm font-josefin font-normal text-[#FB2E86] line-through'>$ <span>65.00</span></p>
+                        <p className='text-sm font-josefin font-normal text-[#FB2E86] line-through'>$ <span>{item.price}</span></p>
                     </div>
                     <div className='flex gap-3 '>
                         <span><FaStar className='text-[#FFC416] text-sm' /></span>
@@ -72,7 +72,7 @@ const ProductCard07 = ({item}) => {
 
                     </div>
                 </div>
-                <p className='text-[#9295AA] max-w-[478px] font-normal text-center lg:text-start text-[17px]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.</p>
+                <p className='text-[#9295AA] max-w-[478px] font-normal text-center lg:text-start text-[17px]'>{item.descaption.slice(0,150)}</p>
                 <div className="icons  flex items-center justify-center lg:items-start lg:justify-start  gap-2 ">
                     <Link onClick={() => handlecard(item)} className='w-[30px] h-[30px] rounded-full text-[#2F1AC4] bg-[#EEEFFB] flex justify-center items-center'><IoCartOutline /></Link>
                     <Link className='w-[30px] h-[30px] rounded-full text-[#1389FF] bg-[#EEEFFB] flex justify-center items-center'><FaRegHeart /></Link>

@@ -53,7 +53,7 @@ const ProductCard02 = ({item}) => {
             <div className="content flex justify-between items-baseline py-4">
             <Link  to={`/product/${item._id}`}> <h2 className='text-lg font-bold leading-[22px]  text-[#151875] hover:text-[#FB2E86] transition-all duration-500 capitalize cursor-pointer'>{item.title}</h2> </Link>  
                 <div className='text-sm font-josefin font-normal flex gap-2'><p>$ <span >42.00</span></p>
-                <p className='text-sm font-josefin font-normal text-[#FB2E86] line-through'>$ <span>65.00</span></p>
+                <p className='text-sm font-josefin font-normal text-[#FB2E86] line-through'>$ <span>{item.price}</span></p>
                 </div>
             </div>
         </div>
