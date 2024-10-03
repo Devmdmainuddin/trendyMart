@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaCheck, FaCheckSquare } from 'react-icons/fa';
 
-const Sidebar = ({cetegorey,handleCategoriesChange,selectedCategories,brand,selectedBrand,handleBrandChange,}) => {
-   
+const Sidebar = ({handlebrandfilter, colors,  handlePriceChange, selectedRanges, cetegorey, handleCategoriesChange, selectedCategories, brand, selectedBrand, handleBrandChange, }) => {
+
     const [selectedDiscount, setSelectedDiscount] = useState([]);
-    const [selectedRanges, setSelectedRanges] = useState([]);
+    const [label, setSelectedlabel] = useState([]);
     const [selectedColors, setSelectedColors] = useState([]);
 
-
+    console.log(colors, label);
 
     const priceRanges = [
         { label: "$0 - $50", value: [0, 50] },
@@ -16,17 +16,17 @@ const Sidebar = ({cetegorey,handleCategoriesChange,selectedCategories,brand,sele
         { label: "$201 - $500", value: [201, 500] },
         { label: "$501 - $1000", value: [501, 1000] },
     ];
-    const handlePriceChange = (range) => {
-        // Check if the range is already selected, remove or add it accordingly
-        const isSelected = selectedRanges.some(
-            (r) => r[0] === range[0] && r[1] === range[1]
-        );
-        if (isSelected) {
-            setSelectedRanges(selectedRanges.filter((r) => r[0] !== range[0] || r[1] !== range[1]));
-        } else {
-            setSelectedRanges([...selectedRanges, range]);
-        }
-    };
+    // const handlePriceChange = (range) => {
+
+    //     const isSelected = selectedRanges.some(
+    //         (r) => r[0] === range[0] && r[1] === range[1]
+    //     );
+    //     if (isSelected) {
+    //         setSelectedRanges(selectedRanges.filter((r) => r[0] !== range[0] || r[1] !== range[1]));
+    //     } else {
+    //         setSelectedRanges([...selectedRanges, range]);
+    //     }
+    // };
 
     const discountOptions = [
         "20% Cashback",
@@ -44,16 +44,16 @@ const Sidebar = ({cetegorey,handleCategoriesChange,selectedCategories,brand,sele
             }
         });
     };
-    const colors = [
-        { label: "Red", value: "#FF0000" },
-        { label: "Yellow", value: "#FFFF00" },
-        { label: "Blue", value: "#0000FF" },    // Blue color
-        { label: "Orange", value: "#FFA500" },  // Orange color
-        { label: "Brown", value: "#A52A2A" },   // Brown color
-        { label: "Green", value: "#008000" },   // Green color
-        { label: "Purple", value: "#800080" },  // Purple color
-        { label: "Sky", value: "#87CEEB" }
-    ];
+    // const colors = [
+    //     { label: "Red", value: "#FF0000" },
+    //     { label: "Yellow", value: "#FFFF00" },
+    //     { label: "Blue", value: "#0000FF" },    // Blue color
+    //     { label: "Orange", value: "#FFA500" },  // Orange color
+    //     { label: "Brown", value: "#A52A2A" },   // Brown color
+    //     { label: "Green", value: "#008000" },   // Green color
+    //     { label: "Purple", value: "#800080" },  // Purple color
+    //     { label: "Sky", value: "#87CEEB" }
+    // ];
 
     const handleColorChange = (color) => {
         if (selectedColors.includes(color)) {
@@ -64,6 +64,12 @@ const Sidebar = ({cetegorey,handleCategoriesChange,selectedCategories,brand,sele
             setSelectedColors([...selectedColors, color]);
         }
     };
+    useEffect(() => {
+        if (colors === "#FF0000") {
+            setSelectedlabel('Red')
+        }
+    }, [])
+
     return (
         <div>
             <div className=' md:w-[225px] flex items-start justify-start gap-6  flex-wrap'>
@@ -160,21 +166,22 @@ const Sidebar = ({cetegorey,handleCategoriesChange,selectedCategories,brand,sele
                 <div>
                     <h2 className='text-xl text-[#151875] leading-7 font-josefin font-bold underline md:mt-10'>Price Filter</h2>
                     {priceRanges.map((range, index) => (
-                        <div key={index} className='mt-2'>
+                        <div  key={index} className='mt-2'>
                             <label className='flex items-center text-[#7E81A2]'>
                                 <input
                                     type="checkbox"
                                     id={`price-${index}`}
                                     value={range.value}
                                     checked={selectedRanges.some(
-                                        (selectedRange) => selectedRange[0] === range.value[0] && selectedRange[1] === range.value[1]
+                                        (selectedRanges) => selectedRanges[0] === range.value[0] &&
+                                            selectedRanges[1] === range.value[1]
                                     )}
                                     onChange={() => handlePriceChange(range.value)}
                                     className="peer appearance-none checked:bg-[#FF3EB2] checked:text-white"
                                 />
                                 <span
                                     className={`flex items-center ${selectedRanges.some(
-                                        (selectedRange) => selectedRange[0] === range.value[0] && selectedRange[1] === range.value[1]
+                                        (selectedRanges) => selectedRanges[0] === range.value[0] && selectedRanges[1] === range.value[1]
                                     ) ? 'text-[#FF3EB2]' : 'text-[#fad3eb]'}`}
                                 >
                                     <FaCheckSquare />
@@ -189,35 +196,38 @@ const Sidebar = ({cetegorey,handleCategoriesChange,selectedCategories,brand,sele
                 {/* filter by color */}
                 <div>
                     <h2 className='text-xl text-[#151875] leading-7 font-josefin font-bold underline md:mt-10'>Filter by Color</h2>
+                  <div className='flex gap-2 items-center flex-wrap'>
+
+                
                     {colors.map((color, index) => (
-                        <div key={index} className='mt-2'>
+                        <div onClick={()=>handlebrandfilter(color)} key={index} className='mt-2'>
                             <label className='flex items-center text-[#7E81A2]'>
-                                <input
-                                    type="checkbox"
-                                    id={`color-${index}`}
-                                    value={color.value}
-                                    checked={selectedColors.includes(color.value)}
-                                    onChange={() => handleColorChange(color.value)}
-                                    className="peer appearance-none checked:bg-[#FF3EB2] checked:text-white"
-                                />
-                                <span
-                                    className={` flex items-center ${selectedColors.includes(color.value) ? 'text-[#FF3EB2]' : 'text-[#fad3eb]'}`}
-                                >
-                                    <FaCheckSquare />
-                                </span>
+                                
                                 <div className='flex gap-1 items-center'>
                                     <span
                                         className={`w-4 h-4 rounded-full  ml-2`}
-                                        style={{ backgroundColor: color.value }} 
+                                        style={{ backgroundColor: color }}
                                     >
                                     </span>
-                                    <span className="peer-checked:text-[#FF3EB2] ml-2">
-                                        {color.label}
+                                    <span className="peer-checked:text-[#FF3EB2] ">
+                                        {color === "#FF0000" ? 'red' : ''
+                                            || color === "#FFFF00" ? 'Yellow' : ''
+                                            || color === "#0000FF" ? 'Blue' : ''
+                                            || color === "#FFA500" ? 'Orange' : ''
+                                            || color === "#A52A2A" ? 'Brown' : ''
+                                            || color === "#008000" ? 'Green' : ''
+                                            || color === "#800080" ? 'Purple' : ''
+                                            || color === "#87CEEB" ? 'Sky' : ''
+
+
+                                        }
+                      
                                     </span>
                                 </div>
                             </label>
                         </div>
                     ))}
+                      </div>
                 </div>
 
 

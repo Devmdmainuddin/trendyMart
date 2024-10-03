@@ -209,6 +209,9 @@ const AddProductForm = () => {
                                     <option value='#87CEEB'>Sky</option>
                                 </select>
                             </div>
+                            <div>
+                                <label htmlFor=""></label>
+                            </div>
                             {/* tags */}
                             <div>
                                 <label htmlFor="tag01" className='capitalize'>tags</label>

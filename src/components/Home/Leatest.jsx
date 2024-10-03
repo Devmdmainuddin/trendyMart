@@ -6,7 +6,9 @@ import ProductCard02 from '../Card/ProductCard02';
 import { useGetproductsQuery } from '../../Featured/ProductAPI/productApi';
 
 const Leatest = () => {
-    const { data, error, isLoading, } = useGetproductsQuery()
+    const [sortOrder, setSortOrder] = useState('old');
+    const { data, error, isLoading, } = useGetproductsQuery({ sortOrder })
+
     const [newArrival, setNewArrival] = useState([])
    
     const [specialOffer, setSpecialOffer] = useState()
@@ -14,21 +16,16 @@ const Leatest = () => {
     // const [newArrival,setNewArrival]=useState()
     // console.log(data);
     console.log('new', newArrival);
+    const handleByNew = () => {
+        setSortOrder('new')
+        setItem(data)
+    }
+
     useEffect(() => {
         if (data && data?.length > 0) {
-            const Newdata = [...data].sort((a, b) => {
-                const dateA = new Date(Date.parse(a.createAt));
-                const dateB = new Date(Date.parse(b.createAt));
-                // dateA - dateB;
-                return  dateB - dateA
-            });
-            setNewArrival(Newdata);
-          
            setItem(data)
-
             const offer= data?.filter(item=> item.discount> 8 )
             setSpecialOffer(offer)
-
         }
     }, [data])
 
@@ -51,7 +48,7 @@ const Leatest = () => {
                 <Heading text='Leatest Products' className='text-center mt-16 md:mt-[71px]'></Heading>
                 <div className='flex justify-center md:mt-[18px]'>
                     <ul className='flex gap-4 lg:gap-[60px] flex-wrap mt-5 items-center'>
-                        <li onClick={()=>setItem(newArrival)} className='text-lg font-bold leading-[22px]  text-[#151875] hover:text-[#FB2E86] transition-all duration-500'> <button>New Arrival</button></li>
+                        <li onClick={handleByNew} className='text-lg font-bold leading-[22px]  text-[#151875] hover:text-[#FB2E86] transition-all duration-500'> <button>New Arrival</button></li>
                         <li className='text-lg font-bold leading-[22px]  text-[#151875] hover:text-[#FB2E86] transition-all duration-500'> <button>Best Seller</button></li>
                         <li className='text-lg font-bold leading-[22px]  text-[#151875] hover:text-[#FB2E86] transition-all duration-500'> <button>Featured</button></li>
                         <li onClick={()=>setItem(specialOffer)} className='text-lg font-bold leading-[22px]  text-[#151875] hover:text-[#FB2E86] transition-all duration-500'> <button>Special Offer</button></li>

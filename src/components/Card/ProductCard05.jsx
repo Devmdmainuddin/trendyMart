@@ -1,4 +1,5 @@
 import { FaPenNib, FaRegCalendarAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 
 const ProductCard05 = () => {
@@ -15,7 +16,7 @@ const ProductCard05 = () => {
                 <h2 className="text-lg font-bold font-josefin text-[#151875] hover:text-[#FB2E86] mt-6 transition-all duration-500">Top essential trends in 2021</h2>
                 <p className="font-normal text-[16px] text-[#72718F] my-4">More off this less hello samlande lied much
                 over tightly circa horse taped mightly</p>
-                <button className=" text-[#151875] hover:text-[#FB2E86] font-normal text-[16px] underline  capitalize transition-all duration-500">read more</button>
+                <Link to='/blogDetails'><button className=" text-[#151875] hover:text-[#FB2E86] font-normal text-[16px] underline  capitalize transition-all duration-500">read more</button> </Link>  
             </div>
         </div>
     );

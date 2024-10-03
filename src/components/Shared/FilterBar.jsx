@@ -5,7 +5,7 @@ import { IoGrid } from 'react-icons/io5';
 import { FaThList } from 'react-icons/fa';
 
 
-const FilterBar = ({handleByNew,handleByOld,selectNumber}) => {
+const FilterBar = ({setActiveMulti,handleByNew,handleByOld,selectNumber}) => {
  
 
     return (
@@ -58,10 +58,10 @@ const FilterBar = ({handleByNew,handleByOld,selectNumber}) => {
                         <div className='flex gap-2 items-center'>
                             <p className='text-[#3F509E] text-[16px] font-normal capitalize'>view:</p>
                             <div className="icon flex gap-1">
-                                <div className={`  text-[#737373] border-[#F0F0F0] w-6   h-6 border  flex justify-center items-center  `}>
+                                <div onClick={() => setActiveMulti(true)} className={`  text-[#737373] border-[#F0F0F0] w-6   h-6 border  flex justify-center items-center  `}>
                                     <IoGrid className='text-[16px]' />
                                 </div>
-                                <div className={`   w-6   h-6  border border-[#F0F0F0] flex justify-center items-center text-[#737373] `}>
+                                <div onClick={() => setActiveMulti(false)}  className={`   w-6   h-6  border border-[#F0F0F0] flex justify-center items-center text-[#737373] `}>
                                     <FaThList className='text-[16px]' />
                                 </div>
 

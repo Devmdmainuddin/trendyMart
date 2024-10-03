@@ -5,24 +5,29 @@ import PropTypes from 'prop-types';
 // import { useGetproductsQuery } from '../../Featured/ProductAPI';
 import ProductCard06 from '../Card/ProductCard06';
 import { useGetproductsQuery } from '../../Featured/ProductAPI/productApi';
+import ProductCard07 from '../Card/ProductCard07';
 
 
-function Items({ currentItems }) {
+function Items({ currentItems,activeMulti }) {
 
 
     return (
         <>
             {currentItems &&
                 currentItems.map((item,key) => (
-                    <div key={key}>
-                        <ProductCard06 item={item}></ProductCard06>
+                    <div key={key} className={`${activeMulti?'':'w-full'}`}>
+                           {activeMulti ? (
+                       <ProductCard06 item={item}></ProductCard06>
+                    ) : (
+                        <ProductCard07 item={item}></ProductCard07>
+                    )}
                     </div>
                 ))}
         </>
     );
 }
 
-function PaginatedItems({ itemsPerPage, item }) {
+function PaginatedItems({ itemsPerPage, item,activeMulti }) {
  
     const { data } = useGetproductsQuery()
     const items = item? item : data;
@@ -41,7 +46,7 @@ function PaginatedItems({ itemsPerPage, item }) {
 
     return (
         <>
-            <Items currentItems={currentItems} />
+            <Items currentItems={currentItems} activeMulti={activeMulti} />
             <div className='w-full flex justify-between items-center mt-[50px] flex-wrap gap-y-4'>
                 <ReactPaginate
                     breakLabel="..."

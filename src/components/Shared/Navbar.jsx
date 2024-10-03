@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Container from './Container';
 import { IoSearch } from 'react-icons/io5';
 import { IoMdClose, IoMdMenu } from 'react-icons/io';
@@ -8,13 +8,18 @@ import { FaCartPlus, FaMinus, FaPlus, FaRegHeart, FaRegUser } from 'react-icons/
 import { useDispatch, useSelector } from 'react-redux';
 import { changeQuantity, deleteItem } from '../../Featured/CartAPI/cartSlice';
 import Swal from 'sweetalert2';
+import { useGetproductsQuery } from '../../Featured/ProductAPI/productApi';
 
 const Navbar = () => {
     const carts = useSelector((state) => state.cart.cartItem)
     const [menu, setMenu] = useState(false)
     const [cartOpen, setCartOpen] = useState(false);
-
+    let [searchInput, setSearchInput] = useState("");
+    let [searchFilter, setSearchFilter] = useState([]);
+    const [sortOrder, setSortOrder] = useState('old');
+    const { data, error, isLoading, } = useGetproductsQuery({ sortOrder })
     const cartRef = useRef();
+    const navigate = useNavigate()
 
     let [totalPrice, setTotalPrice] = useState(0);
 
@@ -52,22 +57,34 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleClickOutside = (e) => {
-          if (cartRef.current.contains(e.target)) {
-            setCartOpen(!cartOpen);
-          } else {
-            setCartOpen(false);
-          }
-         
+            if (cartRef.current.contains(e.target)) {
+                setCartOpen(!cartOpen);
+            } else {
+                setCartOpen(false);
+            }
+
         };
-    
+
         window.addEventListener("click", handleClickOutside);
         return () => {
-          window.removeEventListener("click", handleClickOutside);
+            window.removeEventListener("click", handleClickOutside);
         };
-      }, [cartOpen]);
+    }, [cartOpen]);
 
-
-
+    const handleInput = (e) => {
+        setSearchInput(e.target.value)
+        if (e.target.value === "") {
+            setSearchFilter([])
+        } else {
+            const searchOne = data?.filter(item => item.title.toLowerCase().includes(e.target.value.toLowerCase()))
+            setSearchFilter(searchOne)
+        }
+    }
+    const handleLink = (id) => {
+        navigate(`/product/${id}`)
+        setSearchFilter([])
+        setSearchInput("")
+    }
     return (
         <nav>
             <div className='bg-[#7E33E0] py-[14px] hidden md:block'>
@@ -95,10 +112,10 @@ const Navbar = () => {
                                 </li>
                                 <li className=' text-white'><NavLink to='/myAccount/login' className='flex gap-1 items-center'> Login <FaRegUser /><span></span></NavLink> </li>
                                 <li className=' text-white '> <button className='flex gap-1 items-center'> wishlist <FaRegHeart className='text-white' /><span></span></button></li>
-                                <li className=' text-white '><button  ref={cartRef}  className='flex gap-1 items-center relative'><FaCartPlus className='text-white text-lg ' /> {carts?.length > 0 ? <span className="text-red-500 bg-white w-5 h-5 border p-1 rounded-full text-center absolute -top-3 -right-3 flex justify-center items-center">{carts?.length}</span> : ''}</button></li>
+                                <li className=' text-white '><button ref={cartRef} className='flex gap-1 items-center relative'><FaCartPlus className='text-white text-lg ' /> {carts?.length > 0 ? <span className="text-red-500 bg-white w-5 h-5 border p-1 rounded-full text-center absolute -top-3 -right-3 flex justify-center items-center">{carts?.length}</span> : ''}</button></li>
                                 {cartOpen && (
                                     <div className="block w-[360px]  absolute z-50 top-full right-0 bg-slate-50 border translate-y-6">
-                                        <div className={`w-full  overflow-y-scroll ${carts.length>0?'h-[320px]':''}`}>
+                                        <div className={`w-full  overflow-y-scroll ${carts.length > 0 ? 'h-[320px]' : ''}`}>
                                             {carts.length ? <>
                                                 {carts.slice(0, 4).map(item =>
                                                     <div key={item._id} className="flex   gap-2 bg-[#F5F5F3] py-2 px-5">
@@ -150,7 +167,7 @@ const Navbar = () => {
                 </Container>
             </div>
             <Container>
-                <div className='flex justify-between  items-center py-4 relative gap-3'>
+                <div className=' flex justify-between  items-center py-4 relative gap-3'>
                     <div className="logo md:w-[98px] h-[34px]"><img src="/Hekto.png" alt="logo" className='w-full h-full object-contain' /></div>
                     <div>
                         {/* <ul className={`lg:flex gap-[35px] bg-slate-300 lg:bg-transparent p-6 lg:p-0 text-[#0D0E43] text-[16px] font-normal text-center lg:text-start absolute lg:static transition-all duration-300 ease-in-out z-[9999999]  top-full -left-full ${menu?'left-1/2 -translate-x-1/2':'top-0 '}`}> */}
@@ -172,17 +189,32 @@ const Navbar = () => {
 
                         </ul>
                     </div>
-                    <div className='flex items-center h-10'>
-                        <input type="text" name="" id="" className='sm:w-[386px] lg:w-auto bg-[#D9D9D9] border-none outline-none h-full px-3' />
+                    <div className='relative flex items-center h-10'>
+                        <input type="text" name="" value={searchInput} onChange={handleInput} placeholder='Search Products' id="" className='sm:w-[386px] lg:w-auto bg-[#D9D9D9] border-none outline-none h-full px-3' />
                         <div className='w-[50px] h-full bg-[#FB2E86] flex items-center justify-center text-white'>
-                            <IoSearch className=' text-2xl ' />
+                            <IoSearch className=' text-2xl absolute right-1 lg:right-5 top-1/2 translate-y-[-50%]' />
+                            
+
                         </div>
 
-
+                        
                     </div>
                     <div onClick={() => setMenu(!menu)} className='inline-block lg:hidden'>
                         <p><IoMdMenu className='text-[#0D0E43] text-3xl' /></p>
                     </div>
+                    {searchFilter.length > 0 &&
+                                <div className='absolute w-[350px] max-h-[350px] top-full left-1/2 -translate-x-1/2 z-50  overflow-y-scroll' >
+                                    {searchFilter.map((item, key) =>
+                                        <div onClick={() => handleLink(item._id)} key={key} className=" cursor-pointer flex   gap-2 bg-[#F5F5F3] p-5 border-b">
+                                            <img src={item.image} alt="" className="bg-[#979797] w-20 h-20" />
+                                            <div><h2>{item.title}</h2>
+                                            </div>
+
+
+                                        </div>
+                                    )}
+                                </div>}
+
                 </div>
 
 

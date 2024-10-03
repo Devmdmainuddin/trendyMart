@@ -13,11 +13,12 @@ const Products = () => {
     const [sortOrder, setSortOrder] = useState('new');
     const { data, error, isLoading, } = useGetproductsQuery({ sortOrder })
     const [item, setItem] = useState(data)
+    const [activeMulti, setActiveMulti] = useState(true)
 
     useEffect(() => {
         setItem(data)
     }, [data])
-    
+
 
     const handleByNew = () => {
         setSortOrder('new')
@@ -30,9 +31,9 @@ const Products = () => {
         setNumber(numberConverter)
 
     }
- 
-  
-  let content;
+
+
+    let content;
     if (isLoading) {
         content = <h1>loading............</h1>
     }
@@ -43,7 +44,7 @@ const Products = () => {
         content = <h1>NO POSTS FOUND</h1>
     }
     if (!isLoading && !error && data.length > 0) {
-        content =  <PaginatedItems item={item} itemsPerPage={number}></PaginatedItems>
+        content = <PaginatedItems item={item} itemsPerPage={number} activeMulti={activeMulti}></PaginatedItems>
     }
 
 
@@ -51,23 +52,13 @@ const Products = () => {
     return (
         <div>
             <Bredcumb></Bredcumb>
-            <FilterBar handleByNew={handleByNew} handleByOld={handleByOld} selectNumber={selectNumber}></FilterBar>
+            <FilterBar setActiveMulti={setActiveMulti} handleByNew={handleByNew} handleByOld={handleByOld} selectNumber={selectNumber}></FilterBar>
             <Container>
                 <div className='flex gap-[15px] flex-wrap justify-center md:justify-between  mt-[58px]'>
-                {data ? content : <p>no product</p>}
+                    {data ? content : <p>no product</p>}
                     {/* {item?.slice(0, 6).map((items, idx) => <ProductCard06 key={idx} items={items}></ProductCard06>)} */}
 
-                    {/* <ProductCard06></ProductCard06>
-                <ProductCard06></ProductCard06>
-                <ProductCard06></ProductCard06>
-                <ProductCard06></ProductCard06>
-                <ProductCard06></ProductCard06>
-                <ProductCard06></ProductCard06>
-                <ProductCard06></ProductCard06>
-                <ProductCard06></ProductCard06>
-                <ProductCard06></ProductCard06>
-                <ProductCard06></ProductCard06>
-                <ProductCard06></ProductCard06> */}
+
                 </div>
                 <Company></Company>
             </Container>
