@@ -1,10 +1,13 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Container from './Container';
 import { IoGrid } from 'react-icons/io5';
 import { FaThList } from 'react-icons/fa';
 
-const FilterBar = () => {
+
+const FilterBar = ({handleByNew,handleByOld,selectNumber}) => {
+ 
+
     return (
         <div>
             <Container>
@@ -19,7 +22,8 @@ const FilterBar = () => {
                     <div className="filter flex gap-6">
                         <div className='flex gap-1 items-center'>
                             <p className='text-[#3F509E] text-[16px] font-normal capitalize'>per page</p>
-                            <select        
+                            <select  
+                             onChange={selectNumber}      
                               name="" id="" className='text-[#737373] text-[16px] font-normal border border-[#e8e8e8]  px-5 outline-none'>
                                 <option value="3">3</option>
                                 <option value="6">6</option>

@@ -1,24 +1,14 @@
 import React, { useState } from 'react';
 import { FaCheck, FaCheckSquare } from 'react-icons/fa';
 
-const Sidebar = () => {
-    const [selectedFurniture, setSelectedFurniture] = useState([]);
+const Sidebar = ({cetegorey,handleCategoriesChange,selectedCategories,brand,selectedBrand,handleBrandChange,}) => {
+   
     const [selectedDiscount, setSelectedDiscount] = useState([]);
-    const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedRanges, setSelectedRanges] = useState([]);
     const [selectedColors, setSelectedColors] = useState([]);
 
 
-    const Categories = [
-        " Prestashop",
-        " Magento",
-        "Bigcommerce",
-        "osCommerce",
-        "Bags",
-        "Accessories",
-        "Jewellery",
-        "Watches",
-    ]
+
     const priceRanges = [
         { label: "$0 - $50", value: [0, 50] },
         { label: "$51 - $100", value: [51, 100] },
@@ -38,44 +28,15 @@ const Sidebar = () => {
         }
     };
 
-    const furnitureOptions = [
-        "Coaster Furniture",
-        "Fusion Dot High Fashion",
-        "Unique Furniture Restor",
-        "Dream Furniture Flipping",
-        "Young Repurposed",
-        "Green DIY Furniture",
-    ];
     const discountOptions = [
         "20% Cashback",
         "5% Cashback Offer",
         "25% Discount Offer",
     ]
-    console.log(selectedFurniture);
-    // Handle checkbox changes
-    const handleCheckboxChange = (event) => {
-        const value = event.target.value;
-        setSelectedFurniture((prevSelected) => {
-            if (prevSelected.includes(value)) {
-                return prevSelected.filter((item) => item !== value);
-            } else {
-                return [...prevSelected, value];
-            }
-        });
-    };
+
     const handleDiscountChange = (event) => {
         const value = event.target.value;
         setSelectedDiscount((prevSelected) => {
-            if (prevSelected.includes(value)) {
-                return prevSelected.filter((item) => item !== value);
-            } else {
-                return [...prevSelected, value];
-            }
-        });
-    };
-    const handleCategoriesChange = (event) => {
-        const value = event.target.value;
-        setSelectedCategories((prevSelected) => {
             if (prevSelected.includes(value)) {
                 return prevSelected.filter((item) => item !== value);
             } else {
@@ -111,20 +72,20 @@ const Sidebar = () => {
                 {/* Brand */}
                 <div >
                     <h2 className='text-xl text-[#151875] leading-7 font-josefin font-bold underline '>Product Brand</h2>
-                    {furnitureOptions.map((furniture) => (
-                        <div key={furniture} className='mt-2'>
+                    {brand.map((brands) => (
+                        <div key={brands} className='mt-2'>
                             <label className='flex items-center  text-[#7E81A2]'>
                                 <input
                                     type="checkbox"
-                                    value={furniture}
-                                    checked={selectedFurniture.includes(furniture)}
-                                    onChange={handleCheckboxChange}
+                                    value={brands}
+                                    checked={selectedBrand.includes(brands)}
+                                    onChange={handleBrandChange}
                                     className="peer  appearance-none  checked:bg-[#603EFF] checked:text-white "
                                 />
-                                <span className={` flex  items-center ${selectedFurniture.includes(furniture) ? 'text-[#603EFF]' : 'text-[#d7d2f0]'}`}>
+                                <span className={` flex  items-center ${selectedBrand.includes(brands) ? 'text-[#603EFF]' : 'text-[#d7d2f0]'}`}>
                                     <FaCheckSquare />
                                 </span>
-                                <span className="peer-checked:text-[#603EFF] ml-2">{furniture}</span>
+                                <span className="peer-checked:text-[#603EFF] ml-2">{brands}</span>
                             </label>
                         </div>
                     ))}
@@ -154,7 +115,7 @@ const Sidebar = () => {
                 {/* category */}
                 <div >
                     <h2 className='text-xl text-[#151875] leading-7 font-josefin font-bold underline md:mt-10'>Categories</h2>
-                    {Categories.map((item) => (
+                    {cetegorey.map((item) => (
                         <div key={item} className='mt-2'>
                             <label className='flex items-center  text-[#7E81A2]'>
                                 <input
