@@ -31,6 +31,16 @@ const ProductDetails = () => {
   const products = useLoaderData();
   const { data, error, isLoading, } = useGetproductsQuery()
   const [relatedProducts, setRelatedProducts] = useState([]);
+// const [discountPrice,setDiscountPrice] = useState(0);
+
+
+
+
+  const discountp = (parseInt(products?.price) * parseInt(products?.discount)) / 100
+  const discountPrice = parseInt(products?.price) - discountp
+  
+
+
 
   useEffect(() => {
     const newpro = data?.filter(items => items.categorys.category === products.categorys.category);
@@ -145,8 +155,8 @@ const ProductDetails = () => {
               <span className='text-sm'>22</span>
             </div>
             <div className='text-[13px] font-josefin font-normal flex gap-2 mt-3'>
-              <p className='text-[#151875] text-[16px]'>$ <span >{products.price}</span></p>
-              <p className='  text-[#FB2E86] line-through'>$ <span>65.00</span></p>
+            <p className='text-[#151875] text-[16px]'> {products.discount &&  <span > ${discountPrice}</span>}</p> 
+              <p className={`text-[16px] text-[#FB2E86]  ${products.discount?'line-through':''}`}>$ <span> {products.price}</span></p>
             </div>
             <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-4 capitalize'>Color : <span className={`w-10 h-10 rounded-full bg-[${products.color}]`}>{products?.color === "#FF0000" ? 'red' : ''
               || products?.color === "#FFFF00" ? 'Yellow' : ''

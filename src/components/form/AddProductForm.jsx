@@ -101,7 +101,6 @@ const AddProductForm = () => {
             dimensions,
             userInfo
         };
-        console.log(info);
 
         try {
             await addProduct(info)

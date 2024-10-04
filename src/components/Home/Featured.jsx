@@ -6,11 +6,10 @@ import { useGetproductsQuery } from '../../Featured/ProductAPI/productApi';
 import LoadingSpinner from '../Shared/LoadingSpinner';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
-
 import "swiper/css";
 import "swiper/css/pagination";
 import "../../styles/swipers.css";
-import useProducts from '../../hooks/useProducts';
+
 
 // import Slider from "react-slick";
 // import "slick-carousel/slick/slick.css";

@@ -22,6 +22,7 @@ import Shop from "../pages/Products/Shop";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import AddProductForm from "../components/form/AddProductForm";
+import AddBlog from "../pages/Dashboard/Admin/AddBlog";
 
 
 
@@ -43,10 +44,7 @@ export const router = createBrowserRouter([
                 path: "/shop",
                 element: <Shop />,
               },
-              {
-                path: "/addProduct",
-                element:<AddProductForm/>,
-              },
+              
 
               {
                 path: "/product/:id",
@@ -119,6 +117,11 @@ export const router = createBrowserRouter([
           path: "/dashboard/addProduct",
           element:<AddProductForm/>,
         },
+        {
+          path: "/dashboard/addBlog",
+          element:<AddBlog/>,
+        },
+
       ]
     },
     

@@ -15,8 +15,6 @@ const DefaultProducts = () => {
             <ProductCard06></ProductCard06>
             <ProductCard06></ProductCard06>
             <ProductCard06></ProductCard06>
-        
-            
         </div>
         <Company></Company>
         </Container>

@@ -193,27 +193,27 @@ const Navbar = () => {
                         <input type="text" name="" value={searchInput} onChange={handleInput} placeholder='Search Products' id="" className='sm:w-[386px] lg:w-auto bg-[#D9D9D9] border-none outline-none h-full px-3' />
                         <div className='w-[50px] h-full bg-[#FB2E86] flex items-center justify-center text-white'>
                             <IoSearch className=' text-2xl absolute right-1 lg:right-5 top-1/2 translate-y-[-50%]' />
-                            
+
 
                         </div>
 
-                        
+
                     </div>
                     <div onClick={() => setMenu(!menu)} className='inline-block lg:hidden'>
                         <p><IoMdMenu className='text-[#0D0E43] text-3xl' /></p>
                     </div>
                     {searchFilter.length > 0 &&
-                                <div className='absolute w-[350px] max-h-[350px] top-full left-1/2 -translate-x-1/2 z-50  overflow-y-scroll' >
-                                    {searchFilter.map((item, key) =>
-                                        <div onClick={() => handleLink(item._id)} key={key} className=" cursor-pointer flex   gap-2 bg-[#F5F5F3] p-5 border-b">
-                                            <img src={item.image} alt="" className="bg-[#979797] w-20 h-20" />
-                                            <div><h2>{item.title}</h2>
-                                            </div>
+                        <div className='absolute max-w-[420px] max-h-[350px] top-full left-1/2 -translate-x-1/2 z-50  overflow-y-scroll' >
+                            {searchFilter.map((item, key) =>
+                                <div onClick={() => handleLink(item._id)} key={key} className=" cursor-pointer flex   gap-2 bg-[#F5F5F3] p-5 border-b">
+                                    <img src={item.image} alt="" className="bg-[#979797] w-20 h-20" />
+                                    <div><h2>{item.title}</h2>
+                                    </div>
 
 
-                                        </div>
-                                    )}
-                                </div>}
+                                </div>
+                            )}
+                        </div>}
 
                 </div>
 
