@@ -23,7 +23,7 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import AddProductForm from "../components/form/AddProductForm";
 import AddBlog from "../pages/Dashboard/Admin/AddBlog";
-
+import Profile from '../pages/Dashboard/Profile/Profile'
 
 
 export const router = createBrowserRouter([
@@ -113,6 +113,10 @@ export const router = createBrowserRouter([
       path: "/dashboard", 
       element:<PrivateRoute><Dashboard/></PrivateRoute> ,
       children:[
+        {
+          path: "/dashboard",
+          element:<Profile/>,
+        },
         {
           path: "/dashboard/addProduct",
           element:<AddProductForm/>,

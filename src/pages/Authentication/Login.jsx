@@ -7,6 +7,7 @@ import { FaEye } from 'react-icons/fa';
 import { IoMdEyeOff } from 'react-icons/io';
 import useAuth from '../../hooks/useAuth';
 import PasswordResetModal from '../../components/modal/PasswordResetModal'
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const { signIn, setLoading } = useAuth()
@@ -25,7 +26,7 @@ const Login = () => {
 
         try {
             const result = await signIn(email, password)
-            // dispatch(loginUser(formData))
+          
             navigate(from)
             Swal.fire({
                 position: "top-end",
@@ -39,7 +40,7 @@ const Login = () => {
             Swal.fire({
                 position: "top-end",
                 icon: "error",
-                title: "err.message",
+                title: err.code,
                 showConfirmButton: false,
                 timer: 1500
             });

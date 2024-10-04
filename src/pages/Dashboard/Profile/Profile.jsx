@@ -2,11 +2,11 @@ import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import useRole from "../../../hooks/useRole"
 import UpdateProfileModal from "../../../components/modal/UpdateProfileModal";
-import useUser from "../../../hooks/useUser";
+
 import UpdatePasswordModel from "../../../components/modal/UpdatePasswordModel";
 const Profile = () => {
     const { user,logOut, setLoading,loading } = useAuth()
-    const [users] = useUser()
+
     const [role, isloading] = useRole()
     const [Open, setOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(false)

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { CiMenuFries } from "react-icons/ci";
 // import { IoMdSettings } from "react-icons/io";
 // import { RiLockPasswordFill } from "react-icons/ri";
@@ -16,6 +16,7 @@ import { ImProfile } from "react-icons/im";
 import { GrDocumentUpdate } from "react-icons/gr";
 import { TbPasswordUser } from "react-icons/tb";
 import { BiLogOut } from "react-icons/bi";
+import { useGetUserByEmailQuery} from "../../Featured/auth/authApi";
 
 // import Sidebar from "./Sidebar";
 
@@ -24,9 +25,11 @@ import { BiLogOut } from "react-icons/bi";
 
 const Dashboard = () => {
     const { user, logOut } = useAuth()
+    const email = user?.email;
+    const { data, error, isLoading } = useGetUserByEmailQuery(email);;
     const [show, setShow] = useState(false)
     const [role, isloading] = useRole()
-    if (isloading) return <LoadingSpinner />
+   
 
     return (
         <div>
@@ -40,12 +43,12 @@ const Dashboard = () => {
                             <div className="text-center py-6 bg-slate-100 relative mt-5">
                                 <img alt="" className=" w-12 h-12  object-cover rounded-full bg-slate-300 absolute -top-[30px] left-1/2 -translate-x-1/2" src={user?.photoURL ? user?.photoURL : '/user.png'} />
                                 <div className="">
-                                    <p className="text-xl font-semibold leading-snug"> {user?.displayName}</p>
+                                    <p className="text-xl font-semibold leading-snug"> {user?.displayName?user?.displayName: data?.firstName + data?.lastName }</p>
                                     <p>{role}</p>
                                 </div>
                             </div>
                             <ul className="mt-4 bg-slate-100 p-3">
-                                <li><NavLink to='/' className="capitalize  flex items-center gap-2 "> <ImProfile /> view profile</NavLink></li>
+                                <li><NavLink to='/profile' className="capitalize  flex items-center gap-2 "> <ImProfile /> view profile</NavLink></li>
                                 <li className="my-2"><NavLink to='/' className="capitalize flex items-center gap-2 "> <GrDocumentUpdate /> update profile</NavLink></li>
                                 <li><NavLink to='/' className="capitalize  flex items-center gap-2"><TbPasswordUser /> password change</NavLink></li>
 

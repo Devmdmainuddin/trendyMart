@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Container from './Container';
+import useAuth from '../../hooks/useAuth'
 import { IoSearch } from 'react-icons/io5';
 import { IoMdClose, IoMdMenu } from 'react-icons/io';
 import { CiUser } from 'react-icons/ci';
@@ -12,11 +13,13 @@ import { useGetproductsQuery } from '../../Featured/ProductAPI/productApi';
 
 const Navbar = () => {
     const carts = useSelector((state) => state.cart.cartItem)
+    const { user, logOut } = useAuth()
     const [menu, setMenu] = useState(false)
     const [cartOpen, setCartOpen] = useState(false);
     let [searchInput, setSearchInput] = useState("");
     let [searchFilter, setSearchFilter] = useState([]);
     const [sortOrder, setSortOrder] = useState('old');
+    const [proOpen, setProOpen] = useState(false);
     const { data, error, isLoading, } = useGetproductsQuery({ sortOrder })
     const cartRef = useRef();
     const navigate = useNavigate()
@@ -110,7 +113,27 @@ const Navbar = () => {
                                     <option value="BD" className='text-black'>BD</option>
                                 </select>
                                 </li>
-                                <li className=' text-white'><NavLink to='/myAccount/login' className='flex gap-1 items-center'> Login <FaRegUser /><span></span></NavLink> </li>
+                                <li onClick={() => setProOpen(!proOpen)} className=' text-white'>   <span className='flex gap-1 items-center'> Login <FaRegUser /> </span> </li>
+                                {proOpen && (
+                                    <div className=" absolute z-50 top-full right-12 translate-y-6">
+                                        <div className="w-[263px] block  bg-[#ffffff] ">
+                                            <div className="button flex flex-col  w-full">
+                                                {user ? (
+                                                    <>
+                                                        <Link onClick={() => setProOpen(!proOpen)} to='/dashboard' className="py-4  px-3 lg:px-10 text-white bg-[#FB2E86] text-center w-full  ">My Account</Link>
+                                                        <button onClick={logOut} className="py-4 px-3 lg:px-10 bg-white text-[#FB2E86]  w-full mt-0  border text-center">logOut</button>
+                                                    </>
+                                                )
+                                                    :
+                                                    (
+                                                        <Link onClick={() => setProOpen(!proOpen)} to='/myAccount/login' className="py-4 px-3 lg:px-6 bg-white  w-full mt-0 text-center border  uppercase">login</Link>)}
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                                 <li className=' text-white '> <button className='flex gap-1 items-center'> wishlist <FaRegHeart className='text-white' /><span></span></button></li>
                                 <li className=' text-white '><button ref={cartRef} className='flex gap-1 items-center relative'><FaCartPlus className='text-white text-lg ' /> {carts?.length > 0 ? <span className="text-red-500 bg-white w-5 h-5 border p-1 rounded-full text-center absolute -top-3 -right-3 flex justify-center items-center">{carts?.length}</span> : ''}</button></li>
                                 {cartOpen && (

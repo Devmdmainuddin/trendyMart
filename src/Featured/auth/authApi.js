@@ -11,11 +11,21 @@ export const authApi = createApi({
             providesTags: (result) =>
                 result
                     ? [
-                          ...result.map(({ id }) => ({ type: 'user', id })),
-                          { type: 'user', id: 'LIST' }, // Track the list
-                      ]
+                        ...result.map(({ id }) => ({ type: 'user', id })),
+                        { type: 'user', id: 'LIST' }, // Track the list
+                    ]
                     : [{ type: 'user', id: 'LIST' }],
         }),
+        // Get User by email
+        getUserByEmail: builder.query({
+            query: (email) => `/user/${email}`,
+            providesTags: (result) =>
+                result
+                    ? [{ type: 'user', id: result.id }, { type: 'user', id: 'LIST' }] 
+                    : [{ type: 'user', id: 'LIST' }],
+        }),
+        
+
         // add product
         addUser: builder.mutation({
             query: (body) => ({
@@ -23,12 +33,12 @@ export const authApi = createApi({
                 method: 'PUT',
                 body
             }),
-            invalidatesTags:  [{ type: 'user', id: 'LIST' },] 
+            invalidatesTags: [{ type: 'user', id: 'LIST' },]
         }),
-        
-    
+
+
 
     }),
 });
 
-export const { useGetUserQuery,useAddUserMutation } = authApi;
+export const { useGetUserQuery,useGetUserByEmailQuery, useAddUserMutation } = authApi;
