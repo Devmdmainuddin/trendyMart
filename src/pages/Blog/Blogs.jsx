@@ -6,24 +6,19 @@ import Company from '../../components/Home/Company';
 import Sidebar from './Sidebar';
 import LoadingSpinner from '../../components/Shared/LoadingSpinner'
 import { useGetproductsQuery } from '../../Featured/ProductAPI/productApi';
+import { useGetBlogsQuery } from '../../Featured/BlogAPI/blogApi';
 const Blogs = () => {
     const [sortOrder, setSortOrder] = useState('new');
-    const { data, error, isLoading, } = useGetproductsQuery({ sortOrder });
-    const [offer, setOffer] = useState([]);
-    const [categorey, setCategorey] = useState([])
-    const [tags, setTags] = useState([])
-// console.log(tags);
+    const { data, error, isLoading, } = useGetBlogsQuery({ sortOrder })
     let content;
     if (isLoading) {
-        content = 
-        <div className='flex justify-center items-center'>
-            <span className="loading loading-ring loading-xs"></span>
-            <span className="loading loading-ring loading-sm"></span>
-            <span className="loading loading-ring loading-md"></span>
-            <span className="loading loading-ring loading-lg"></span>
-        </div>
-
-      
+        content =
+            <div className='flex justify-center items-center'>
+                <span className="loading loading-ring loading-xs"></span>
+                <span className="loading loading-ring loading-sm"></span>
+                <span className="loading loading-ring loading-md"></span>
+                <span className="loading loading-ring loading-lg"></span>
+            </div>
     }
     if (!isLoading && error) {
         content = <p>Error fetching products</p>
@@ -32,34 +27,19 @@ const Blogs = () => {
         content = <h1>NO POSTS FOUND</h1>
     }
     if (!isLoading && !error && data.length > 0) {
-        content = <Sidebar data={data} categorey={categorey} offer={offer} tags={tags}></Sidebar>
+        content = <main className='flex flex-col gap-8'>
+            {data?.slice(0, 4).map((item, idx) => <BlogCard key={idx} item={item}></BlogCard>)}
+        </main>
     }
-    useEffect(() => {
-        if (data && data?.length > 0) {
-            setCategorey([... new Set(data?.map(item => item.categorys.category))])
-            setTags([... new Set(data?.map(item => item.tags.tag01))])
-            const offerData = data?.filter(item => item.discount > 0)
-            setOffer(offerData)
-        }
-    }, [data])
-
 
     return (
         <div>
             <Bredcumb></Bredcumb>
             <Container>
-
-
                 <div className='flex gap-6 flex-col md:flex-row mt-16 md:mt-[125px]'>
-                    <main className='flex flex-col gap-8'>
-
-                        <BlogCard></BlogCard>
-                        <BlogCard></BlogCard>
-                        <BlogCard></BlogCard>
-                        <BlogCard></BlogCard>
-                    </main>
+                    {content}
                     <div>
-                        {content}
+                        <Sidebar ></Sidebar>
                     </div>
 
                 </div>

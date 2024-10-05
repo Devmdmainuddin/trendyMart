@@ -24,6 +24,8 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import AddProductForm from "../components/form/AddProductForm";
 import AddBlog from "../pages/Dashboard/Admin/AddBlog";
 import Profile from '../pages/Dashboard/Profile/Profile'
+import UpdateProfile from "../pages/Dashboard/Profile/UpdateProfile";
+import PasswordChange from "../pages/Dashboard/Profile/PasswordChange";
 
 
 export const router = createBrowserRouter([
@@ -69,8 +71,9 @@ export const router = createBrowserRouter([
                 element: <Blogs />,
               },
               {
-                path: "/blogDetails",
+                path: "/blog/:id",
                 element: <BlogDetails />,
+                loader: ({ params }) => fetch(`http://localhost:5000/blog/${params.id}`)
               },
               {
                 path: "/about",
@@ -116,6 +119,14 @@ export const router = createBrowserRouter([
         {
           path: "/dashboard",
           element:<Profile/>,
+        },
+        {
+          path: "/dashboard/updateProfile",
+          element:<UpdateProfile/>,
+        },
+        {
+          path: "/dashboard/updatePassword",
+          element:<PasswordChange/>,
         },
         {
           path: "/dashboard/addProduct",

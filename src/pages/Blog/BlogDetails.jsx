@@ -3,7 +3,7 @@ import Bredcumb from "../../components/Shared/Bredcumb";
 import Container from "../../components/Shared/Container";
 import { IoCalendarOutline } from "react-icons/io5";
 import Image from "../../components/Shared/Image";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import ProductCart09 from "../../components/Card/ProductCart09";
 import Company from "../../components/Home/Company";
 import { MdMarkEmailRead } from "react-icons/md";
@@ -11,27 +11,19 @@ import { AiFillMessage } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import { useGetproductsQuery } from "../../Featured/ProductAPI/productApi";
+import { useGetBlogsQuery } from "../../Featured/BlogAPI/blogApi";
 
 
 const BlogDetails = () => {
-
+    const blog = useLoaderData()
     const [sortOrder, setSortOrder] = useState('new');
     const { data, error, isLoading, } = useGetproductsQuery({ sortOrder });
-    const [offer,setOffer]=useState([]);
-    const [categorey, setCategorey] = useState([])
-
-    useEffect(() => {
-        if (data && data?.length > 0) {
-            setCategorey([... new Set(data?.map(item => item.categorys.category))])
-            const offerData = data?.filter(item => item.discount > 0)
-            setOffer(offerData)
-        }
-    }, [data])
-
+    // const {data:blogdata}=useGetBlogsQuery({ sortOrder })
     const [isChecked, setIsChecked] = useState(false);
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
+
 
     return (
         <div>
@@ -42,51 +34,44 @@ const BlogDetails = () => {
                         <div>
                             <div>
                                 <div className="image">
-                                    <img src="/blogs.jpg" alt="" />
+                                    <img src={blog.image} alt="" className="w-full h-full object-contain" />
                                 </div>
                                 <div className="content mt-7">
                                     <div className='flex gap-6'>
                                         <div className='flex gap-2 items-center'>
                                             <span><FaPenNib className='text-[#FB2E86]' /></span>
-                                            <p className='text-sm font-josefin font-normal #151875 bg-[#FFE7F9] px-3'>Surf Auxion </p>
+                                            <p className='text-sm font-josefin font-normal #151875 bg-[#FFE7F9] px-3'>{blog.author.name} </p>
                                         </div>
                                         <div className='flex gap-2 items-center'>
                                             <span> <IoCalendarOutline className='text-[#f8bb9a]' /></span>
-                                            <p className='text-sm font-josefin font-normal #151875 bg-[#FFECE2] px-3'>Aug 09 2020 </p>
+                                            <p className='text-sm font-josefin font-normal #151875 bg-[#FFECE2] px-3'>{blog.publishDate} </p>
                                         </div>
 
 
                                     </div>
-                                    <h2 className='mt-7 text-[#151875] text-[30px] font-josefin font-bold'>Mauris at orci non vulputate diam tincidunt nec.</h2>
-                                    <p className='max-w-[852px] text-[#8A8FB9] font-josefin font-normal text-[16px]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit facilisis quis auctor pretium ipsum, eu rutrum. Condimentum eu malesuada vitae ultrices in in neque, porta dignissim. Adipiscing purus, cursus vulputate id id dictum at.</p>
-                                    <p className='max-w-[852px] mt-[63px] text-[#8A8FB9] font-josefin font-normal text-[16px]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, </p>
-                                    <p className='max-w-[852px] text-[#8A8FB9] bg-[#FAFAFB] mt-[43px] pt-9 pb-4 px-5 border-l-2 border-[#FC45A0] font-josefin font-normal text-[16px] '>“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dictum sapien, amet, consequat.
-
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo dictum sapien, amet, consequat
-
-                                        toamk risusu” </p>
+                                    <h2 className='mt-7 text-[#151875] text-[30px] font-josefin font-bold'>{blog.title}</h2>
+                                    <p className='max-w-[852px] text-[#8A8FB9] font-josefin font-normal text-[16px]'>{blog.descaption}</p>
+                                    <p className='max-w-[852px] mt-[63px] text-[#8A8FB9] font-josefin font-normal text-[16px]'>{blog.descaption} </p>
+                                    <p className='max-w-[852px] text-[#8A8FB9] bg-[#FAFAFB] mt-[43px] pt-9 pb-4 px-5 border-l-2 border-[#FC45A0] font-josefin font-normal text-[16px] '>
+                                        {blog.descaption} </p>
 
                                     <div className="flex gap-8 mt-[43px] flex-col md:flex-row">
-                                        <div>
-                                            <img src="/blog01.jpg" alt="" />
+                                        <div className="w-[385px] h-[222px]">
+                                            <img src={blog.thumbnail.thumbnail01} alt="thumbnail" className="w-full h-full object-contain" />
                                         </div>
-                                        <div>
-                                            <img src="blog02.jpg" alt="" />
+                                        <div className="w-[385px] h-[222px]">
+                                            <img src={blog.thumbnail.thumbnail02} alt="thumbnail" className="w-full h-full object-contain" />
                                         </div>
                                     </div>
-                                    <p className='max-w-[852px] mt-[63px] text-[#8A8FB9] font-josefin font-normal text-[16px]' >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, </p>
+                                    <p className='max-w-[852px] mt-[63px] text-[#8A8FB9] font-josefin font-normal text-[16px]' >{blog.descaption} </p>
                                 </div>
 
                             </div>
                             <div className='flex gap-3 flex-wrap justify-center mx-auto mt-[58px]'>
-
-                                <ProductCart09></ProductCart09>
-                                <ProductCart09></ProductCart09>
-                                <ProductCart09></ProductCart09>
-                                <ProductCart09></ProductCart09>
+                                {data?.slice(0, 4).map((item, idx) => <ProductCart09 key={idx} item={item}></ProductCart09>)}
                             </div>
                             <p className='max-w-[852px] text-[#8A8FB9] font-josefin font-normal text-[16px] py-12 border-b border-[#e3e4e4]' >
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc, montes, lacus consequat integer viverra. Sit morbi etiam quam rhoncus. Velit in arcu platea donec vitae ante posuere malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Velit dapibus est, nunc,
+                                {blog.descaption}
                             </p>
                             <div className="flex justify-center items-center">
 
@@ -107,13 +92,13 @@ const BlogDetails = () => {
                         </div>
                     </main>
                     <div>
-                        <Sidebar data={data} categorey={categorey} offer={offer}></Sidebar>
+                        <Sidebar ></Sidebar>
                     </div>
                 </div>
 
             </Container>
 
-           
+
             <Container>
                 <div className=" mt-6 md:mt-[111px]">
                     <div className="w-[668px] shadow-commentuserShadow p-[14px] flex gap-[14px] items-center">
@@ -176,28 +161,28 @@ const BlogDetails = () => {
                                 <input className=" w-full   py-[13px] pl-[30px] border outline-0" type="text" placeholder="Your Name*" />
                             </div>
                             <div className=" relative w-full">
-                            <MdMarkEmailRead className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2'/>
+                                <MdMarkEmailRead className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
                                 <input className=" w-full  py-[13px] pl-[30px] border outline-0" type="email" placeholder="Write Your Email*" />
                             </div>
 
                         </div>
                         <div className='mt-[44px] relative '>
-                        <AiFillMessage className='text-sm text-[#8A8FB9] absolute left-2 top-5 '/>
+                            <AiFillMessage className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
                             <textarea className="inputtext w-full  py-[13px] pl-[30px] border outline-0 resize-none" cols="30" rows="10" placeholder="Write your comment*"></textarea>
                         </div>
                         <div>
-                        <input
-                                        type="checkbox"
-                                        id="comment"
-                                        className={`w-2 h-2 mr-1 rounded-sm border-2 border-gray-500 cursor-pointer appearance-none 
+                            <input
+                                type="checkbox"
+                                id="comment"
+                                className={`w-2 h-2 mr-1 rounded-sm border-2 border-gray-500 cursor-pointer appearance-none 
                     ${isChecked ? 'bg-[#19D16F] border-none' : ''}`}
-                                        checked={isChecked}
-                                        onChange={handleCheckboxChange}
-                                    />
-                                    <label htmlFor="comment" className='text-[#8A91AB] text-[12px] font-normal'>Save my name, email, and website in this browser for the next time I comment.</label>
+                                checked={isChecked}
+                                onChange={handleCheckboxChange}
+                            />
+                            <label htmlFor="comment" className='text-[#8A91AB] text-[12px] font-normal'>Save my name, email, and website in this browser for the next time I comment.</label>
 
                         </div>
-                       
+
 
 
 

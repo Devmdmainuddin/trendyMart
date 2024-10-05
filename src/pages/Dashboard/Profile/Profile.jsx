@@ -4,40 +4,48 @@ import useRole from "../../../hooks/useRole"
 import UpdateProfileModal from "../../../components/modal/UpdateProfileModal";
 
 import UpdatePasswordModel from "../../../components/modal/UpdatePasswordModel";
+import { useGetUserByEmailQuery } from "../../../Featured/auth/authApi";
 const Profile = () => {
-    const { user,logOut, setLoading,loading } = useAuth()
-
+    const { user, logOut, setLoading, loading } = useAuth()
+    const email = user?.email;
+    const { data, error, isLoading } = useGetUserByEmailQuery(email);
+    const [show, setShow] = useState(false)
     const [role, isloading] = useRole()
     const [Open, setOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenpass, setIsOpenpass] = useState(false)
-if(loading && isloading){
-    <p>loading................</p>
-}
+    if (loading && isloading) {
+        <p>loading................</p>
+    }
     return (
         <div>
-            <div className="flex flex-row flex-wrap-reverse justify-center  mt-8">
+            <div className="">
 
-                <div className="flex flex-col  justify-center w-full  mx-6 my-12 text-center rounded-md md:w-[480px]  bg-gray-100 text-gray-800">
-                    <img alt="" className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src={user?.photoURL ? user?.photoURL : '/user.png'} />
-                    <div className="flex-1 my-4 px-8">
-                        <p className="text-xl font-semibold leading-snug"> {user?.displayName}</p>
-                        <p>{role}</p>
-                        <p className="text-xl font-semibold leading-snug"> {user?.email}</p>
-                    </div>
+            
+                <div className="border p-6">
+                    <h2 className="text-xl font-semibold leading-snug">Personal information</h2>
+                    <div className="mt-3">
+                        <h3 className="text-lg  font-josefin capitalize">First Name : <span className="text-sm ">{data?.firstName}</span></h3>
+                        <h3 className="text-lg  font-josefin capitalize">Last Name : <span className="text-sm ">{data?.lastName}</span></h3>
+                        <h3 className="text-lg  font-josefin capitalize">Email address : <span className="text-sm "> {data?.email}</span></h3>
+                        <h3 className="text-lg  font-josefin capitalize">Bio : <span className="text-sm ">{role}</span></h3>
 
-                    <div className="flex items-center   justify-between    gap-4 border-y-2 bg-[#14727f] border-[#d7d8d9]">
-                        <button onClick={()=>setOpen(!Open)} className="capitalize   p-3 text-sm text-gray-100 ">view profile</button>
-                        <button onClick={() => setIsOpen(true)} className="capitalize   border-x-2  text-sm text-gray-100 p-3 ">update profile</button>
-                        <UpdateProfileModal isOpen={isOpen} setIsOpen={setIsOpen} email={user?.email}></UpdateProfileModal>
-                        <button  onClick={() => setIsOpenpass(true)} className="capitalize   p-3 text-sm text-gray-100 ">password change</button>
-                        <UpdatePasswordModel isOpen={isOpenpass} setIsOpen={setIsOpenpass} > </UpdatePasswordModel>
-                        <button onClick={logOut} className="capitalize   p-3 text-sm text-gray-100 border-l-2">logOut</button>
-                        
                     </div>
-                  
-                    
                 </div>
+                {/* ........ */}
+                <div className="border p-6 mt-6">
+                    <h2 className="text-xl font-semibold leading-snug">Address</h2>
+                    <div className="mt-3">
+
+                        <h3 className="text-lg  font-josefin font-semibold capitalize">address : <span >{data?.address}</span></h3>
+                        <h3 className="text-lg font-josefin font-semibold capitalize">country : <span className="text-sm ">{data?.country}</span></h3>
+                        <h3 className="text-lg font-josefin font-semibold capitalize">city  : <span className="text-sm "> {data?.city}</span></h3>
+                        <h3 className="text-lg font-josefin font-semibold capitalize">postCode  : <span className="text-sm ">{data?.postCode}</span></h3>
+
+                    </div>
+                </div>
+
+
             </div>
         </div>
     );

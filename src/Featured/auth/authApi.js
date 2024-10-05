@@ -26,7 +26,7 @@ export const authApi = createApi({
         }),
         
 
-        // add product
+        // add User
         addUser: builder.mutation({
             query: (body) => ({
                 url: `/user/`,
@@ -36,9 +36,18 @@ export const authApi = createApi({
             invalidatesTags: [{ type: 'user', id: 'LIST' },]
         }),
 
+        // **Update User**
+        updateUser: builder.mutation({
+            query: ({ email, ...body }) => ({
+                url: `/users/${email}`,
+                method: 'PATCH',
+                body,
+            }),
+            invalidatesTags: [{ type: 'user', id: 'LIST' }], // Invalidating the LIST tag to refetch user data
+        }),
 
 
     }),
 });
 
-export const { useGetUserQuery,useGetUserByEmailQuery, useAddUserMutation } = authApi;
+export const { useGetUserQuery,useGetUserByEmailQuery, useAddUserMutation,useUpdateUserMutation } = authApi;

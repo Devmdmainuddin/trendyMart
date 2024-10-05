@@ -3,9 +3,11 @@ import Swal from 'sweetalert2';
 import { imageUpload } from '../../../utils';
 import useAuth from '../../../hooks/useAuth';
 import Container from '../../../components/Shared/Container';
+import { useAddBlogMutation } from '../../../Featured/BlogAPI/blogApi';
 
 const AddBlog = () => {
     const { user } = useAuth() || {}
+    const[AddBlog]=useAddBlogMutation()
 
     const handleAddProduct = async (e) => {
         e.preventDefault();
@@ -40,7 +42,7 @@ const AddBlog = () => {
             },
             image,
             title,
-            // brand,
+           
             descaption,
             tags: {
                 tag01,
@@ -53,11 +55,11 @@ const AddBlog = () => {
             author
         };
         try {
-            // await addProduct(info)
+            await AddBlog(info)
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: " create product  ",
+                title: " create Blog  ",
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -67,7 +69,7 @@ const AddBlog = () => {
             Swal.fire({
                 position: "top-end",
                 icon: "error",
-                title: " create product items faile",
+                title: " create Blog items failed",
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -99,11 +101,13 @@ const AddBlog = () => {
                             <div >
                                 <label htmlFor="category">category </label>
                                 
-                                <select name="" id="" className='w-full py-[13px] px-[11px] border outline-0'>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
+                                <select name="category" id="" className='w-full py-[13px] px-[11px] border outline-0'>
+                                    <option value="Business">Business</option>
+                                    <option value="Politics">Politics</option>
+                                    <option value="Culture">Culture</option>
+                                    <option value="Travel">Travel</option>
+                                    <option value="Careers">Careers</option>
+                                   
 
                                 </select>
 

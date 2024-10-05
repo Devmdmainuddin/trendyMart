@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaFacebook, FaInstagramSquare, FaSearch, FaTwitterSquare } from 'react-icons/fa';
 import Image from '../../components/Shared/Image';
 import { Link } from 'react-router-dom';
+import { useGetproductsQuery } from '../../Featured/ProductAPI/productApi';
+import { useGetBlogsQuery } from '../../Featured/BlogAPI/blogApi';
 
-const Sidebar = ({ categorey, offer, data,tags}) => {
+const Sidebar = () => {
+    const [sortOrder, setSortOrder] = useState('new');
+    const { data, error, isLoading, } = useGetproductsQuery({ sortOrder });
+    const { data: blogdata } = useGetBlogsQuery({ sortOrder })
+    const [categorey, setCategorey] = useState([])
+    const [offer, setOffer] = useState([]);
+    const [tags, setTags] = useState([])
+
+    useEffect(() => {
+        if (blogdata && blogdata?.length > 0) {
+            setCategorey([... new Set(blogdata?.map(item => item.category))])
+            setTags([... new Set(blogdata?.map(item => item.tags.tag01))])
+           
+        }
+    }, [blogdata])
+    useEffect(() => {
+        if (data && data?.length > 0) {
+            const offerData = data?.filter(item => item.discount > 0)
+            setOffer(offerData)
+        }
+    }, [data])
+
 
     const fashion = data?.filter(item => item.categorys.category === 'Fashion & Lifestyle');
     const kitchen = data?.filter(item => item.categorys.category === 'Home & Kitchen')
@@ -36,13 +59,15 @@ const Sidebar = ({ categorey, offer, data,tags}) => {
             </div>
             <h2 className='text-[#151875] text-[22px] font-josefin font-semibold my-9'>Recent Post</h2>
             <div className='flex flex-col gap-[22px] '>
-            {data?.slice(0,5).map(item => 
+            {blogdata?.slice(0,5).map(item => 
                 <div className='flex gap-2 items-center'>
+                <div>
                 <div className="image w-[70px] h-[51px]">
                     <Image src={item.image}> </Image>
 
                 </div>
-                <Link  to={`/product/${item._id}`}>
+                </div>
+                <Link  to={`/blog/${item._id}`}>
                 <div className="content">
                     <h2 className='text-[#3F509E] text-sm font-normal font-josefin hover:text-[#F939BF] transition-all duration-500'>{item.title}</h2>
                     <p className='text-[#8A8FB9] text-[11px] font-semibold font-josefin'>{item.createAt}</p>

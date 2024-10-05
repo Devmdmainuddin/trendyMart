@@ -26,7 +26,7 @@ import { useGetUserByEmailQuery} from "../../Featured/auth/authApi";
 const Dashboard = () => {
     const { user, logOut } = useAuth()
     const email = user?.email;
-    const { data, error, isLoading } = useGetUserByEmailQuery(email);;
+    const { data, error, isLoading } = useGetUserByEmailQuery(email);
     const [show, setShow] = useState(false)
     const [role, isloading] = useRole()
    
@@ -48,9 +48,9 @@ const Dashboard = () => {
                                 </div>
                             </div>
                             <ul className="mt-4 bg-slate-100 p-3">
-                                <li><NavLink to='/profile' className="capitalize  flex items-center gap-2 "> <ImProfile /> view profile</NavLink></li>
-                                <li className="my-2"><NavLink to='/' className="capitalize flex items-center gap-2 "> <GrDocumentUpdate /> update profile</NavLink></li>
-                                <li><NavLink to='/' className="capitalize  flex items-center gap-2"><TbPasswordUser /> password change</NavLink></li>
+                                <li><NavLink to='/dashboard' className="capitalize  flex items-center gap-2 "> <ImProfile /> view profile</NavLink></li>
+                                <li className="my-2"><NavLink to='/dashboard/updateProfile' className="capitalize flex items-center gap-2 "> <GrDocumentUpdate /> update profile</NavLink></li>
+                                <li><NavLink to='/dashboard/updatePassword' className="capitalize  flex items-center gap-2"><TbPasswordUser /> password change</NavLink></li>
 
                                 {role === 'user' && <GuestMenu />}
                                 {role === 'Seller' && <SellerMenu />}
@@ -64,7 +64,7 @@ const Dashboard = () => {
                         </aside>
                     </div>
 
-                    <main>
+                    <main className="w-full">
                         <Outlet></Outlet>
                     </main>
                 </div>
