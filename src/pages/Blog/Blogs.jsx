@@ -7,9 +7,40 @@ import Sidebar from './Sidebar';
 import LoadingSpinner from '../../components/Shared/LoadingSpinner'
 import { useGetproductsQuery } from '../../Featured/ProductAPI/productApi';
 import { useGetBlogsQuery } from '../../Featured/BlogAPI/blogApi';
+import { useLocation } from 'react-router-dom';
 const Blogs = () => {
     const [sortOrder, setSortOrder] = useState('new');
     const { data, error, isLoading, } = useGetBlogsQuery({ sortOrder })
+   const [items,setItems]= useState()
+    const location = useLocation();
+    
+console.log(data);
+
+
+    useEffect(() => {
+
+
+        setItems(data)
+
+        const getCategoryFromQuery = () => {
+            const params = new URLSearchParams(location.search);
+            return params.get('category');
+        };
+        const category = getCategoryFromQuery();
+        if (data) {
+            if (category) {
+                const filtered = data.filter((blog) => blog.category === category);
+                setItems(filtered);
+            } else {
+                setItems(data);
+            }
+        }
+    }, [data, location]);
+    
+
+
+
+
     let content;
     if (isLoading) {
         content =
@@ -28,7 +59,7 @@ const Blogs = () => {
     }
     if (!isLoading && !error && data.length > 0) {
         content = <main className='flex flex-col gap-8'>
-            {data?.slice(0, 4).map((item, idx) => <BlogCard key={idx} item={item}></BlogCard>)}
+            {items?.slice(0, 4).map((item, idx) => <BlogCard key={idx} item={item}></BlogCard>)}
         </main>
     }
 
