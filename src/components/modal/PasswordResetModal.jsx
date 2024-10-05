@@ -9,7 +9,6 @@ import {
     DialogPanel,
 
 } from '@headlessui/react'
-import toast from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
 

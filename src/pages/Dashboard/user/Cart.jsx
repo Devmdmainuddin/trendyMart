@@ -1,16 +1,21 @@
-import { FaTrashAlt } from "react-icons/fa";
-import useCartItems from "../../../hooks/useCartItems";
+import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
-import useAxiosCommon from "../../../hooks/useAxiosCommon";
+
+import { useDispatch, useSelector } from "react-redux";
+import { changeQuantity, clearCart, deleteItem } from "../../../Featured/CartAPI/cartSlice";
 
 
 const Cart = () => {
-    const [cartItems, ,refetch,cartTotal] = useCartItems()
-    // const totalprice = cart.reduce((total, item) => total + parseInt(item.price), 0)
-    const axiosCommon = useAxiosCommon()
-    const handleDelet = id => {
+    const carts = useSelector((state) => state.cart.cartItem)
+    const dispatch = useDispatch();
 
+    let { totalprice, totalQuntity } = carts.reduce((acc, item) => {
+        acc.totalprice += item.price * item.qun
+        acc.totalQuntity += item.qun
+        return acc
+    }, { totalprice: 0, totalQuntity: 0 })
 
+    const handleDelete = id => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -19,40 +24,37 @@ const Cart = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
-                axiosCommon.delete(`/cart/${id}`)
-                    .then(res => {
-                        if (res.data.deletedCount > 0) {
-                            Swal.fire({
-                                position: "top-end",
-                                icon: "success",
-                                title: "Your items has been delete",
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                            refetch()
-                        }
-                    })
-
+                dispatch(deleteItem(id));
             }
         });
-
+    }
+    const handleclear = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "clear all Cart items!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                dispatch(clearCart());
+            }
+        });
+    }
+    const handkeMinusQuantity = (items, quantity) => {
+        dispatch(changeQuantity({ ...items, qun: quantity - 1, }))
+    }
+    const handkePlusQuantity = (items, quantity) => {
+        dispatch(changeQuantity({ ...items, qun: quantity + 1, }))
     }
 
     return (
         <div>
-            <div className="flex justify-evenly mb-8">
-                <h2 className="text-3xl">total cart : {cartItems.length}</h2>
-                <h2 className="text-3xl">total price : ${cartTotal}</h2>
-                {/* {
-                    cart.length ? <Link to='/dashboard/payment'><button className="py-2 px-6 bg-[#eba421]">play</button></Link>
-                        :
-                        <button disabled className="py-2 px-6 bg-[#eba421]">play</button>
-                } */}
 
-
-            </div>
 
             <div className="overflow-x-auto">
                 <table className="table w-full">
@@ -62,13 +64,14 @@ const Cart = () => {
                             <th>#</th>
                             <th>Image</th>
                             <th>Name</th>
+                            <th>Quantity</th>
                             <th>Price</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            cartItems.map((item, idx) =>
+                            carts.map((item, idx) =>
 
                                 <tr key={item._id}>
                                     <th>
@@ -86,10 +89,27 @@ const Cart = () => {
                                     <td>
                                         {item.title}
                                     </td>
+                                    <td>
+                                    <div className="w-[139px]   border border-[#F0F0F0] text-[#767676] flex justify-between items-center p-3">
+                                                    <span
+                                                        className="cursor-pointer inline-block   text-lg font-normal "
+                                                        onClick={() => handkeMinusQuantity(item, item.qun)}
+                                                    >
+                                                        <FaMinus />
+                                                    </span>
+                                                    <span className="inline-block px-2 text-lg font-normal">{item.qun}</span>
+                                                    <span
+                                                        className="cursor-pointer inline-block  text-lg "
+                                                        onClick={() => handkePlusQuantity(item, item.qun)}
+                                                    >
+                                                        <FaPlus />
+                                                    </span>
+                                                </div>
+                                    </td>
                                     <td>{item.price}</td>
                                     <th>
                                         <button
-                                        onClick={()=>handleDelet(item._id)}
+                                            onClick={() => handleDelete(item._id)}
                                             className="btn btn-ghost btn-xs"><FaTrashAlt className="text-red-600" /></button>
                                     </th>
                                 </tr>
@@ -102,6 +122,17 @@ const Cart = () => {
 
 
                 </table>
+            </div>
+            <div className="flex justify-evenly mt-8 pt-3 border-t">
+                <h2 className="text-xl capitalize font-josefin font-semibold">total cart : {carts.length}</h2>
+                <h2 className="text-xl capitalize font-josefin font-semibold">total price : ${totalprice}</h2>
+            </div>
+            <div>
+                <div className="flex justify-end items-center gap-2 mt-16">
+                    
+                    <button onClick={handleclear} className="inline-block text-sm font-josefin font-semibold py-3 px-5  bg-[#FB2E86] text-white hover:text-[#FB2E86] border border-[#FB2E86] hover:bg-white rounded-sm capitalize transition-all duration-300">Clear Cart</button>
+                    <button className="inline-block text-sm font-josefin font-semibold py-3 px-5 text-[#FB2E86] border border-[#FB2E86] hover:text-white hover:bg-[#FB2E86]  rounded-sm  capitalize transition-all duration-300">checkOut</button>
+                </div>
             </div>
 
         </div>

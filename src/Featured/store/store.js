@@ -8,6 +8,7 @@ import { brandApi } from "../ProductAPI/brandApi";
 import { authApi } from "../auth/authApi";
 import { blogApi } from "../BlogAPI/blogApi";
 import { productReviewsApi } from "../reviewsAPI/productReviewsApi";
+import { blogReviewsApi } from "../reviewsAPI/blogReviewsApi";
 
 // import { reviewApi } from "../../services/reviewApi";
 
@@ -21,9 +22,10 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [blogApi.reducerPath]: blogApi.reducer,
     [productReviewsApi.reducerPath]: productReviewsApi.reducer,
+    [blogReviewsApi.reducerPath]: blogReviewsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(productApi.middleware,categoryApi.middleware,subCategoryApi.middleware,brandApi.middleware,authApi.middleware,blogApi.middleware,productReviewsApi.middleware),
+    getDefaultMiddleware().concat(productApi.middleware,categoryApi.middleware,subCategoryApi.middleware,brandApi.middleware,authApi.middleware,blogApi.middleware,productReviewsApi.middleware,blogReviewsApi.middleware),
 // , reviewApi.middleware
 });
 

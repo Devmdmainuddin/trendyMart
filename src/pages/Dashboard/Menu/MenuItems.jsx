@@ -5,7 +5,7 @@ const MenuItems = ({ to, icon:Icon, text }) => {
     return (
       
             <NavLink to={to}
-                className={({ isActive }) => `capitalize  flex items-center gap-2 mt-2 ${isActive ? '' : ''}`}>
+                className={({ isActive }) => `capitalize  flex items-center gap-2 mt-2 ${isActive ? 'text-[#FB2E86]' : ''}`}>
         <Icon/>
                 <span className={``}>{text}</span>
 

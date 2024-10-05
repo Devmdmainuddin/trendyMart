@@ -1,9 +1,6 @@
 import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import useRole from "../../../hooks/useRole"
-import UpdateProfileModal from "../../../components/modal/UpdateProfileModal";
-
-import UpdatePasswordModel from "../../../components/modal/UpdatePasswordModel";
 import { useGetUserByEmailQuery } from "../../../Featured/auth/authApi";
 const Profile = () => {
     const { user, logOut, setLoading, loading } = useAuth()

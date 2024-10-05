@@ -25,7 +25,7 @@ const Login = () => {
         const password = form.password.value
 
         try {
-            const result = await signIn(email, password)
+             await signIn(email, password)
           
             navigate(from)
             Swal.fire({
@@ -70,11 +70,14 @@ const Login = () => {
                                 </div>
                             </div>
                             <button onClick={()=>setIsOpen(!isOpen)} className='text-[#9096B2] text-[17px] font-josefin font-normal mt-[13px]'>Forgot your password?</button>
-                            <PasswordResetModal isOpen={isOpen} setIsOpen={setIsOpen}></PasswordResetModal>
                             <button className="block mt-6 w-full  text-[16px] font-josefin font-semibold py-3 px-5 bg-[#FB2E86] text-white rounded-sm  capitalize">Sign In</button>
 
-                            <Link to='/myAccount/registation' className='flex justify-center items-center '>  <button className='text-[#9096B2]  text-[17px] font-josefin font-normal mt-[28px]  '>Don’t have an Account? <span className='text-[#1D3178]'>Create account</span> </button></Link>
+                            
                         </form>
+                        <Link to='/myAccount/registation' className='flex justify-center items-center '>  <button className='text-[#9096B2]  text-[17px] font-josefin font-normal mt-[28px]  '>Don’t have an Account? <span className='text-[#1D3178]'>Create account</span> </button></Link>
+                        
+                            <PasswordResetModal isOpen={isOpen} setIsOpen={setIsOpen}></PasswordResetModal>
+                            
                     </div>
                 </div>
             </Container>

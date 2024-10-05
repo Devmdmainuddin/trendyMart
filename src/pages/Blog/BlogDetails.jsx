@@ -2,7 +2,8 @@ import { FaFacebook, FaInstagramSquare, FaLongArrowAltLeft, FaLongArrowAltRight,
 import Bredcumb from "../../components/Shared/Bredcumb";
 import Container from "../../components/Shared/Container";
 import { IoCalendarOutline } from "react-icons/io5";
-import Image from "../../components/Shared/Image";
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
 import { Link, useLoaderData } from "react-router-dom";
 import ProductCart09 from "../../components/Card/ProductCart09";
 import Company from "../../components/Home/Company";
@@ -14,6 +15,8 @@ import { useGetproductsQuery } from "../../Featured/ProductAPI/productApi";
 import { useGetBlogsQuery } from "../../Featured/BlogAPI/blogApi";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useAddBlogReviewsMutation, useGetBlogReviewsQuery } from "../../Featured/reviewsAPI/blogReviewsApi";
+import { RiSortNumberAsc } from "react-icons/ri";
 
 
 const BlogDetails = () => {
@@ -21,7 +24,9 @@ const BlogDetails = () => {
     const { user } = useAuth() || {}
     const [sortOrder, setSortOrder] = useState('new');
     const { data, error, isLoading, } = useGetproductsQuery({ sortOrder });
-    // const {data:blogdata}=useGetBlogsQuery({ sortOrder })
+    const { data: reviews, error: reviewsError, isLoading: reviewsIsLoading, } = useGetBlogReviewsQuery(blog._id)
+  const [addBlogReview] = useAddBlogReviewsMutation()
+  console.log(reviews);
     const [isChecked, setIsChecked] = useState(false);
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
@@ -53,9 +58,9 @@ const BlogDetails = () => {
             },
             reviewAt
         }
-console.log(info);
+
         try {
-            // await addReviews(info)
+            await addBlogReview(info)
             Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -155,57 +160,33 @@ console.log(info);
 
             <Container>
                 <div className=" mt-6 md:mt-[111px]">
-                    <div className="w-[668px] shadow-commentuserShadow p-[14px] flex gap-[14px] items-center">
+                    {reviews?.slice(0,4).map(review=>
+                        <div className="w-[668px] shadow-commentuserShadow p-[14px] flex gap-[14px] items-center">
                         <div>
                             <div className="image w-[103px] h-[106px]">
-                                <img src="/tas.png" alt="" className="w-full h-full object-cover" />
+                                <img src={review?.auth.userImage} alt="" className="w-full h-full object-cover" />
                             </div>
                         </div>
 
-                        <div className="content">
+                        <div className="content w-full">
                             <div className="flex justify-between">
-                                <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
-                                <span className="text-[#A3A2B6] text-[12px] font-normal">Jan 09 2020</span>
+                                <h2 className="text-[#363385] text-lg font-josefin font-semibold">{review?.auth.userName}</h2>
+                                <span className="text-[#A3A2B6] text-[12px] font-normal">{review?.reviewAt}</span>
                             </div>
-                            <p className="text-[12px] font-normal font-josefin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At in vitae rutrum vulputate consectetur.</p>
-                            <p className="text-[12px] font-normal font-josefin">consectetur</p>
+                            <p className="text-[12px] font-normal font-josefin">{review?.review}</p>
+                            <div>
+                        <Rating
+                                        style={{ maxWidth: 120,fontSize:4 }}
+                                        value={review?.rating}
+                                        className='text-[5px]'
+                                        readOnly
+                                    />
+                        </div>
                         </div>
 
                     </div>
-                    <div className="w-[668px] shadow-commentuserShadow p-[14px] my-[30px] flex gap-[14px] items-center">
-                        <div>
-                            <div className="image w-[103px] h-[106px]">
-                                <img src="/tas.png" alt="" className="w-full h-full object-cover" />
-                            </div>
-                        </div>
+                    )}
 
-                        <div className="content">
-                            <div className="flex justify-between">
-                                <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
-                                <span className="text-[#A3A2B6] text-[12px] font-normal">Jan 09 2020</span>
-                            </div>
-                            <p className="text-[12px] font-normal font-josefin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At in vitae rutrum vulputate consectetur.</p>
-                            <p className="text-[12px] font-normal font-josefin">consectetur</p>
-                        </div>
-
-                    </div>
-                    <div className="w-[668px] shadow-commentuserShadow p-[14px] flex gap-[14px] items-center">
-                        <div>
-                            <div className="image w-[103px] h-[106px]">
-                                <img src="/tas.png" alt="" className="w-full h-full object-cover" />
-                            </div>
-                        </div>
-
-                        <div className="content">
-                            <div className="flex justify-between">
-                                <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
-                                <span className="text-[#A3A2B6] text-[12px] font-normal">Jan 09 2020</span>
-                            </div>
-                            <p className="text-[12px] font-normal font-josefin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At in vitae rutrum vulputate consectetur.</p>
-                            <p className="text-[12px] font-normal font-josefin">consectetur</p>
-                        </div>
-
-                    </div>
                 </div>
                 <div>
                     <form onSubmit={handleSubmit} className='mt-[46px] md:mt-[135px] max-w-[717px]'>
@@ -225,8 +206,8 @@ console.log(info);
                             <textarea name="review" className="inputtext w-full  py-[13px] pl-[30px] border outline-0 resize-none" cols="30" rows="10" placeholder="Write your comment*"></textarea>
                         </div>
                         <div className='mt-[44px] relative '>
-                            <AiFillMessage className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
-                            <input name="rating" id='rating' min={1} max={5} className=" w-full  py-[13px] pl-[30px] border outline-0" type="number" placeholder="Write Your rating*" />
+                            <RiSortNumberAsc className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
+                            <input name="rating" id='rating' min={1} max={5} className=" w-full  py-[13px] pl-[30px] border outline-0" type="number" placeholder="Your rating in 1 to 5 number *" />
                         </div>
 
                         <div>

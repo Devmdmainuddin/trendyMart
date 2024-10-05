@@ -7,7 +7,7 @@ export const productReviewsApi = createApi({
     endpoints: (builder) => ({
         // get reviews
         getProductReviews: builder.query({
-            query: () => `/productReviews`,
+            query: (id) => `/productReviews/${id}`,
             providesTags: (result) =>
                 result
                     ? [

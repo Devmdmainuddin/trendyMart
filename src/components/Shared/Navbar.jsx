@@ -95,25 +95,25 @@ const Navbar = () => {
                     <div className='flex justify-between items-center'>
                         <div>
                             <ul className='flex gap-12 items-center'>
-                                <li className='flex gap-2 items-center text-white text-[16px]  font-josefin font-semibold'><span></span> mhhasanul@gmail.com</li>
-                                <li className='flex gap-2 items-center text-white text-[16px]  font-josefin font-semibold'><span></span> (12345)67890</li>
+                                <li className='flex gap-2 items-center text-white hover:text-[#FB2E86] transition-all duration-300 text-[16px]  font-josefin font-semibold'><span></span> mhhasanul@gmail.com</li>
+                                <li className='flex gap-2 items-center text-white hover:text-[#FB2E86] transition-all duration-300 text-[16px]  font-josefin font-semibold'><span></span> (12345)67890</li>
                             </ul>
 
                         </div>
                         <div>
                             <ul className='flex items-center gap-4 relative'>
                                 <li>
-                                    <select name="" id="" className='bg-transparent text-white'>
+                                    <select name="" id="" className='hover:text-[#FB2E86] transition-all duration-300 bg-transparent text-white'>
                                         <option value="English" className='text-black'>English</option>
                                         <option value="Bangla" className='text-black'>Bangla</option>
                                     </select>
                                 </li>
-                                <li> <select name="" id="" className='bg-transparent text-white'>
+                                <li> <select name="" id="" className='hover:text-[#FB2E86] transition-all duration-300 bg-transparent text-white'>
                                     <option value="USD" className='text-black'>USD</option>
                                     <option value="BD" className='text-black'>BD</option>
                                 </select>
                                 </li>
-                                <li onClick={() => setProOpen(!proOpen)} className=' text-white'>   <span className='flex gap-1 items-center'> Login <FaRegUser /> </span> </li>
+                                <li onClick={() => setProOpen(!proOpen)} className=' text-white hover:text-[#FB2E86] transition-all duration-300'>   <span className='flex gap-1 items-center cursor-pointer'> profile <FaRegUser /> </span> </li>
                                 {proOpen && (
                                     <div className=" absolute z-50 top-full right-12 translate-y-6">
                                         <div className="w-[263px] block  bg-[#ffffff] ">

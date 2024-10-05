@@ -7,6 +7,7 @@ import Products from "../pages/Products/Products";
 import Blogs from "../pages/Blog/Blogs";
 import Faq from '../pages/FAQ/Faq'
 import Cart from "../pages/cart/Cart";
+import Carts from "../pages/Dashboard/user/Cart";
 import OrderComplete from "../pages/cart/OrderComplete";
 import Checkout from "../pages/checkOut/Checkout";
 import Login from "../pages/Authentication/Login";
@@ -135,6 +136,10 @@ export const router = createBrowserRouter([
         {
           path: "/dashboard/addBlog",
           element:<AddBlog/>,
+        },
+        {
+          path: "/dashboard/cart",
+          element: <Carts />,
         },
 
       ]

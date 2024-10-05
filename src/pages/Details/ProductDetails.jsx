@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Bredcumb from '../../components/Shared/Bredcumb';
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -24,6 +26,9 @@ import { addToCart } from '../../Featured/CartAPI/cartSlice';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { AiFillMessage } from 'react-icons/ai';
 import useAuth from '../../hooks/useAuth';
+import { useGetBlogReviewsQuery } from '../../Featured/reviewsAPI/blogReviewsApi';
+import { useAddProductReviewsMutation, useGetProductReviewsQuery } from '../../Featured/reviewsAPI/productReviewsApi';
+import { RiSortNumberAsc } from 'react-icons/ri';
 
 
 
@@ -34,14 +39,15 @@ const ProductDetails = () => {
   const products = useLoaderData();
   const { data, error, isLoading, } = useGetproductsQuery()
   const [relatedProducts, setRelatedProducts] = useState([]);
-// const [discountPrice,setDiscountPrice] = useState(0);
-
-
+  // const [discountPrice,setDiscountPrice] = useState(0);
+  const { data: reviews, error: reviewsError, isLoading: reviewsIsLoading, } = useGetProductReviewsQuery(products._id)
+  const [addProductReview] = useAddProductReviewsMutation()
+  console.log(reviews);
 
 
   const discountp = (parseInt(products?.price) * parseInt(products?.discount)) / 100
   const discountPrice = parseInt(products?.price) - discountp
-  
+
 
 
 
@@ -98,7 +104,7 @@ const ProductDetails = () => {
 
   }
 
-  const handleSubmit =async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     const form = e.target
@@ -109,46 +115,46 @@ const ProductDetails = () => {
     const userName = user?.displayName;
     const userEmail = user?.email;
     const userImage = user?.photoURL;
-    const blogId = blog._id;
-    const blogTitle = blog.title;
+    const productId = products._id;
+    const productTitle = products.title;
     const reviewAt = (new Date()).toDateString();
-    
-    const info={
-        name,
-        email,
-        review,
-        rating,
-        blogId,
-        blogTitle,
-        auth:{
-            userName,userEmail,userImage
-        },
-        reviewAt
-    }
-console.log(info);
-    try {
-        // await addReviews(info)
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: " create review  ",
-            showConfirmButton: false,
-            timer: 1500
-        });
-        // form.reset();
-        // refetch()
-    }
-    catch (err) {
-        Swal.fire({
-            position: "top-end",
-            icon: "error",
-            title: " your review not add  ",
-            showConfirmButton: false,
-            timer: 1500
-        });
+
+    const info = {
+      name,
+      email,
+      review,
+      rating,
+      productId,
+      productTitle,
+      auth: {
+        userName, userEmail, userImage
+      },
+      reviewAt
     }
 
-}
+    try {
+      await addProductReview(info)
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: " create review  ",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      // form.reset();
+      // refetch()
+    }
+    catch (err) {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: " your review not add  ",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+
+  }
 
 
 
@@ -209,20 +215,21 @@ console.log(info);
                 <span><FaStar className='text-[#B2B2B2] text-[10px]' /></span>
 
               </div>
-              <span className='text-sm'>22</span>
+              <span className='text-sm'>{reviews.length}</span>
             </div>
             <div className='text-[13px] font-josefin font-normal flex gap-2 mt-3'>
-            <p className='text-[#151875] text-[16px]'> {products.discount &&  <span > ${discountPrice}</span>}</p> 
-              <p className={`text-[16px] text-[#FB2E86]  ${products.discount?'line-through':''}`}>$ <span> {products.price}</span></p>
+              <p className='text-[#151875] text-[16px]'> {products.discount && <span > ${discountPrice}</span>}</p>
+              <p className={`text-[16px] text-[#FB2E86]  ${products.discount ? 'line-through' : ''}`}>$ <span> {products.price}</span></p>
             </div>
-            <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-4 capitalize'>Color : <span className={`w-10 h-10 rounded-full bg-[${products.color}]`}>{products?.color === "#FF0000" ? 'red' : ''
+            <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-4 capitalize'>Color : <span className={`w-10 h-10 rounded-full bg-[${products.color}]`}>{
+            products?.color === "#FF0000" ? 'red' : ''
               || products?.color === "#FFFF00" ? 'Yellow' : ''
-              || products?.color === "#0000FF" ? 'Blue' : ''
-              || products?.color === "#FFA500" ? 'Orange' : ''
-              || products?.color === "#A52A2A" ? 'Brown' : ''
-              || products?.color === "#008000" ? 'Green' : ''
-              || products?.color === "#800080" ? 'Purple' : ''
-              || products?.color === "#87CEEB" ? 'Sky' : ''
+                || products?.color === "#0000FF" ? 'Blue' : ''
+                  || products?.color === "#FFA500" ? 'Orange' : ''
+                    || products?.color === "#A52A2A" ? 'Brown' : ''
+                      || products?.color === "#008000" ? 'Green' : ''
+                        || products?.color === "#800080" ? 'Purple' : ''
+                          || products?.color === "#87CEEB" ? 'Sky' : ''
 
 
             }</span> </h4>
@@ -260,111 +267,88 @@ console.log(info);
 
             <TabPanel>
               <h2>   <div>
-            <h2 className='text-[#151875] text-[22px] font-josefin font-semibold mt-4 md:mt-[61px] '>Varius tempor.</h2>
-            <p className='text-[#A9ACC6] text-[16px] font-josefin font-semibold leading-[29px] mt-2 md:mt-4'>Aliquam dis vulputate vulputate integer sagittis. Faucibus dolor ornare faucibus vel sed et eleifend habitasse amet. Montes, mauris varius ac est bibendum. Scelerisque a, risus ac ante. Velit consectetur neque, elit, aliquet. Non varius proin sed urna, egestas consequat laoreet diam tincidunt. Magna eget faucibus cras justo, tortor sed donec tempus. Imperdiet consequat, quis diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</p>
-            <h2 className='text-[#151875] text-[22px] font-josefin font-semibold mt-4 md:mt-8'>More details</h2>
-            <ul className=' mt-2 md:mt-4'>
-              <li className='flex gap-1 md:items-center text-[#A9ACC6] text-[16px] font-josefin font-semibold leading-[29px]'><span><MdOutlineArrowOutward className=' text-[16px] text-[#2F1AC4]' /></span> Aliquam dis vulputate vulputate integer sagittis. Faucibus ds diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</li>
-              <li className='flex gap-1 md:items-center text-[#A9ACC6] text-[16px] font-josefin font-semibold leading-[29px]'><span><MdOutlineArrowOutward className=' text-[16px] text-[#2F1AC4]' /></span> Aliquam dis vulputate vulputate integer sagittis. Faucibus ds diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</li>
-              <li className='flex gap-1 md:items-center text-[#A9ACC6] text-[16px] font-josefin font-semibold leading-[29px]'><span><MdOutlineArrowOutward className=' text-[16px] text-[#2F1AC4]' /></span> Aliquam dis vulputate vulputate integer sagittis. Faucibus ds diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</li>
-              <li className='flex gap-1 md:items-center text-[#A9ACC6] text-[16px] font-josefin font-semibold leading-[29px]'><span><MdOutlineArrowOutward className=' text-[16px] text-[#2F1AC4]' /></span> Aliquam dis vulputate vulputate integer sagittis. Faucibus ds diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</li>
-              <li className='flex gap-1 md:items-center text-[#A9ACC6] text-[16px] font-josefin font-semibold leading-[29px]'><span><MdOutlineArrowOutward className=' text-[16px] text-[#2F1AC4]' /></span> Aliquam dis vulputate vulputate integer sagittis. Faucibus ds diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</li>
+                <h2 className='text-[#151875] text-[22px] font-josefin font-semibold mt-4 md:mt-[61px] '>Varius tempor.</h2>
+                <p className='text-[#A9ACC6] text-[16px] font-josefin font-semibold leading-[29px] mt-2 md:mt-4'>Aliquam dis vulputate vulputate integer sagittis. Faucibus dolor ornare faucibus vel sed et eleifend habitasse amet. Montes, mauris varius ac est bibendum. Scelerisque a, risus ac ante. Velit consectetur neque, elit, aliquet. Non varius proin sed urna, egestas consequat laoreet diam tincidunt. Magna eget faucibus cras justo, tortor sed donec tempus. Imperdiet consequat, quis diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</p>
+                <h2 className='text-[#151875] text-[22px] font-josefin font-semibold mt-4 md:mt-8'>More details</h2>
+                <ul className=' mt-2 md:mt-4'>
+                  <li className='flex gap-1 md:items-center text-[#A9ACC6] text-[16px] font-josefin font-semibold leading-[29px]'><span><MdOutlineArrowOutward className=' text-[16px] text-[#2F1AC4]' /></span> Aliquam dis vulputate vulputate integer sagittis. Faucibus ds diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</li>
+                  <li className='flex gap-1 md:items-center text-[#A9ACC6] text-[16px] font-josefin font-semibold leading-[29px]'><span><MdOutlineArrowOutward className=' text-[16px] text-[#2F1AC4]' /></span> Aliquam dis vulputate vulputate integer sagittis. Faucibus ds diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</li>
+                  <li className='flex gap-1 md:items-center text-[#A9ACC6] text-[16px] font-josefin font-semibold leading-[29px]'><span><MdOutlineArrowOutward className=' text-[16px] text-[#2F1AC4]' /></span> Aliquam dis vulputate vulputate integer sagittis. Faucibus ds diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</li>
+                  <li className='flex gap-1 md:items-center text-[#A9ACC6] text-[16px] font-josefin font-semibold leading-[29px]'><span><MdOutlineArrowOutward className=' text-[16px] text-[#2F1AC4]' /></span> Aliquam dis vulputate vulputate integer sagittis. Faucibus ds diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</li>
+                  <li className='flex gap-1 md:items-center text-[#A9ACC6] text-[16px] font-josefin font-semibold leading-[29px]'><span><MdOutlineArrowOutward className=' text-[16px] text-[#2F1AC4]' /></span> Aliquam dis vulputate vulputate integer sagittis. Faucibus ds diam arcu, nulla lobortis justo netus dis. Eu in fringilla vulputate nunc nec. Dui, massa viverr .</li>
 
-            </ul>
-          </div></h2>
+                </ul>
+              </div></h2>
             </TabPanel>
             <TabPanel>
-              <p>{products.descaption}</p>
-            
+              <p>{products?.descaption}</p>
+
             </TabPanel>
             <TabPanel>
-            <Container>
+              <Container>
                 <div className=" mt-6 md:mt-[111px]">
+                  {reviews?.slice(0,4).map(review =>
                     <div className="w-[668px] shadow-commentuserShadow p-[14px] flex gap-[14px] items-center">
-                        <div>
-                            <div className="image w-[103px] h-[106px]">
-                                <img src="/tas.png" alt="" className="w-full h-full object-cover" />
-                            </div>
+                      <div>
+                        <div className="image w-[103px] h-[106px]">
+                          <img src={review?.auth.userImage} alt="" className="w-full h-full object-cover" />
                         </div>
+                      </div>
 
-                        <div className="content">
-                            <div className="flex justify-between">
-                                <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
-                                <span className="text-[#A3A2B6] text-[12px] font-normal">Jan 09 2020</span>
-                            </div>
-                            <p className="text-[12px] font-normal font-josefin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At in vitae rutrum vulputate consectetur.</p>
-                            <p className="text-[12px] font-normal font-josefin">consectetur</p>
+                      <div className="content w-full">
+                        <div className="flex justify-between items-center">
+                          <h2 className="text-[#363385] text-lg font-josefin font-semibold">{review?.auth.userName}</h2>
+                          <span className="text-[#A3A2B6] text-[12px] font-normal">{review?.reviewAt}</span>
                         </div>
+                        <p className="text-[12px] font-normal font-josefin">{review?.review}</p>
+                        <div>
+                        <Rating
+                                        style={{ maxWidth: 120,fontSize:4 }}
+                                        value={review?.rating}
+                                        className='text-[5px]'
+                                        readOnly
+                                    />
+                        </div>
+                        {/* <p className="text-[12px] font-normal font-josefin">{review?.rating}</p> */}
+                      </div>
 
                     </div>
-                    <div className="w-[668px] shadow-commentuserShadow p-[14px] my-[30px] flex gap-[14px] items-center">
-                        <div>
-                            <div className="image w-[103px] h-[106px]">
-                                <img src="/tas.png" alt="" className="w-full h-full object-cover" />
-                            </div>
-                        </div>
+                  )}
 
-                        <div className="content">
-                            <div className="flex justify-between">
-                                <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
-                                <span className="text-[#A3A2B6] text-[12px] font-normal">Jan 09 2020</span>
-                            </div>
-                            <p className="text-[12px] font-normal font-josefin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At in vitae rutrum vulputate consectetur.</p>
-                            <p className="text-[12px] font-normal font-josefin">consectetur</p>
-                        </div>
-
-                    </div>
-                    <div className="w-[668px] shadow-commentuserShadow p-[14px] flex gap-[14px] items-center">
-                        <div>
-                            <div className="image w-[103px] h-[106px]">
-                                <img src="/tas.png" alt="" className="w-full h-full object-cover" />
-                            </div>
-                        </div>
-
-                        <div className="content">
-                            <div className="flex justify-between">
-                                <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
-                                <span className="text-[#A3A2B6] text-[12px] font-normal">Jan 09 2020</span>
-                            </div>
-                            <p className="text-[12px] font-normal font-josefin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At in vitae rutrum vulputate consectetur.</p>
-                            <p className="text-[12px] font-normal font-josefin">consectetur</p>
-                        </div>
-
-                    </div>
                 </div>
                 <div>
-                    <form onSubmit={handleSubmit} className='mt-[46px] md:mt-[135px] max-w-[717px]'>
-                        <div className=" flex justify-between gap-6 items-center">
-                            <div className=" relative w-full">
-                                <FaUser className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
-                                <input name="name" className=" w-full   py-[13px] pl-[30px] border outline-0" type="text" placeholder="Your Name*" />
-                            </div>
-                            <div className=" relative w-full">
-                                <MdMarkEmailRead className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
-                                <input name="email" className=" w-full  py-[13px] pl-[30px] border outline-0" type="email" placeholder="Write Your Email*" />
-                            </div>
+                  <form onSubmit={handleSubmit} className='mt-[46px] md:mt-[135px] max-w-[717px]'>
+                    <div className=" flex justify-between gap-6 items-center">
+                      <div className=" relative w-full">
+                        <FaUser className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
+                        <input name="name" className=" w-full   py-[13px] pl-[30px] border outline-0" type="text" placeholder="Your Name*" />
+                      </div>
+                      <div className=" relative w-full">
+                        <MdMarkEmailRead className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
+                        <input name="email" className=" w-full  py-[13px] pl-[30px] border outline-0" type="email" placeholder="Write Your Email*" />
+                      </div>
 
-                        </div>
-                        <div className='mt-[44px] relative '>
-                            <AiFillMessage className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
-                            <textarea name="review" className="inputtext w-full  py-[13px] pl-[30px] border outline-0 resize-none" cols="30" rows="10" placeholder="Write your comment*"></textarea>
-                        </div>
-                        <div className='mt-[44px] relative '>
-                            <AiFillMessage className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
-                            <input name="rating" id='rating' min={1} max={5} className=" w-full  py-[13px] pl-[30px] border outline-0" type="number" placeholder="Write Your rating*" />
-                        </div>
+                    </div>
+                    <div className='mt-[44px] relative '>
+                      <AiFillMessage className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
+                      <textarea name="review" className="inputtext w-full  py-[13px] pl-[30px] border outline-0 resize-none" cols="30" rows="10" placeholder="Write your comment*"></textarea>
+                    </div>
+                    <div className='mt-[44px] relative '>
+                      <RiSortNumberAsc className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
+                      <input name="rating" id='rating' min={1} max={5} className=" w-full  py-[13px] pl-[30px] border outline-0" type="number" placeholder="Your rating in 1 to 5 number *" />
+                    </div>
 
-                        <button className="w-full text-white bg-[#FB2E86] font-josefin text-[14px] rounded-[3px] border border-[#FB2E86] px-[20px] py-[10px] mt-[33px] capitalize">submit comment</button>
-                    </form>
+                    <button className="w-full text-white bg-[#FB2E86] font-josefin text-[14px] rounded-[3px] border border-[#FB2E86] px-[20px] py-[10px] mt-[33px] capitalize">submit comment</button>
+                  </form>
                 </div>
-            </Container>
+              </Container>
             </TabPanel>
             <TabPanel>
-              
-            <h2>{products.descaption}</h2>
+
+              <h2>{products.descaption}</h2>
             </TabPanel>
           </Tabs>
-       
+
         </Container>
       </div>
       <div className='mt-6 md:mt-16 lg:mt-[126px]'>
