@@ -25,10 +25,8 @@ const AddBlog = () => {
         // const brand = form.brand.value;
         const category = form.category.value;
         const descaption = form.descaption.value;
-        const tag01 = form.tag01.value;
-        const tag02 = form.tag02.value;
-        const tag03 = form.tag03.value;
-        const tag04 = form.tag04.value;
+        const tags = form.tag.value;
+
         const publishDate = (new Date()).toDateString();
         const name = user?.displayName;
         const email = user?.email;
@@ -44,12 +42,7 @@ const AddBlog = () => {
             title,
            
             descaption,
-            tags: {
-                tag01,
-                tag02,
-                tag03,
-                tag04
-            },
+            tags,
             category,
             publishDate,
             author
@@ -128,12 +121,9 @@ const AddBlog = () => {
                             </div>
                             {/* tags */}
                             <div>
-                                <label htmlFor="tag01" className='capitalize'>tags</label>
+                                <label htmlFor="tag" className='capitalize'>tags</label>
                                 <div className='mt-2 border'>
-                                    <input name='tag01' type='text' placeholder='tag01' className='w-full py-[13px] px-[11px] border-b outline-0' />
-                                    <input name='tag02' type='text' placeholder='tag02' className='w-full py-[13px] px-[11px] border-b outline-0' />
-                                    <input name='tag03' type='text' placeholder='tag03' className='w-full py-[13px] px-[11px] border-b outline-0' />
-                                    <input name='tag04' type='text' placeholder='tag04' className='w-full py-[13px] px-[11px]  outline-0' />
+                                    <input name='tag' type='text' placeholder='tag' className='w-full py-[13px] px-[11px]  outline-0' />
                                 </div>
 
                             </div>

@@ -10,10 +10,10 @@ import 'swiper/css/thumbs';
 import { Navigation, Thumbs } from 'swiper/modules';
 import Image from '../../components/Shared/Image';
 import Container from '../../components/Shared/Container';
-import { FaFacebook, FaInstagramSquare, FaRegHeart, FaStar, FaTwitter } from 'react-icons/fa';
+import { FaFacebook, FaInstagramSquare, FaRegHeart, FaStar, FaTwitter, FaUser } from 'react-icons/fa';
 import { IoCartOutline } from 'react-icons/io5';
 import { Link, useLoaderData } from 'react-router-dom';
-import { MdOutlineArrowOutward } from 'react-icons/md';
+import { MdMarkEmailRead, MdOutlineArrowOutward } from 'react-icons/md';
 import Heading from '../../components/Shared/Heading'
 import ProductCard08 from '../../components/Card/ProductCard08';
 import Company from '../../components/Home/Company'
@@ -22,10 +22,13 @@ import Swal from 'sweetalert2';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../Featured/CartAPI/cartSlice';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { AiFillMessage } from 'react-icons/ai';
+import useAuth from '../../hooks/useAuth';
 
 
 
 const ProductDetails = () => {
+  const { user } = useAuth() || {}
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [swiperDirection, setSwiperDirection] = useState('horizontal');
   const products = useLoaderData();
@@ -95,6 +98,60 @@ const ProductDetails = () => {
 
   }
 
+  const handleSubmit =async (e) => {
+    e.preventDefault()
+
+    const form = e.target
+    const name = form.name.value
+    const email = form.email.value
+    const review = form.review.value
+    const rating = form.rating.value
+    const userName = user?.displayName;
+    const userEmail = user?.email;
+    const userImage = user?.photoURL;
+    const blogId = blog._id;
+    const blogTitle = blog.title;
+    const reviewAt = (new Date()).toDateString();
+    
+    const info={
+        name,
+        email,
+        review,
+        rating,
+        blogId,
+        blogTitle,
+        auth:{
+            userName,userEmail,userImage
+        },
+        reviewAt
+    }
+console.log(info);
+    try {
+        // await addReviews(info)
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: " create review  ",
+            showConfirmButton: false,
+            timer: 1500
+        });
+        // form.reset();
+        // refetch()
+    }
+    catch (err) {
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: " your review not add  ",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
+
+}
+
+
+
   return (
     <div>
       <Bredcumb />
@@ -160,12 +217,12 @@ const ProductDetails = () => {
             </div>
             <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-4 capitalize'>Color : <span className={`w-10 h-10 rounded-full bg-[${products.color}]`}>{products?.color === "#FF0000" ? 'red' : ''
               || products?.color === "#FFFF00" ? 'Yellow' : ''
-                || products?.color === "#0000FF" ? 'Blue' : ''
-                  || products?.color === "#FFA500" ? 'Orange' : ''
-                    || products?.color === "#A52A2A" ? 'Brown' : ''
-                      || products?.color === "#008000" ? 'Green' : ''
-                        || products?.color === "#800080" ? 'Purple' : ''
-                          || products?.color === "#87CEEB" ? 'Sky' : ''
+              || products?.color === "#0000FF" ? 'Blue' : ''
+              || products?.color === "#FFA500" ? 'Orange' : ''
+              || products?.color === "#A52A2A" ? 'Brown' : ''
+              || products?.color === "#008000" ? 'Green' : ''
+              || products?.color === "#800080" ? 'Purple' : ''
+              || products?.color === "#87CEEB" ? 'Sky' : ''
 
 
             }</span> </h4>
@@ -221,8 +278,86 @@ const ProductDetails = () => {
             
             </TabPanel>
             <TabPanel>
-              
-            <h2>reviews</h2>
+            <Container>
+                <div className=" mt-6 md:mt-[111px]">
+                    <div className="w-[668px] shadow-commentuserShadow p-[14px] flex gap-[14px] items-center">
+                        <div>
+                            <div className="image w-[103px] h-[106px]">
+                                <img src="/tas.png" alt="" className="w-full h-full object-cover" />
+                            </div>
+                        </div>
+
+                        <div className="content">
+                            <div className="flex justify-between">
+                                <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
+                                <span className="text-[#A3A2B6] text-[12px] font-normal">Jan 09 2020</span>
+                            </div>
+                            <p className="text-[12px] font-normal font-josefin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At in vitae rutrum vulputate consectetur.</p>
+                            <p className="text-[12px] font-normal font-josefin">consectetur</p>
+                        </div>
+
+                    </div>
+                    <div className="w-[668px] shadow-commentuserShadow p-[14px] my-[30px] flex gap-[14px] items-center">
+                        <div>
+                            <div className="image w-[103px] h-[106px]">
+                                <img src="/tas.png" alt="" className="w-full h-full object-cover" />
+                            </div>
+                        </div>
+
+                        <div className="content">
+                            <div className="flex justify-between">
+                                <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
+                                <span className="text-[#A3A2B6] text-[12px] font-normal">Jan 09 2020</span>
+                            </div>
+                            <p className="text-[12px] font-normal font-josefin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At in vitae rutrum vulputate consectetur.</p>
+                            <p className="text-[12px] font-normal font-josefin">consectetur</p>
+                        </div>
+
+                    </div>
+                    <div className="w-[668px] shadow-commentuserShadow p-[14px] flex gap-[14px] items-center">
+                        <div>
+                            <div className="image w-[103px] h-[106px]">
+                                <img src="/tas.png" alt="" className="w-full h-full object-cover" />
+                            </div>
+                        </div>
+
+                        <div className="content">
+                            <div className="flex justify-between">
+                                <h2 className="text-[#363385] text-lg font-josefin font-semibold">Sapien ac</h2>
+                                <span className="text-[#A3A2B6] text-[12px] font-normal">Jan 09 2020</span>
+                            </div>
+                            <p className="text-[12px] font-normal font-josefin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At in vitae rutrum vulputate consectetur.</p>
+                            <p className="text-[12px] font-normal font-josefin">consectetur</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div>
+                    <form onSubmit={handleSubmit} className='mt-[46px] md:mt-[135px] max-w-[717px]'>
+                        <div className=" flex justify-between gap-6 items-center">
+                            <div className=" relative w-full">
+                                <FaUser className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
+                                <input name="name" className=" w-full   py-[13px] pl-[30px] border outline-0" type="text" placeholder="Your Name*" />
+                            </div>
+                            <div className=" relative w-full">
+                                <MdMarkEmailRead className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
+                                <input name="email" className=" w-full  py-[13px] pl-[30px] border outline-0" type="email" placeholder="Write Your Email*" />
+                            </div>
+
+                        </div>
+                        <div className='mt-[44px] relative '>
+                            <AiFillMessage className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
+                            <textarea name="review" className="inputtext w-full  py-[13px] pl-[30px] border outline-0 resize-none" cols="30" rows="10" placeholder="Write your comment*"></textarea>
+                        </div>
+                        <div className='mt-[44px] relative '>
+                            <AiFillMessage className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
+                            <input name="rating" id='rating' min={1} max={5} className=" w-full  py-[13px] pl-[30px] border outline-0" type="number" placeholder="Write Your rating*" />
+                        </div>
+
+                        <button className="w-full text-white bg-[#FB2E86] font-josefin text-[14px] rounded-[3px] border border-[#FB2E86] px-[20px] py-[10px] mt-[33px] capitalize">submit comment</button>
+                    </form>
+                </div>
+            </Container>
             </TabPanel>
             <TabPanel>
               

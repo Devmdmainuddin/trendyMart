@@ -10,7 +10,8 @@ import { useDispatch } from 'react-redux';
 const ProductCard06 = ({item}) => {
     let [Quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
-
+    const discountp = (parseInt(item?.price) * parseInt(item?.discount)) / 100
+    const discountPrice = parseInt(item?.price) - discountp
     // add to cart
     const handlecard = async i => {
         try {
@@ -38,7 +39,7 @@ const ProductCard06 = ({item}) => {
     return (
         <div className='w-[270px] group'>
         <div className="image w-[270px] h-[280px] relative overflow-hidden">
-            <img src='/sale.svg' className='absolute -top-full group-hover:top-[10px] left-4   transition-all duration-500' />
+        {item?.discount &&  <p className='absolute -top-full group-hover:top-[10px] left-4  py-2 px-3  bg-[#FB2E86] text-white  transition-all duration-500 rounded-md' > {item?.discount} %</p>}  
             <div className='bg-[#F6F7FB]  w-[270px] h-[280px] flex justify-center items-center border'>
                 <img src={item?.image} alt=""  className='w-full h-full object-cover'/>
             </div>
@@ -55,8 +56,8 @@ const ProductCard06 = ({item}) => {
             <div className='w-[10px] h-[10px] rounded-full bg-[#EC42A2]'></div>
             <div className='w-[10px] h-[10px] rounded-full bg-[#8568FF]'></div>
            </div>
-            <div className='text-sm font-josefin font-normal flex gap-2'><p>$ <span >{item.price}</span></p>
-            <p className='text-sm font-josefin font-normal text-[#FB2E86] line-through'>$ <span>{item.price}</span></p>
+            <div className='text-sm font-josefin font-normal flex gap-2'><p>{item.discount && <span > ${discountPrice}</span>}</p>
+            <p className={`text-[#FB2E86]  ${item.discount ? 'line-through' : ''}`}>$ <span>{item.price}</span></p>
             </div>
         </div>
     </div>

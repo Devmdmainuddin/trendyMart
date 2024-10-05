@@ -19,10 +19,11 @@ const Sidebar = () => {
     useEffect(() => {
         if (blogdata && blogdata?.length > 0) {
             setCategorey([... new Set(blogdata?.map(item => item.category))])
-            setTags([... new Set(blogdata?.map(item => item.tags.tag01))])
+            setTags([... new Set(blogdata?.map(item => item.tags ))])
 
         }
     }, [blogdata])
+
     useEffect(() => {
         if (data && data?.length > 0) {
             const offerData = data?.filter(item => item.discount > 0)
@@ -49,7 +50,7 @@ const Sidebar = () => {
 
     const handleCategoryFilter = (category) => {
         navigate(`/blogs?category=${encodeURIComponent(category)}`);
-     };
+    };
 
     const Culture = blogdata?.filter(item => item.category === 'Culture');
     const Careers = blogdata?.filter(item => item.category === 'Careers')
@@ -69,13 +70,13 @@ const Sidebar = () => {
             <div>
                 <ul className='flex gap-3 flex-wrap'>
                     {categorey.map(item =>
-                        <li onClick={()=>handleCategoryFilter(item)} className='text-[#3F509E] hover:text-white hover:bg-[#F939BF] p-1 text-sm font-normal font-josefin transition-all duration-500'>{item} <span>({
+                        <li onClick={() => handleCategoryFilter(item)} className='text-[#3F509E] hover:text-white hover:bg-[#F939BF] p-1 text-sm font-normal font-josefin transition-all duration-500'>{item} <span>({
                             item === 'Culture' ? Culture?.length : 0
-                            || item === 'Careers' ? Careers?.length : 0
-                            || item === 'Politics' ? Politics?.length : 0
-                            || item === 'Business' ? Business?.length : 0
-                            || item === 'Travel' ? Travel?.length : 0
-                         
+                                || item === 'Careers' ? Careers?.length : 0
+                                    || item === 'Politics' ? Politics?.length : 0
+                                        || item === 'Business' ? Business?.length : 0
+                                            || item === 'Travel' ? Travel?.length : 0
+
 
 
 
@@ -169,7 +170,7 @@ const Sidebar = () => {
                     {searchFilter.map((item, key) =>
                         <div onClick={() => handleLink(item._id)} key={key} className=" cursor-pointer flex w-full  gap-2 bg-[#F5F5F3] p-5 border-b">
                             <img src={item.image} alt="" className="bg-[#979797] w-10 h-10" />
-                            <div><h2 className='text-sm'>{item.title.slice(0,22)}</h2>
+                            <div><h2 className='text-sm'>{item.title.slice(0, 22)}</h2>
                             </div>
 
 

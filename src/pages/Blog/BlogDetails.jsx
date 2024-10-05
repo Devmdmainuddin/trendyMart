@@ -12,10 +12,13 @@ import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import { useGetproductsQuery } from "../../Featured/ProductAPI/productApi";
 import { useGetBlogsQuery } from "../../Featured/BlogAPI/blogApi";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 const BlogDetails = () => {
     const blog = useLoaderData()
+    const { user } = useAuth() || {}
     const [sortOrder, setSortOrder] = useState('new');
     const { data, error, isLoading, } = useGetproductsQuery({ sortOrder });
     // const {data:blogdata}=useGetBlogsQuery({ sortOrder })
@@ -23,6 +26,57 @@ const BlogDetails = () => {
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
+    const handleSubmit =async (e) => {
+        e.preventDefault()
+
+        const form = e.target
+        const name = form.name.value
+        const email = form.email.value
+        const review = form.review.value
+        const rating = form.rating.value
+        const userName = user?.displayName;
+        const userEmail = user?.email;
+        const userImage = user?.photoURL;
+        const blogId = blog._id;
+        const blogTitle = blog.title;
+        const reviewAt = (new Date()).toDateString();
+        
+        const info={
+            name,
+            email,
+            review,
+            rating,
+            blogId,
+            blogTitle,
+            auth:{
+                userName,userEmail,userImage
+            },
+            reviewAt
+        }
+console.log(info);
+        try {
+            // await addReviews(info)
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: " create review  ",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            // form.reset();
+            // refetch()
+        }
+        catch (err) {
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: " your review not add  ",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+
+    }
 
 
     return (
@@ -154,32 +208,36 @@ const BlogDetails = () => {
                     </div>
                 </div>
                 <div>
-                    <form className='mt-[46px] md:mt-[135px] max-w-[717px]'>
+                    <form onSubmit={handleSubmit} className='mt-[46px] md:mt-[135px] max-w-[717px]'>
                         <div className=" flex justify-between gap-6 items-center">
                             <div className=" relative w-full">
                                 <FaUser className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
-                                <input className=" w-full   py-[13px] pl-[30px] border outline-0" type="text" placeholder="Your Name*" />
+                                <input name="name" className=" w-full   py-[13px] pl-[30px] border outline-0" type="text" placeholder="Your Name*" />
                             </div>
                             <div className=" relative w-full">
                                 <MdMarkEmailRead className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
-                                <input className=" w-full  py-[13px] pl-[30px] border outline-0" type="email" placeholder="Write Your Email*" />
+                                <input name="email" className=" w-full  py-[13px] pl-[30px] border outline-0" type="email" placeholder="Write Your Email*" />
                             </div>
 
                         </div>
                         <div className='mt-[44px] relative '>
                             <AiFillMessage className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
-                            <textarea className="inputtext w-full  py-[13px] pl-[30px] border outline-0 resize-none" cols="30" rows="10" placeholder="Write your comment*"></textarea>
+                            <textarea name="review" className="inputtext w-full  py-[13px] pl-[30px] border outline-0 resize-none" cols="30" rows="10" placeholder="Write your comment*"></textarea>
                         </div>
+                        <div className='mt-[44px] relative '>
+                            <AiFillMessage className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
+                            <input name="rating" id='rating' min={1} max={5} className=" w-full  py-[13px] pl-[30px] border outline-0" type="number" placeholder="Write Your rating*" />
+                        </div>
+
                         <div>
                             <input
                                 type="checkbox"
-                                id="comment"
-                                className={`w-2 h-2 mr-1 rounded-sm border-2 border-gray-500 cursor-pointer appearance-none 
-                    ${isChecked ? 'bg-[#19D16F] border-none' : ''}`}
+                                id="checkbox"
+                                className={`w-2 h-2 mr-1 rounded-sm border-2 border-gray-500 cursor-pointer appearance-none ${isChecked ? 'bg-[#19D16F] border-none' : ''}`}
                                 checked={isChecked}
                                 onChange={handleCheckboxChange}
                             />
-                            <label htmlFor="comment" className='text-[#8A91AB] text-[12px] font-normal'>Save my name, email, and website in this browser for the next time I comment.</label>
+                            <label htmlFor="checkbox" className='text-[#8A91AB] text-[12px] font-normal'>Save my name, email, and website in this browser for the next time I comment.</label>
 
                         </div>
 

@@ -5,6 +5,10 @@ import { MdOutlineReviews } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 const ProductCard08 = ({item}) => {
+
+    const discountp = (parseInt(item?.price) * parseInt(item?.discount)) / 100
+    const discountPrice = parseInt(item?.price) - discountp
+
     return (
         <div className='w-[270px] group'>
             <div className="image w-[270px] h-[340px] relative overflow-hidden">
@@ -31,8 +35,8 @@ const ProductCard08 = ({item}) => {
 
                 <div className='flex items-center gap-4'>
                     <div className='text-[13px] font-josefin font-normal flex gap-2'>
-                        <p className='text-[#151875]'>$ <span >{item.price}</span></p>
-                        <p className='  text-[#FB2E86] line-through'>$ <span>{item.price}</span></p>
+                        <p className='text-[#151875]'>{item.discount && <span > ${discountPrice}</span>}</p>
+                        <p className={`text-[#FB2E86]  ${item.discount ? 'line-through' : ''}`}>$ <span>{item.price}</span></p>
                     </div>
 
                 </div>
