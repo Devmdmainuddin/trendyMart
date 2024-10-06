@@ -111,7 +111,7 @@ const AddProductForm = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
-            // form.reset();
+            form.reset();
         }
         catch (err) {
             Swal.fire({
