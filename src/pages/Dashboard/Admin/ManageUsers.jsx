@@ -1,37 +1,55 @@
-import { Helmet } from 'react-helmet-async'
- import useAxiosSecure from '../../../hooks/useAxiosSecure'
-import {  useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import UserDataRow from '../../../components/row/UserDataRow'
+import { useState } from 'react'
+import { RiDeleteBinLine } from 'react-icons/ri'
+import Swal from 'sweetalert2'
+import UpdateUserModal from '../../../components/modal/UpdateUserModal'
+import { useDeleteUserMutation, useGetFilteredUsersQuery } from '../../../Featured/auth/authApi'
 
 
 const ManageUsers = () => {
   const [filter, setFilter] = useState('')
   const [sort, setSort] = useState('')
-
-  const axiosSecure = useAxiosSecure()
-
-  const {data: filteruser = [],refetch} = useQuery({
-    queryKey: ['filteruser',filter,sort],
-    queryFn: async () => {
-      const { data } = await axiosSecure.get(`/filteruser?filter=${filter}&sort=${sort}`)
-      return data 
-    },
-  })
- 
+  const [isOpen, setIsOpen] = useState(false)
+  const { data: filteruser = [], isLoading, isError, error, refetch } = useGetFilteredUsersQuery({ filter, sort });
+  const [deleteUser, { isLoading: isDeleting }] = useDeleteUserMutation();
 
 
+  const handleDelet = id => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await deleteUser(id)
+        refetch()
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "user has been delete",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    });
+
+  }
 
 
-//   if (loading || isLoading) return <LoadingSpinner />
+
+  if (isLoading) return <div>Loading........</div>;
+  if (isError) return <div>Error: {error.message}</div>;
   return (
     <>
       <div className='container mx-auto px-4 sm:px-8'>
-        <Helmet>
+        {/* <Helmet>
           <title>Manage Users</title>
-        </Helmet>
+        </Helmet> */}
 
-        <div className='flex flex-col md:flex-row justify-center items-center gap-5 mt-6'>
+        <div className='flex flex-col md:flex-row  items-center gap-5 mt-6'>
           <div>
             <select
               onChange={e => {
@@ -46,7 +64,7 @@ const ManageUsers = () => {
               <option value=''>Filter By roul</option>
               <option value='user'>user</option>
               <option value='admin'>admin</option>
-              <option value='moderator'>moderator</option>
+              <option value='seller'>seller</option>
             </select>
           </div>
           <div>
@@ -107,7 +125,46 @@ const ManageUsers = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteruser.map(user => <UserDataRow key={user?._id} user={user} refetch={refetch} ></UserDataRow>)}
+                  {filteruser.map(user =>
+                    <tr>
+                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                        <p className='text-gray-900 whitespace-no-wrap'>{user?.firstName + user?.lastName}</p>
+                      </td>
+                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                        <p className='text-gray-900 whitespace-no-wrap'>{user?.email}</p>
+                      </td>
+                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                        <p className='text-gray-900 whitespace-no-wrap'>{user?.role}</p>
+                      </td>
+                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                        {user?.status ? (
+                          <p
+                            className={`${user.status === 'Verified' ? 'text-green-500' : 'text-yellow-500'
+                              } whitespace-no-wrap`}
+                          >
+                            {user?.status}
+                          </p>
+                        ) : (
+                          <p className='text-red-500 whitespace-no-wrap'>Unavailable</p>
+                        )}
+                      </td>
+
+                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                        <button onClick={() => setIsOpen(true)} className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-[#F939BF] leading-tight'>
+                          <span
+                            aria-hidden='true'
+                            className='absolute inset-0 border  border-[#F939BF] opacity-50 rounded-sm'
+                          ></span>
+                          <span className='relative'>Update Role</span>
+                        </button>
+
+                        <UpdateUserModal isOpen={isOpen} setIsOpen={setIsOpen} user={user} refetch={refetch}></UpdateUserModal>
+                        <button onClick={() => handleDelet(user._id)} className='cursor-pointer inline-block px-3 py-1 border ml-1 border-[#F939BF]  rounded-full font-semibold text-[#F939BF] leading-tight'>
+                          <RiDeleteBinLine />
+                        </button>
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>

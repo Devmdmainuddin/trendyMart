@@ -12,7 +12,6 @@ const Checkout = () => {
     const { data, error, isLoading } = useGetUserByEmailQuery(email);
     const [isChecked, setIsChecked] = useState(false);
 
-       console.log(carts);
     let { totalprice, totalQuntity } = carts.reduce((acc, item) => {
         acc.totalprice += item.price * item.qun
         acc.totalQuntity += item.qun

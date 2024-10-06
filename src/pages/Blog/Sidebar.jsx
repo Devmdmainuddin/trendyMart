@@ -69,8 +69,8 @@ const Sidebar = () => {
             <h2 className='text-[#151875] text-[22px] font-josefin font-semibold mt-[52px] mb-6'>Categories</h2>
             <div>
                 <ul className='flex gap-3 flex-wrap'>
-                    {categorey.map(item =>
-                        <li onClick={() => handleCategoryFilter(item)} className='text-[#3F509E] hover:text-white hover:bg-[#F939BF] p-1 text-sm font-normal font-josefin transition-all duration-500'>{item} <span>({
+                    {categorey.map((item,idx) =>
+                        <li key={idx} onClick={() => handleCategoryFilter(item)} className='text-[#3F509E] hover:text-white hover:bg-[#F939BF] p-1 text-sm font-normal font-josefin transition-all duration-500'>{item} <span>({
                             item === 'Culture' ? Culture?.length : 0
                                 || item === 'Careers' ? Careers?.length : 0
                                     || item === 'Politics' ? Politics?.length : 0
@@ -86,8 +86,8 @@ const Sidebar = () => {
             </div>
             <h2 className='text-[#151875] text-[22px] font-josefin font-semibold my-9'>Recent Post</h2>
             <div className='flex flex-col gap-[22px] '>
-                {blogdata?.slice(0, 5).map(item =>
-                    <div className='flex gap-2 items-center'>
+                {blogdata?.slice(0, 5).map((item,idx) =>
+                    <div key={idx} className='flex gap-2 items-center'>
                         <div>
                             <div className="image w-[70px] h-[51px]">
                                 <Image src={item.image}> </Image>
@@ -109,8 +109,8 @@ const Sidebar = () => {
             </div>
             <h2 className='text-[#151875] text-[22px] font-josefin font-semibold my-9'>Sale Product</h2>
             <div className='flex flex-col gap-[22px] '>
-                {data?.slice(1, 5).map(item =>
-                    <div className='flex gap-2 items-center'>
+                {data?.slice(1, 5).map((item,idx) =>
+                    <div key={idx} className='flex gap-2 items-center'>
 
                         <div className="image w-[70px] h-[51px]">
                             <Image src={item.image}> </Image>
@@ -131,9 +131,9 @@ const Sidebar = () => {
             {/* Offer product */}
             <h2 className='text-[#151875] text-[22px] font-josefin font-semibold my-9'>Offer product</h2>
             <div className='flex flex-wrap gap-4'>
-                {offer.slice(0, 4).map(item =>
+                {offer.slice(0, 4).map((item,idx) =>
 
-                    <div>
+                    <div key={idx}>
                         <Link to={`/product/${item._id}`}>
                             <div className="image w-[126px] h-[80px]">
                                 <Image src={item.image} > </Image>
@@ -158,8 +158,8 @@ const Sidebar = () => {
             <h2 className='text-[#151875] text-[22px] font-josefin font-semibold mt-[52px] mb-6'>Tags</h2>
             <div>
                 <ul className='flex gap-3 flex-wrap'>
-                    {tags?.map(item =>
-                        <li className='text-[#151875] text-[16px] hover:text-white hover:bg-[#F939BF] p-1 text-sm font-normal font-josefin transition-all duration-500 underline'>{item} </li>
+                    {tags?.map((item,idx) =>
+                        <li key={idx} className='text-[#151875] text-[16px] hover:text-white hover:bg-[#F939BF] p-1 text-sm font-normal font-josefin transition-all duration-500 underline'>{item} </li>
                     )}
 
 
@@ -167,8 +167,8 @@ const Sidebar = () => {
             </div>
             {searchFilter.length > 0 &&
                 <div className='absolute max-w-[420px] w-full max-h-[350px] top-[112px] left-0  z-50  overflow-y-scroll' >
-                    {searchFilter.map((item, key) =>
-                        <div onClick={() => handleLink(item._id)} key={key} className=" cursor-pointer flex w-full  gap-2 bg-[#F5F5F3] p-5 border-b">
+                    {searchFilter.map((item,idx)=>
+                        <div key={idx} onClick={() => handleLink(item._id)}  className=" cursor-pointer flex w-full  gap-2 bg-[#F5F5F3] p-5 border-b">
                             <img src={item.image} alt="" className="bg-[#979797] w-10 h-10" />
                             <div><h2 className='text-sm'>{item.title.slice(0, 22)}</h2>
                             </div>

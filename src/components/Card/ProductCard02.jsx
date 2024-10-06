@@ -37,8 +37,8 @@ const ProductCard02 = ({ item }) => {
     }
 
     return (
-        <div className='w-[360px] group'>
-            <div className="image w-[360px] h-[270px] relative overflow-hidden">
+        <div className='w-full md:w-[360px] group'>
+            <div className="image sm:w-[360px] h-[270px] relative overflow-hidden">
                 {item.discount && <p className='absolute -top-full group-hover:top-[10px] left-4  py-1 px-2 bg-[#FB2E86] text-white rounded-sm transition-all duration-500'>{item.discount} %</p>}
                 <div className='bg-[#F6F7FB] w-full h-full flex justify-center items-center p-6'>
                     <img src={item.image} alt="" className='w-full h-full object-contain' />

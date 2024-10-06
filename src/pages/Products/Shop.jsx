@@ -12,7 +12,7 @@ import PaginatedItem from '../../components/Shared/PaginatedItem';
 
 
 const Shop = () => {
-    const [number, setNumber] = useState(3)
+    const [number, setNumber] = useState(6)
     const [sortOrder, setSortOrder] = useState('new');
     const { data, error, isLoading, } = useGetproductsQuery({ sortOrder })
     const [item, setItem] = useState([])
@@ -23,8 +23,6 @@ const Shop = () => {
     const [selectedBrand, setSelectedBrand] = useState([]);
     const [selectedRanges, setSelectedRanges] = useState([]);
     const [activeMulti, setActiveMulti] = useState(true)
-
-    // console.log(data);
 
 
     // Handle category change

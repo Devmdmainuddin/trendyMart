@@ -14,8 +14,6 @@ const Blogs = () => {
    const [items,setItems]= useState()
     const location = useLocation();
     
-console.log(data);
-
 
     useEffect(() => {
 

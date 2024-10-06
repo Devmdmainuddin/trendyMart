@@ -17,31 +17,13 @@ import { imageUpload } from '../../utils/index';
 import toast from 'react-hot-toast';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useAuth from '../../hooks/useAuth';
+import { useUpdateUserMutation } from '../../Featured/auth/authApi';
 
-const UpdateProfileModal = ({ setIsOpen, isOpen,email }) => {
+const UpdateProfileModal = ({ setIsOpen, isOpen, email }) => {
     const axiosSecure = useAxiosSecure()
-    const { updateUserProfile } = useAuth()
-
-    const { mutateAsync } = useMutation({
-        mutationFn: async updateProfile => {
-            const { data } = await axiosSecure.patch(`/users/update/${email}`, updateProfile)
-            return data
-        },
-        onSuccess: data => {
-            // console.log(data)
-            // refetch()
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Your Profile Update",
-                showConfirmButton: false,
-                timer: 1500
-            });
-            setIsOpen(false)
-
-        }
-    })
-
+    const { updateUserProfile, } = useAuth()
+   
+    const [updateUser, { isLoading:lod, isSuccess, isError }] = useUpdateUserMutation();
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target
@@ -53,8 +35,9 @@ const UpdateProfileModal = ({ setIsOpen, isOpen,email }) => {
             image: image,
         }
         try {
+            await updateUser({ email, ...userinfo }).unwrap();
             await updateUserProfile(name, image)
-            await mutateAsync(userinfo)
+           
         }
         catch (err) {
             toast.error(err.message)
@@ -125,8 +108,8 @@ const UpdateProfileModal = ({ setIsOpen, isOpen,email }) => {
                                             accept='image/*'
                                         />
                                     </div>
-                                    <button 
-                                    onClick={() => setIsOpen(false)} 
+                                    <button
+                                        onClick={() => setIsOpen(false)}
                                         type='submit'
                                         className='bg-rose-500 w-full mt-4 rounded-md py-3 text-white'
                                     >

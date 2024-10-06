@@ -27,7 +27,10 @@ import AddBlog from "../pages/Dashboard/Admin/AddBlog";
 import Profile from '../pages/Dashboard/Profile/Profile'
 import UpdateProfile from "../pages/Dashboard/Profile/UpdateProfile";
 import PasswordChange from "../pages/Dashboard/Profile/PasswordChange";
-
+import ManageProduct from "../pages/Dashboard/Admin/ManageProduct";
+import EdditProductCard from "../pages/Dashboard/Admin/EdditProductCard";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
+import AdminRoute from './AdminRoute'
 
 export const router = createBrowserRouter([
     {
@@ -47,8 +50,6 @@ export const router = createBrowserRouter([
                 path: "/shop",
                 element: <Shop />,
               },
-              
-
               {
                 path: "/product/:id",
                 element: <ProductDetails />,
@@ -94,11 +95,11 @@ export const router = createBrowserRouter([
               },
               {
                 path: "/orderComplete",
-                element: <OrderComplete />,
+                element:<PrivateRoute><OrderComplete /></PrivateRoute>,
               },
               {
                 path: "/checkout",
-                element: <Checkout />,
+                element:<PrivateRoute><Checkout /></PrivateRoute> ,
               },
               {
                 path: "/myAccount/login",
@@ -119,27 +120,41 @@ export const router = createBrowserRouter([
       children:[
         {
           path: "/dashboard",
-          element:<Profile/>,
+          element:<PrivateRoute><Profile/></PrivateRoute>,
         },
         {
           path: "/dashboard/updateProfile",
-          element:<UpdateProfile/>,
+          element:<PrivateRoute><UpdateProfile/></PrivateRoute>,
         },
         {
           path: "/dashboard/updatePassword",
-          element:<PasswordChange/>,
+          element:<PrivateRoute><PasswordChange/></PrivateRoute> ,
         },
         {
           path: "/dashboard/addProduct",
-          element:<AddProductForm/>,
+          element:<PrivateRoute><AddProductForm/></PrivateRoute> ,
         },
         {
+          path: "/dashboard/manageProduct",
+          element:<PrivateRoute><ManageProduct/></PrivateRoute> ,
+        },
+        {
+          path: "/dashboard/manageUsers",
+          element: <PrivateRoute> <AdminRoute> <ManageUsers/> </AdminRoute></PrivateRoute> ,
+        },
+        {
+          path: "/dashboard/edditProduct/:id",
+          element:<PrivateRoute><EdditProductCard/></PrivateRoute> ,
+          loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
+        },
+
+        {
           path: "/dashboard/addBlog",
-          element:<AddBlog/>,
+          element:<PrivateRoute><AddBlog/></PrivateRoute> ,
         },
         {
           path: "/dashboard/cart",
-          element: <Carts />,
+          element:<PrivateRoute> <Carts /></PrivateRoute>,
         },
 
       ]

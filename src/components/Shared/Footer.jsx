@@ -11,7 +11,8 @@ const Footer = () => {
                     <Container>
                         <div className='flex flex-wrap gap-[70px]'>
                             <div className='md:w-2/5'>
-                                <img src="/Hekto.png" alt="" className='w-[110px] h-[38px]' />
+                                {/* <img src="/Hekto.png" alt="" className='w-[110px] h-[38px]' /> */}
+                                <div className="logo "><h2 className='text-xl md:text-3xl'>trendy<span className='text-[#FB2E86]'>Mart</span></h2></div>
                                 <div className='mt-8 w-auto md:w-[377px]'>
                                     <input type="email" name="" id="" placeholder='Enter Email Address' className='py-2 px-3 md:py-[14px] text-[#8A8FB9]  md:px-6 border-0 outline-0' />
                                     <button className='capitalize bg-[#FB2E86] text-white text-[17px] font-semibold py-2 px-3 md:py-[14px] md:px-6'>sign up</button>

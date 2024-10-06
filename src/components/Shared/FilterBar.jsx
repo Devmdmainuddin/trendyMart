@@ -19,7 +19,7 @@ const FilterBar = ({setActiveMulti,handleByNew,handleByOld,selectNumber}) => {
                             <p className='text-[#8A8FB9] capitalize text-[12px] font-josefin font-normal'>About 9,620 results (0.62 seconds)</p>
                         </div>
                     </div>
-                    <div className="filter flex gap-6">
+                    <div className="filter flex flex-wrap gap-6">
                         <div className='flex gap-1 items-center'>
                             <p className='text-[#3F509E] text-[16px] font-normal capitalize'>per page</p>
                             <select  

@@ -26,7 +26,7 @@ const BlogDetails = () => {
     const { data, error, isLoading, } = useGetproductsQuery({ sortOrder });
     const { data: reviews, error: reviewsError, isLoading: reviewsIsLoading, } = useGetBlogReviewsQuery(blog._id)
   const [addBlogReview] = useAddBlogReviewsMutation()
-  console.log(reviews);
+ 
     const [isChecked, setIsChecked] = useState(false);
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);

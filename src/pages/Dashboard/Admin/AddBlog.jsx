@@ -20,13 +20,10 @@ const AddBlog = () => {
         const thumbnail01 = await imageUpload(thumbnailImage01);
         const thumbnail02 = await imageUpload(thumbnailImage02);
         const image = await imageUpload(image_url)
-
         const title = form.title.value;
-        // const brand = form.brand.value;
         const category = form.category.value;
         const descaption = form.descaption.value;
         const tags = form.tag.value;
-
         const publishDate = (new Date()).toDateString();
         const name = user?.displayName;
         const email = user?.email;
@@ -127,20 +124,7 @@ const AddBlog = () => {
                                 </div>
 
                             </div>
-                            {/* brand */}
-                            {/* <div>
-                                <label htmlFor="brand">brand</label>
-                                <select name="brand" id="" className='mt-2 w-full py-[13px] px-[11px] border outline-0'>
-                                    {brand?.map((item, idx) => <option key={idx} value={item.brand}>{item.brand}</option>)}
-                                </select>
-                            </div> */}
                             
-                           
-
-
-
-
-
                         </div>
                     </div>
                     <div className=" mt-6">

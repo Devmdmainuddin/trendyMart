@@ -48,7 +48,7 @@ const Leatest = () => {
                 <Heading text='Leatest Products' className='text-center mt-16 md:mt-[71px]'></Heading>
                 <div className='flex justify-center md:mt-[18px]'>
                     <Tabs>
-                        <TabList className=" flex gap-16 items-center justify-center text-xl py-6 ">
+                        <TabList className=" flex gap-6 md:gap-16 items-center justify-center flex-wrap text-xl py-6 ">
                             <Tab onClick={handleByNew} className='text-[#151875] text-2xl font-josefin font-semibold outline-0 transition-all duration-300'>New Arrival</Tab>
                             <Tab className='text-[#151875] text-2xl font-josefin font-semibold outline-0 transition-all duration-300'>Best Seller</Tab>
                             <Tab onClick={handleFeatured} className='text-[#151875] text-2xl font-josefin font-semibold outline-0 transition-all duration-300'>Featured</Tab>

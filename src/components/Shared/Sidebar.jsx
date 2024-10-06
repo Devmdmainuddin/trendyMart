@@ -7,7 +7,6 @@ const Sidebar = ({handlebrandfilter, colors,  handlePriceChange, selectedRanges,
     const [label, setSelectedlabel] = useState([]);
     const [selectedColors, setSelectedColors] = useState([]);
 
-    console.log(colors, label);
 
     const priceRanges = [
         { label: "$0 - $50", value: [0, 50] },

@@ -8,8 +8,8 @@ const AddSubCategoryForm = () => {
     const { user } = useAuth() || {}
     const [addSubCategory] = useAddSubcategoryMutation()
     const {data}=useGetCategoryQuery()
-    console.log(data);
-    
+  
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 

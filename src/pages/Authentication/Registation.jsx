@@ -6,9 +6,6 @@ import Company from '../../components/Home/Company'
 import { FaEye } from 'react-icons/fa';
 import { IoMdEyeOff } from 'react-icons/io';
 import useAuth from '../../hooks/useAuth';
-import toast from 'react-hot-toast';
-// import { useDispatch } from 'react-redux';
-import { registerUser } from '../../Featured/auth/authSlice';
 import Swal from 'sweetalert2';
 import { useAddUserMutation } from '../../Featured/auth/authApi';
 
@@ -142,9 +139,9 @@ const Registation = () => {
 
         try {
             setLoading(true)
-            console.log("ok");
-            const result = await createUser(email, password)
-            console.log(result);
+        
+             await createUser(email, password)
+         
            await AddUser(userinfo)
             // dispatch(registerUser(userinfo))
             Swal.fire({
@@ -160,7 +157,7 @@ const Registation = () => {
         }
         catch (error) {
             setLoading(false)
-            // console.log(err.message);
+           
             const errorCode = error.code;
             if(errorCode.includes("email")){
             //   setEmailError("Email already in use")

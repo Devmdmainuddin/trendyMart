@@ -16,7 +16,9 @@ import { ImProfile } from "react-icons/im";
 import { GrDocumentUpdate } from "react-icons/gr";
 import { TbPasswordUser } from "react-icons/tb";
 import { BiLogOut } from "react-icons/bi";
-import { useGetUserByEmailQuery} from "../../Featured/auth/authApi";
+import { useGetUserByEmailQuery } from "../../Featured/auth/authApi";
+import { FaRegEdit } from "react-icons/fa";
+import UpdateProfileModal from "../../components/modal/UpdateProfileModal";
 
 // import Sidebar from "./Sidebar";
 
@@ -29,8 +31,9 @@ const Dashboard = () => {
     const { data, error, isLoading } = useGetUserByEmailQuery(email);
     const [show, setShow] = useState(false)
     const [role, isloading] = useRole()
-   
+    const [isOpen,setIsOpen]= useState(false)
 
+    if (isloading) { <p>loading...............</p> }
     return (
         <div>
             <Navbar></Navbar>
@@ -40,20 +43,26 @@ const Dashboard = () => {
                         <aside className='w-[270px] p-6  min-h-screen shadow-commentuserShadow'>
 
 
-                            <div className="text-center py-6 bg-slate-100 relative mt-5">
-                                <img alt="" className=" w-12 h-12  object-cover rounded-full bg-slate-300 absolute -top-[30px] left-1/2 -translate-x-1/2" src={user?.photoURL ? user?.photoURL : '/user.png'} />
+                            <div className="text-center py-6 bg-slate-100 relative mt-5 ">
+                                <div className="relative w-12 h-12 group -top-[55px] left-1/2 -translate-x-1/2 overflow-hidden">
+                                    <img alt="" className=" w-full h-full  object-cover rounded-full bg-slate-300 " src={user?.photoURL ? user?.photoURL : '/user.png'} />
+                                    <span onClick={()=>setIsOpen(true)} className="bg-red-100 absolute top-0 -right-full group-hover:-right-1 p-1 rounded-full flex justify-center items-center transition-all duration-300"><FaRegEdit /> </span>
+                                </div>
+
+
                                 <div className="">
-                                    <p className="text-xl font-semibold leading-snug"> {user?.displayName?user?.displayName: data?.firstName + data?.lastName }</p>
+                                    <p className="text-xl font-semibold leading-snug "> {user?.displayName ? user?.displayName : data?.firstName + data?.lastName} </p>
                                     <p>{role}</p>
                                 </div>
                             </div>
+                            <UpdateProfileModal isOpen={isOpen} email={email}  setIsOpen={setIsOpen}></UpdateProfileModal>
                             <ul className="mt-4 bg-slate-100 p-3">
                                 <li><NavLink to='/dashboard' className="capitalize  flex items-center gap-2 "> <ImProfile /> view profile</NavLink></li>
                                 <li className="my-2"><NavLink to='/dashboard/updateProfile' className="capitalize flex items-center gap-2 "> <GrDocumentUpdate /> update profile</NavLink></li>
                                 <li><NavLink to='/dashboard/updatePassword' className="capitalize  flex items-center gap-2"><TbPasswordUser /> password change</NavLink></li>
 
                                 {role === 'user' && <GuestMenu />}
-                                {role === 'Seller' && <SellerMenu />}
+                                {role === 'seller' && <SellerMenu />}
                                 {role === 'admin' && <AdminMenu />}
                                 <li className="my-2"><NavLink to='/'><button onClick={logOut} className="capitalize flex items-center gap-2"><BiLogOut /> logOut</button></NavLink></li>
                             </ul>

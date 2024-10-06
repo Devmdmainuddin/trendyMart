@@ -42,8 +42,6 @@ const ProductDetails = () => {
   // const [discountPrice,setDiscountPrice] = useState(0);
   const { data: reviews, error: reviewsError, isLoading: reviewsIsLoading, } = useGetProductReviewsQuery(products._id)
   const [addProductReview] = useAddProductReviewsMutation()
-  console.log(reviews);
-
 
   const discountp = (parseInt(products?.price) * parseInt(products?.discount)) / 100
   const discountPrice = parseInt(products?.price) - discountp
@@ -215,11 +213,11 @@ const ProductDetails = () => {
                 <span><FaStar className='text-[#B2B2B2] text-[10px]' /></span>
 
               </div>
-              <span className='text-sm'>{reviews.length}</span>
+              <span className='text-sm'>{reviews?.length}</span>
             </div>
             <div className='text-[13px] font-josefin font-normal flex gap-2 mt-3'>
-              <p className='text-[#151875] text-[16px]'> {products.discount && <span > ${discountPrice}</span>}</p>
-              <p className={`text-[16px] text-[#FB2E86]  ${products.discount ? 'line-through' : ''}`}>$ <span> {products.price}</span></p>
+              <p className='text-[#151875] text-[16px]'> {products?.discount && <span > ${discountPrice}</span>}</p>
+              <p className={`text-[16px] text-[#FB2E86]  ${products?.discount ? 'line-through' : ''}`}>$ <span> {products.price}</span></p>
             </div>
             <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-4 capitalize'>Color : <span className={`w-10 h-10 rounded-full bg-[${products.color}]`}>{
             products?.color === "#FF0000" ? 'red' : ''

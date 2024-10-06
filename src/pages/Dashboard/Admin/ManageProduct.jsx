@@ -1,14 +1,18 @@
 import Swal from "sweetalert2";
-import ManageProductRow from "../../../components/row/ManageProductRow";
-import { useDeleteProductMutation, useGetproductsQuery } from "../../../services/productApi";
-import useProduct from "../../../hooks/useProduct";
+import { useDeleteProductMutation, useGetproductsQuery } from "../../../Featured/ProductAPI/productApi";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { FaRegEdit } from "react-icons/fa";
+import { BiDetail } from "react-icons/bi";
+import { RiDeleteBinLine } from "react-icons/ri";
+
 
 
 const ManageProduct = () => {
-  const { data, error, isLoading, } = useGetproductsQuery()
+  const [sortOrder, setSortOrder] = useState('new');
+  const { data, error, isLoading, } = useGetproductsQuery({ sortOrder })
   const [deleteProduct] = useDeleteProductMutation()
- const [product]=useProduct()
-  console.log(product);
+
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -29,9 +33,7 @@ const ManageProduct = () => {
   }
   return (
     <div className='container mx-auto px-4 sm:px-8'>
-      {/* <Helmet>
-        <title>Manage ScholerShips</title>
-      </Helmet> */}
+
       <div className='py-8'>
         <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto'>
           <div className='inline-block min-w-full shadow rounded-lg overflow-hidden'>
@@ -62,12 +64,7 @@ const ManageProduct = () => {
                   >
                     price
                   </th>
-                  <th
-                    scope='col'
-                    className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                  >
-                    discount
-                  </th>
+
                   <th
                     scope='col'
                     className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
@@ -83,26 +80,50 @@ const ManageProduct = () => {
                   </th>
                 </tr>
               </thead>
-              {/* User data table row */}
               {isLoading && <p>loading...........</p>}
               {!isLoading && !error && data && data.length > 0 && (
                 <tbody>
-                  { data.map(item => <ManageProductRow key={item._id} item={item} handleDelete={handleDelete}></ManageProductRow>)}
+                  {data?.map(item =>
+                    <tr>
+                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                        <p className='text-gray-900 whitespace-no-wrap'>{item.title}</p>
+                      </td>
+                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                        <img src={item?.image} alt="" className="w-16 h-16" />
+                      </td>
+                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                        <p className='text-gray-900 whitespace-no-wrap'>{item.categorys.category}</p>
+                      </td>
+                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                        <p className='text-gray-900 whitespace-no-wrap'>${item.price}</p>
+                      </td>
+
+                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                        <p className='text-gray-900 whitespace-no-wrap'>{item?.userInfo?.name ? item?.userInfo?.name : item.userInfo.email}</p>
+                      </td>
+                      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm '>                      
+                        <Link to={`/product/${item?._id}`} className='cursor-pointer inline-block px-3 py-1 border border-[#FB2E86]  rounded-sm font-semibold text-[#FB2E86] leading-tight'>
+                          <BiDetail />
+                        </Link>
+                        <Link to={`/dashboard/edditProduct/${item._id} `} className='ml-1 cursor-pointer inline-block px-3 py-1 border border-[#FB2E86]  rounded-sm  font-semibold text-[#FB2E86] leading-tight'>
+                          <FaRegEdit />
+                        </Link>
+                        <button onClick={() => handleDelete(item._id)} className='cursor-pointer inline-block px-3 py-1 border border-[#FB2E86]  rounded-sm   font-semibold text-[#FB2E86] leading-tight'>
+                          <RiDeleteBinLine />
+                        </button>
+                      </td>
+                    </tr>
+                  )}
+               
                 </tbody>
 
               )}
-
-            {/* {
-                  data?.map(item => <ManageProductRow key={item._id} item={item} handleDelete={handleDelete}></ManageProductRow>)
-                } */}
-
-
-          </table>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
     </div >
-    );
+  );
 };
 
 export default ManageProduct;
