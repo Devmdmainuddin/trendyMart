@@ -210,6 +210,7 @@ const Navbar = () => {
                             <li className="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/about">About</NavLink></li>
                             <li className="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/contact">Contact</NavLink></li>
                             <li className="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/FAQ">FAQ</NavLink></li>
+                            <li className=" text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500 lg:hidden flex justify-center items-center"><button ref={cartRef} className='flex gap-1 items-center justify-center relative'><FaCartPlus className='text-[#262626] text-lg ' /> {carts?.length > 0 ? <span className="text-red-500 bg-white w-5 h-5 border p-1 rounded-full text-center absolute -top-3 -right-3 flex justify-center items-center">{carts?.length}</span> : ''}</button></li>
 
                         </ul>
                     </div>
@@ -227,10 +228,10 @@ const Navbar = () => {
                         <p><IoMdMenu className='text-[#0D0E43] text-3xl' /></p>
                     </div>
                     {searchFilter.length > 0 &&
-                        <div className='absolute max-w-[420px] max-h-[350px] top-full left-1/2 -translate-x-1/2 z-50  overflow-y-scroll' >
+                        <div className='absolute max-w-[420px] max-h-[350px] top-full sm:left-1/2 sm:-translate-x-1/2 z-50  overflow-y-scroll' >
                             {searchFilter.map((item, key) =>
                                 <div onClick={() => handleLink(item._id)} key={key} className=" cursor-pointer flex   gap-2 bg-[#F5F5F3] p-5 border-b">
-                                    <img src={item.image} alt="" className="bg-[#979797] w-20 h-20" />
+                                    <img src={item.image} alt="" className="bg-[#979797] w-10 h-10 sm:w-20 sm:h-20" />
                                     <div><h2>{item.title}</h2>
                                     </div>
 

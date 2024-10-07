@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
               {
                 path: "/product/:id",
                 element: <ProductDetails />,
-                loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
+                loader: ({ params }) => fetch(`https://trendy-mart-server.vercel.app/product/${params.id}`)
               },
               {
                 path: "/ShopGridDefault",
@@ -75,7 +75,7 @@ export const router = createBrowserRouter([
               {
                 path: "/blog/:id",
                 element: <BlogDetails />,
-                loader: ({ params }) => fetch(`http://localhost:5000/blog/${params.id}`)
+                loader: ({ params }) => fetch(`https://trendy-mart-server.vercel.app/blog/${params.id}`)
               },
               {
                 path: "/about",
@@ -145,7 +145,7 @@ export const router = createBrowserRouter([
         {
           path: "/dashboard/edditProduct/:id",
           element:<PrivateRoute><EdditProductCard/></PrivateRoute> ,
-          loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
+          loader: ({ params }) => fetch(`https://trendy-mart-server.vercel.app/product/${params.id}`)
         },
 
         {

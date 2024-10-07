@@ -108,17 +108,17 @@ const BlogDetails = () => {
 
 
                                     </div>
-                                    <h2 className='mt-7 text-[#151875] text-[30px] font-josefin font-bold'>{blog.title}</h2>
+                                    <h2 className='mt-7 text-[#151875] text-xl md:text-[30px] font-josefin font-bold'>{blog.title}</h2>
                                     <p className='max-w-[852px] text-[#8A8FB9] font-josefin font-normal text-[16px]'>{blog.descaption}</p>
                                     <p className='max-w-[852px] mt-[63px] text-[#8A8FB9] font-josefin font-normal text-[16px]'>{blog.descaption} </p>
                                     <p className='max-w-[852px] text-[#8A8FB9] bg-[#FAFAFB] mt-[43px] pt-9 pb-4 px-5 border-l-2 border-[#FC45A0] font-josefin font-normal text-[16px] '>
                                         {blog.descaption} </p>
 
-                                    <div className="flex gap-8 mt-[43px] flex-col md:flex-row">
-                                        <div className="w-[385px] h-[222px]">
+                                    <div className="flex gap-5 md:gap-8 mt-[43px] flex-col md:flex-row">
+                                        <div className="w-[276px] h-auto md:w-[385px] md:h-[222px]">
                                             <img src={blog.thumbnail.thumbnail01} alt="thumbnail" className="w-full h-full object-contain" />
                                         </div>
-                                        <div className="w-[385px] h-[222px]">
+                                        <div className="w-[276px] h-auto md:w-[385px] md:h-[222px]">
                                             <img src={blog.thumbnail.thumbnail02} alt="thumbnail" className="w-full h-full object-contain" />
                                         </div>
                                     </div>
@@ -190,7 +190,7 @@ const BlogDetails = () => {
                 </div>
                 <div>
                     <form onSubmit={handleSubmit} className='mt-[46px] md:mt-[135px] max-w-[717px]'>
-                        <div className=" flex justify-between gap-6 items-center">
+                        <div className=" flex flex-col md:flex-row justify-between gap-2 md:gap-6 items-center">
                             <div className=" relative w-full">
                                 <FaUser className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
                                 <input name="name" className=" w-full   py-[13px] pl-[30px] border outline-0" type="text" placeholder="Your Name*" />
@@ -201,11 +201,11 @@ const BlogDetails = () => {
                             </div>
 
                         </div>
-                        <div className='mt-[44px] relative '>
+                        <div className='mt-2 md:mt-[44px] relative '>
                             <AiFillMessage className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
-                            <textarea name="review" className="inputtext w-full  py-[13px] pl-[30px] border outline-0 resize-none" cols="30" rows="10" placeholder="Write your comment*"></textarea>
+                            <textarea name="review" className="inputtext w-full  py-[13px] pl-[30px] border outline-0 resize-none" cols="30" rows='5' md:rows="10" placeholder="Write your comment*"></textarea>
                         </div>
-                        <div className='mt-[44px] relative '>
+                        <div className='mt-2 md:mt-[44px] relative '>
                             <RiSortNumberAsc className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
                             <input name="rating" id='rating' min={1} max={5} className=" w-full  py-[13px] pl-[30px] border outline-0" type="number" placeholder="Your rating in 1 to 5 number *" />
                         </div>

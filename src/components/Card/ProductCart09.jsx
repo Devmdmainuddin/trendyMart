@@ -21,7 +21,7 @@ const ProductCart09 = ({item}) => {
             </div>
             <div className="content flex flex-col gap-4  py-4">
                 <div className='flex gap-4 justify-between items-center'>
-                    <h2 className='text-[19px] font-semibold   text-black hover:text-[#FB2E86] transition-all duration-500 capitalize'>{item.title.slice(0,20)}</h2>
+                <Link to={`/product/${item._id}`}>  <h2 className='text-[19px] font-semibold   text-black hover:text-[#FB2E86] transition-all duration-500 capitalize'>{item.title.slice(0,20)}</h2> </Link>  
                     
                 </div>
 

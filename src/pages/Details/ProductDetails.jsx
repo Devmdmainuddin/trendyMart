@@ -161,7 +161,7 @@ const ProductDetails = () => {
       <Bredcumb />
       <Container>
         <div className='flex flex-col lg:flex-row justify-center items-center  gap-8  my-[121px]'>
-          <div className='left w-[350px] md:w-[526px] flex  flex-col-reverse md:flex-row gap-[21px]  '>
+          <div className='left w-[350px] md:w-[526px] flex justify-center flex-col-reverse md:flex-row gap-[21px]  '>
             <div>
               <Swiper
                 //  direction={'vertical'}
@@ -173,10 +173,10 @@ const ProductDetails = () => {
                 className="mySwiper md:w-[151px] md:h-[487px]  "
               >
 
-                <SwiperSlide className=' h-[155px]'><Image src={products?.thumbnail?.thumbnail01}></Image></SwiperSlide>
-                <SwiperSlide className='  h-[155px]'><Image src={products?.thumbnail?.thumbnail02}></Image></SwiperSlide>
-                <SwiperSlide className='  h-[155px]'><Image src={products?.thumbnail?.thumbnail03}></Image></SwiperSlide>
-                <SwiperSlide className='  h-[155px]'><Image src={products?.thumbnail?.thumbnail04}></Image></SwiperSlide>
+                <SwiperSlide className='h-[110px] md:h-[155px]'><Image src={products?.thumbnail?.thumbnail01}></Image></SwiperSlide>
+                <SwiperSlide className=' h-[110px] md:h-[155px]'><Image src={products?.thumbnail?.thumbnail02}></Image></SwiperSlide>
+                <SwiperSlide className=' h-[110px] md:h-[155px]'><Image src={products?.thumbnail?.thumbnail03}></Image></SwiperSlide>
+                <SwiperSlide className=' h-[110px] md:h-[155px]'><Image src={products?.thumbnail?.thumbnail04}></Image></SwiperSlide>
 
               </Swiper>
 
@@ -190,7 +190,7 @@ const ProductDetails = () => {
                 navigation={true}
                 thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
                 modules={[Navigation, Thumbs]}
-                className="mySwiper w-[355px] h-[457px] md:w-[375px] md:h-[487px] "
+                className="mySwiper w-[285px] h-[285px] sm:w-[355px] sm:h-[457px] md:w-[375px] md:h-[487px] "
               >
                 {/* {products?.map((img,idx)=><SwiperSlide key={idx} className='w-full h-full '><Image src={img.thumbnail}></Image></SwiperSlide>)} */}
 
@@ -203,7 +203,7 @@ const ProductDetails = () => {
             </div>
           </div>
           <div className="right">
-            <h2 className='text-[#0D134E] text-[36px] font-josefin font-semibold capitalize'>{products.title}</h2>
+            <h2 className='text-[#0D134E] text-lg md:text-[36px] font-josefin font-semibold capitalize'>{products.title}</h2>
             <div className='flex gap-2 items-center mt-3'>
               <div className='flex gap-1 '>
                 <span><FaStar className='text-[#FFC416] text-[10px]' /></span>
@@ -220,14 +220,14 @@ const ProductDetails = () => {
               <p className={`text-[16px] text-[#FB2E86]  ${products?.discount ? 'line-through' : ''}`}>$ <span> {products.price}</span></p>
             </div>
             <h4 className='text-[#151875] text-[16px] font-josefin font-semibold mt-4 capitalize'>Color : <span className={`w-10 h-10 rounded-full bg-[${products.color}]`}>{
-            products?.color === "#FF0000" ? 'red' : ''
-              || products?.color === "#FFFF00" ? 'Yellow' : ''
-                || products?.color === "#0000FF" ? 'Blue' : ''
-                  || products?.color === "#FFA500" ? 'Orange' : ''
-                    || products?.color === "#A52A2A" ? 'Brown' : ''
-                      || products?.color === "#008000" ? 'Green' : ''
-                        || products?.color === "#800080" ? 'Purple' : ''
-                          || products?.color === "#87CEEB" ? 'Sky' : ''
+              products?.color === "#FF0000" ? 'red' : ''
+                || products?.color === "#FFFF00" ? 'Yellow' : ''
+                  || products?.color === "#0000FF" ? 'Blue' : ''
+                    || products?.color === "#FFA500" ? 'Orange' : ''
+                      || products?.color === "#A52A2A" ? 'Brown' : ''
+                        || products?.color === "#008000" ? 'Green' : ''
+                          || products?.color === "#800080" ? 'Purple' : ''
+                            || products?.color === "#87CEEB" ? 'Sky' : ''
 
 
             }</span> </h4>
@@ -256,7 +256,7 @@ const ProductDetails = () => {
       <div className='bg-[#F9F8FE] py-[109px]'>
         <Container>
           <Tabs>
-            <TabList className=" flex gap-16 items-center text-xl py-6 ">
+            <TabList className=" flex gap-2 md:gap-16 flex-wrap items-center text-xl md:py-6 mb-16 md:mb-0">
               <Tab className='text-[#151875] text-2xl font-josefin font-semibold outline-0 transition-all duration-300'>Description</Tab>
               <Tab className='text-[#151875] text-2xl font-josefin font-semibold outline-0 transition-all duration-300'>Additional Info</Tab>
               <Tab className='text-[#151875] text-2xl font-josefin font-semibold outline-0 transition-all duration-300'>Reviews</Tab>
@@ -279,71 +279,71 @@ const ProductDetails = () => {
               </div></h2>
             </TabPanel>
             <TabPanel>
-              <p>{products?.descaption}</p>
+              <p className='mt-6'>{products?.descaption}</p>
 
             </TabPanel>
             <TabPanel>
-              <Container>
-                <div className=" mt-6 md:mt-[111px]">
-                  {reviews?.slice(0,4).map(review =>
-                    <div className="w-[668px] shadow-commentuserShadow p-[14px] flex gap-[14px] items-center">
+
+              <div className=" mt-6 md:mt-[111px]">
+                {reviews?.slice(0, 4).map(review =>
+                  <div className="max-w-[668px] shadow-commentuserShadow p-[14px] flex gap-[14px] items-center">
+                    <div>
+                      <div className="image w-12 h-12 md:w-[103px] md:h-[106px]">
+                        <img src={review?.auth.userImage} alt="" className="w-full h-full object-cover" />
+                      </div>
+                    </div>
+
+                    <div className="content w-full">
+                      <div className="flex justify-between items-center">
+                        <h2 className="text-[#363385] text-sm md:text-lg font-josefin font-semibold">{review?.auth.userName}</h2>
+                        <span className="text-[#A3A2B6] text-[12px] font-normal">{review?.reviewAt}</span>
+                      </div>
+                      <p className="text-[12px] font-normal font-josefin">{review?.review}</p>
                       <div>
-                        <div className="image w-[103px] h-[106px]">
-                          <img src={review?.auth.userImage} alt="" className="w-full h-full object-cover" />
-                        </div>
-                      </div>
-
-                      <div className="content w-full">
-                        <div className="flex justify-between items-center">
-                          <h2 className="text-[#363385] text-lg font-josefin font-semibold">{review?.auth.userName}</h2>
-                          <span className="text-[#A3A2B6] text-[12px] font-normal">{review?.reviewAt}</span>
-                        </div>
-                        <p className="text-[12px] font-normal font-josefin">{review?.review}</p>
-                        <div>
                         <Rating
-                                        style={{ maxWidth: 120,fontSize:4 }}
-                                        value={review?.rating}
-                                        className='text-[5px]'
-                                        readOnly
-                                    />
-                        </div>
-                        {/* <p className="text-[12px] font-normal font-josefin">{review?.rating}</p> */}
+                          style={{ maxWidth: 120, fontSize: 4 }}
+                          value={review?.rating}
+                          className='text-[5px]'
+                          readOnly
+                        />
                       </div>
-
-                    </div>
-                  )}
-
-                </div>
-                <div>
-                  <form onSubmit={handleSubmit} className='mt-[46px] md:mt-[135px] max-w-[717px]'>
-                    <div className=" flex justify-between gap-6 items-center">
-                      <div className=" relative w-full">
-                        <FaUser className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
-                        <input name="name" className=" w-full   py-[13px] pl-[30px] border outline-0" type="text" placeholder="Your Name*" />
-                      </div>
-                      <div className=" relative w-full">
-                        <MdMarkEmailRead className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
-                        <input name="email" className=" w-full  py-[13px] pl-[30px] border outline-0" type="email" placeholder="Write Your Email*" />
-                      </div>
-
-                    </div>
-                    <div className='mt-[44px] relative '>
-                      <AiFillMessage className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
-                      <textarea name="review" className="inputtext w-full  py-[13px] pl-[30px] border outline-0 resize-none" cols="30" rows="10" placeholder="Write your comment*"></textarea>
-                    </div>
-                    <div className='mt-[44px] relative '>
-                      <RiSortNumberAsc className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
-                      <input name="rating" id='rating' min={1} max={5} className=" w-full  py-[13px] pl-[30px] border outline-0" type="number" placeholder="Your rating in 1 to 5 number *" />
+                      {/* <p className="text-[12px] font-normal font-josefin">{review?.rating}</p> */}
                     </div>
 
-                    <button className="w-full text-white bg-[#FB2E86] font-josefin text-[14px] rounded-[3px] border border-[#FB2E86] px-[20px] py-[10px] mt-[33px] capitalize">submit comment</button>
-                  </form>
-                </div>
-              </Container>
+                  </div>
+                )}
+
+              </div>
+              <div>
+                <form onSubmit={handleSubmit} className='mt-[46px] md:mt-[135px] max-w-[717px]'>
+                  <div className=" flex flex-col md:flex-row justify-between gap-6 items-center">
+                    <div className=" relative w-full">
+                      <FaUser className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
+                      <input name="name" className=" w-full   py-[13px] pl-[30px] border outline-0" type="text" placeholder="Your Name*" />
+                    </div>
+                    <div className=" relative w-full">
+                      <MdMarkEmailRead className='text-sm text-[#8A8FB9] absolute left-2 top-1/2 -translate-y-1/2' />
+                      <input name="email" className=" w-full  py-[13px] pl-[30px] border outline-0" type="email" placeholder="Write Your Email*" />
+                    </div>
+
+                  </div>
+                  <div className='mt-6 md:mt-[44px] relative '>
+                    <AiFillMessage className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
+                    <textarea name="review" className="inputtext w-full  py-[13px] pl-[30px] border outline-0 resize-none" cols="30" rows="10" placeholder="Write your comment*"></textarea>
+                  </div>
+                  <div className='mt-6 md:mt-[44px] relative '>
+                    <RiSortNumberAsc className='text-sm text-[#8A8FB9] absolute left-2 top-5 ' />
+                    <input name="rating" id='rating' min={1} max={5} className=" w-full  py-[13px] pl-[30px] border outline-0" type="number" placeholder="Your rating in 1 to 5 number *" />
+                  </div>
+
+                  <button className="w-full text-white bg-[#FB2E86] font-josefin text-[14px] rounded-[3px] border border-[#FB2E86] px-[20px] py-[10px] mt-[33px] capitalize">submit comment</button>
+                </form>
+              </div>
+
             </TabPanel>
             <TabPanel>
 
-              <h2>{products.descaption}</h2>
+              <h2 className='mt-6'>{products.descaption}</h2>
             </TabPanel>
           </Tabs>
 

@@ -22,7 +22,7 @@ const BlogCard = ({item}) => {
 
 
                 </div>
-                <h2 className='mt-7 text-[#151875] text-[30px] font-josefin font-bold'>{item.title}</h2>
+                <h2 className='mt-7 text-[#151875] text-xl md:text-[30px] font-josefin font-bold'>{item.title}</h2>
                 <p className='max-w-[852px] text-[#8A8FB9] font-josefin font-normal text-[16px]'>{item.descaption.slice(0,175)}</p>
               <Link  to={`/blog/${item._id}`}>
               

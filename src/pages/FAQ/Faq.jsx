@@ -33,17 +33,17 @@ const Faq = () => {
 
 
           </div>
-          <div className="right w-full md:1/2 bg-[#F8F8FD] py-[65px] px-12">
+          <div className="right w-full md:1/2 bg-[#F8F8FD] py-[65px] px-6 md:px-12">
 
             <h2 className='text-[#1D3178] text-2xl font-josefin font-bold'>Ask a Question</h2>
 
             <form className='mt-6 md:mt-16 lg:mt-[114px]'>
 
               <input className=" w-full   py-[13px] px-[11px] border outline-0" type="text" placeholder="Your Name*" />
-              <input className="mt-8 w-full  py-[13px] px-[11px] border outline-0" type="email" placeholder="Your E-mail" />
-              <input className="mt-8 w-full py-[13px] px-[11px] border outline-0" type="text" placeholder="Subject*" />
+              <input className="mt-2 md:mt-8 w-full  py-[13px] px-[11px] border outline-0" type="email" placeholder="Your E-mail" />
+              <input className="mt-2 md:mt-8 w-full py-[13px] px-[11px] border outline-0" type="text" placeholder="Subject*" />
               {/* <input className=" w-full mt-[47px] h-[197px]   py-[13px] px-[11px] border outline-0" type="text" placeholder="Type Your Message*" /> */}
-              <textarea className="mt-[47px] h-[197px] w-full  py-[13px] px-[11px] border outline-0 resize-none" cols="10" rows="10" placeholder="Type Your Message*"></textarea>
+              <textarea className="mt-2 md:mt-[47px]  w-full md:h-[197px]  py-[13px] px-[11px] border outline-0 resize-none" cols="10" rows='5' md:rows="10" placeholder="Type Your Message*"></textarea>
               <button type='submit' className="text-white bg-[#FB2E86] font-josefin text-[14px] rounded-[3px] border border-[#FB2E86] px-[20px] py-[10px] mt-[41px]">Send Mail</button>
             </form>
           </div>
