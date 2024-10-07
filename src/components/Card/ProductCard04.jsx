@@ -18,7 +18,7 @@ const ProductCard04 = ({product}) => {
             {/* box-shadow: 0px 12px 40px 0px rgba(49, 32, 138, 0.1) */}
             <div className=' group'>
                 <div className='w-[269px] h-[269px]  bg-[#F6F7FB] flex justify-center items-center  group-hover:shadow-[-5px_5px_1px_2px_rgba(149,117,230,1)] rounded-full transition-all duration-500'>
-                    <div className="image w-[269px] h-[269px] bg-[#F6F7FB] rounded-full shadow-[0px_12px_40px_0px_rgba(49,32,138,.1)] p-[52px]">
+                    <div className="image w-[269px] h-[269px] bg-[#F6F7FB] rounded-full shadow-[0px_12px_40px_0px_rgba(49,32,138,.1)] ">
                         <img src={product.image} alt="" className='w-full h-full object-cover bg-[#F6F7FB] rounded-full' />
                     </div>
                 </div>

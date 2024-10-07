@@ -10,9 +10,9 @@ const ProductCart09 = ({item}) => {
 
     return (
         <div className='w-[209px] group'>
-            <div className="image w-[209px] h-[254px] relative overflow-hidden">
+            <div className="image w-[209px] h-[254px] relative overflow-hidden shadow-cusshadow">
                 <img src='/sale.svg' className='absolute -top-full group-hover:top-[10px] left-4   py-2 px-3 transition-all duration-500' />
-                <div className='bg-[#F6F7FB] w-full h-full flex justify-center items-center p-6'>
+                <div className=' w-full h-full flex justify-center items-center '>
                     <img src={item.image} alt="" className='w-full h-full object-contain' />
                 </div>
 

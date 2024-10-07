@@ -11,9 +11,9 @@ const ProductCard03 = ({item}) => {
 
     return (
         <div className='w-[270px] group  bg-white shadow-customshadow p-3 overflow-hidden'>
-            <div className='relative w-[247px] h-[244px]  flex justify-center items-center '>
+            <div className='relative w-[247px] h-[244px]  flex justify-center items-center border border-[#f1f1f1]'>
                {item.discount && <p className='absolute top-3 left-3 py-1 px-2 bg-[#FB2E86] text-white rounded-sm'>{item.discount} %</p>}
-                <img src={item.image} alt="" className='w-full h-full object-contain' />
+                <img src={item.image} alt="" className='w-full h-full object-contain p-[12px]' />
                 <div className="icons absolute bottom-6 -left-full group-hover:left-4 flex flex-col gap-2 transition-all duration-500">
                     <Link onClick={() => handlecard(item)} className='w-[30px] h-[30px] rounded-full text-[#2F1AC4] bg-[#EEEFFB] flex justify-center items-center hover:text-[#FB2E86]  transition-all duration-500'><IoCartOutline /></Link>
                     <Link className='w-[30px] h-[30px] rounded-full text-[#1389FF] bg-[#EEEFFB] flex justify-center items-center hover:text-[#FB2E86]  transition-all duration-500'><FaRegHeart /></Link>

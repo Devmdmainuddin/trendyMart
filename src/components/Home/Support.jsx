@@ -14,8 +14,8 @@ const Support = () => {
                             <img src="/sup.png" alt="" className='w-full h-full object-contain group-hover:text-white transition-all duration-500' />
                         </div>
                         <div className="content">
-                            <h2 className='text-2xl text-[#151875] text-center font-josefin font-semibold group-hover:text-white transition-all duration-500'>24/7 Support</h2>
-                            <p className='font-bold text-[#15187587] text-center mt-5 group-hover:text-white transition-all duration-500'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</p>
+                            <h2 className='text-2xl text-[#151875] text-center font-josefin font-semibold group-hover:text-white transition-all duration-500'>Free Shipping</h2>
+                            <p className='font-bold text-[#15187587] text-center mt-5 group-hover:text-white transition-all duration-500'>Free shipping on all US orders</p>
 
                         </div>
 
@@ -26,8 +26,8 @@ const Support = () => {
                             <img src="/sup01.png" alt="" className='w-full h-full object-contain group-hover:text-white transition-all duration-500' />
                         </div>
                         <div className="content">
-                            <h2 className='text-2xl text-[#151875] text-center font-josefin font-semibold group-hover:text-white transition-all duration-500'>24/7 Support</h2>
-                            <p className='font-bold text-[#15187587] text-center mt-5 group-hover:text-white transition-all duration-500'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</p>
+                            <h2 className='text-2xl text-[#151875] text-center font-josefin font-semibold group-hover:text-white transition-all duration-500'>Safe Payment</h2>
+                            <p className='font-bold text-[#15187587] text-center mt-5 group-hover:text-white transition-all duration-500'>We ensure secure payment with PEV</p>
 
                         </div>
 
@@ -38,8 +38,8 @@ const Support = () => {
                             <img src="/sup02.png" alt="" className='w-full h-full object-contain group-hover:text-white transition-all duration-500' />
                         </div>
                         <div className="content">
-                            <h2 className='text-2xl text-[#151875] text-center font-josefin font-semibold group-hover:text-white transition-all duration-500'>24/7 Support</h2>
-                            <p className='font-bold text-[#15187587] text-center mt-5 group-hover:text-white transition-all duration-500'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</p>
+                            <h2 className='text-2xl text-[#151875] text-center font-josefin font-semibold group-hover:text-white transition-all duration-500'>Free Returns</h2>
+                            <p className='font-bold text-[#15187587] text-center mt-5 group-hover:text-white transition-all duration-500'>Simply return it within 30 days.</p>
 
                         </div>
 
@@ -51,7 +51,7 @@ const Support = () => {
                         </div>
                         <div className="content">
                             <h2 className='text-2xl text-[#151875] group-hover:text-white text-center font-josefin font-semibold transition-all duration-500'>24/7 Support</h2>
-                            <p className='font-bold text-[#15187587] group-hover:text-white text-center mt-5 transition-all duration-500'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</p>
+                            <p className='font-bold text-[#15187587] group-hover:text-white text-center mt-5 transition-all duration-500'>24 hours a day, 7 days a week</p>
 
                         </div>
 

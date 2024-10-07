@@ -38,9 +38,9 @@ const ProductCard06 = ({item}) => {
 
     return (
         <div className='w-[270px] group'>
-        <div className="image w-[270px] h-[280px] relative overflow-hidden">
+        <div className="image w-[270px] h-[280px] relative overflow-hidden shadow-cusshadow">
         {item?.discount &&  <p className='absolute -top-full group-hover:top-[10px] left-4  py-2 px-3  bg-[#FB2E86] text-white  transition-all duration-500 rounded-md' > {item?.discount} %</p>}  
-            <div className='bg-[#F6F7FB]  w-[270px] h-[280px] flex justify-center items-center border'>
+            <div className='  w-[270px] h-[280px] flex justify-center items-center '>
                 <img src={item?.image} alt=""  className='w-full h-full object-cover'/>
             </div>
             <div className="icons absolute bottom-6 -left-full group-hover:left-4 flex flex-col gap-2 transition-all duration-500">

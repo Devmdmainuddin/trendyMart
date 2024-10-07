@@ -37,13 +37,13 @@ const ProductCard01 = ({item}) => {
 
     return (
         <div className='w-[270px] group'>
-            <div className="image w-[270px] h-[236px] relative overflow-hidden">
+            <div className="image w-[270px] h-[236px] relative overflow-hidden shadow-cusshadow">
                 <div className="icons absolute top-[11px] -left-full group-hover:left-[11px] flex gap-2 transition-all duration-500">
                     <button onClick={() => handlecard(item)} className='w-[30px] h-[30px] rounded-full text-[#2F1AC4] bg-[#EEEFFB] flex justify-center items-center hover:text-[#FB2E86]  transition-all duration-500'><IoCartOutline /></button>
                     <Link className='w-[30px] h-[30px] rounded-full text-[#1389FF] bg-[#EEEFFB] flex justify-center items-center hover:text-[#FB2E86]  transition-all duration-500'><FaRegHeart /></Link>
                     <Link className='w-[30px] h-[30px] rounded-full text-[#1DB4E7] bg-[#EEEFFB] flex justify-center items-center hover:text-[#FB2E86]  transition-all duration-500'><MdOutlineReviews /></Link>
                 </div>
-                <div className='w-full h-full bg-[#F6F7FB] flex justify-center items-center p-6'>
+                <div className='w-full h-full  flex justify-center items-center '>
                     <img src={item.image} alt="" className='w-full h-full object-contain'/>
                     </div>
                 <Link to={`/product/${item._id}`} >
