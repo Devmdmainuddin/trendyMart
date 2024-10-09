@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { FaCheck, FaCheckSquare } from 'react-icons/fa';
 
-const Sidebar = ({handlebrandfilter, colors,  handlePriceChange, selectedRanges, cetegorey, handleCategoriesChange, selectedCategories, brand, selectedBrand, handleBrandChange, }) => {
+const Sidebar = ({handlebrandfilter,discount,selectedDiscount,handleDiscountChange, colors,  handlePriceChange, selectedRanges, cetegorey, handleCategoriesChange, selectedCategories, brand, selectedBrand, handleBrandChange, }) => {
 
-    const [selectedDiscount, setSelectedDiscount] = useState([]);
+    // const [selectedDiscount, setSelectedDiscount] = useState([]);
     const [label, setSelectedlabel] = useState([]);
     const [selectedColors, setSelectedColors] = useState([]);
 
@@ -27,22 +27,18 @@ const Sidebar = ({handlebrandfilter, colors,  handlePriceChange, selectedRanges,
     //     }
     // };
 
-    const discountOptions = [
-        "20% Cashback",
-        "5% Cashback Offer",
-        "25% Discount Offer",
-    ]
+    
 
-    const handleDiscountChange = (event) => {
-        const value = event.target.value;
-        setSelectedDiscount((prevSelected) => {
-            if (prevSelected.includes(value)) {
-                return prevSelected.filter((item) => item !== value);
-            } else {
-                return [...prevSelected, value];
-            }
-        });
-    };
+    // const handleDiscountChange = (event) => {
+    //     const value = event.target.value;
+    //     setSelectedDiscount((prevSelected) => {
+    //         if (prevSelected.includes(value)) {
+    //             return prevSelected.filter((item) => item !== value);
+    //         } else {
+    //             return [...prevSelected, value];
+    //         }
+    //     });
+    // };
     // const colors = [
     //     { label: "Red", value: "#FF0000" },
     //     { label: "Yellow", value: "#FFFF00" },
@@ -54,15 +50,15 @@ const Sidebar = ({handlebrandfilter, colors,  handlePriceChange, selectedRanges,
     //     { label: "Sky", value: "#87CEEB" }
     // ];
 
-    const handleColorChange = (color) => {
-        if (selectedColors.includes(color)) {
-            // Remove color if already selected
-            setSelectedColors(selectedColors.filter((c) => c !== color));
-        } else {
-            // Add the selected color
-            setSelectedColors([...selectedColors, color]);
-        }
-    };
+    // const handleColorChange = (color) => {
+    //     if (selectedColors.includes(color)) {
+    //         // Remove color if already selected
+    //         setSelectedColors(selectedColors.filter((c) => c !== color));
+    //     } else {
+    //         // Add the selected color
+    //         setSelectedColors([...selectedColors, color]);
+    //     }
+    // };
     useEffect(() => {
         if (colors === "#FF0000") {
             setSelectedlabel('Red')
@@ -98,7 +94,7 @@ const Sidebar = ({handlebrandfilter, colors,  handlePriceChange, selectedRanges,
                 {/* Offer */}
                 <div >
                     <h2 className='text-xl text-[#151875] leading-7 font-josefin font-bold underline md:mt-10'>Discount Offer</h2>
-                    {discountOptions.map((item) => (
+                    {discount.map((item) => (
                         <div key={item} className='mt-2'>
                             <label className='flex items-center  text-[#7E81A2]'>
                                 <input
@@ -111,7 +107,7 @@ const Sidebar = ({handlebrandfilter, colors,  handlePriceChange, selectedRanges,
                                 <span className={` flex  items-center ${selectedDiscount.includes(item) ? 'text-[#FF3EB2]' : 'text-[#FFDBF1]'}`}>
                                     <FaCheckSquare />
                                 </span>
-                                <span className="peer-checked:text-[#FF3EB2] ml-2">{item}</span>
+                                <span className="peer-checked:text-[#FF3EB2] ml-2 capitalize">{parseInt(item)>0?item:0}% discount offer</span>
                             </label>
                         </div>
                     ))}

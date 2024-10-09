@@ -22,8 +22,10 @@ const Shop = () => {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedBrand, setSelectedBrand] = useState([]);
     const [selectedRanges, setSelectedRanges] = useState([]);
+    const [discount, setDiscount] = useState([]);
+    const [selectedDiscount, setSelectedDiscount] = useState([]);
     const [activeMulti, setActiveMulti] = useState(true)
-
+// console.log(discount);
 
     // Handle category change
     const handleCategoriesChange = (event) => {
@@ -62,6 +64,20 @@ const Shop = () => {
 };
 
 
+
+
+const handleDiscountChange = (event) => {
+    const value = event.target.value;
+    setSelectedDiscount((prevSelected) => {
+        if (prevSelected.includes(value)) {
+            return prevSelected.filter((item) => item !== value);
+        } else {
+            return [...prevSelected, value];
+        }
+    });
+};
+
+
  const filteredItems = useMemo(() => {
         if (!data) return [];
 
@@ -69,15 +85,17 @@ const Shop = () => {
             const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(item.categorys.category);
             const matchesBrand = selectedBrand.length === 0 || selectedBrand.includes(item.brand);
             const matchesPrice = selectedRanges.length === 0 || selectedRanges.some( (range) => item.price >= range[0] && item.price <= range[1]);
-            return matchesCategory && matchesBrand && matchesPrice;
+            const matchesDiscount = selectedDiscount.length === 0 || selectedDiscount.includes(item.discount);
+            return matchesCategory && matchesBrand && matchesPrice && matchesDiscount;
         });
-    }, [data, selectedCategories, selectedBrand,selectedRanges]);
+    }, [data, selectedCategories, selectedBrand,selectedRanges,selectedDiscount]);
 
     useEffect(() => {
         if (data) {
             setCategorey([... new Set(data?.map(item => item.categorys.category))])
             setBrand([... new Set(data?.map(item => item.brand))])
             setColors([... new Set(data?.map(item => item.color))])
+            setDiscount([... new Set(data?.map(item => item.discount))])
             setItem(data)
         }
 
@@ -91,6 +109,20 @@ const Shop = () => {
         const filterItem = data?.filter(items => items.color === filter);
         setItem(filterItem);
     }
+
+
+// Filter products based on selected discount
+//   useEffect(() => {
+//     if (data) {
+//       const filteredItems = data.filter((product) => {
+//         if (selectedDiscount.length === 0) {
+//           return true; // No discount selected, show all products
+//         }
+//         return selectedDiscount.some((discount) => product.discount === discount);
+//       });
+//       setItem(filteredItems);
+//     }
+//   }, [data, selectedDiscount]);
 
 
 
@@ -133,7 +165,7 @@ const Shop = () => {
             <Container>
                 <div className='flex gap-[18px] justify-between flex-col md:flex-row  mt-16 md:mt-[125px]'>
                     <div className=''>
-                        <Sidebar handlebrandfilter={handlebrandfilter} colors={colors}  handlePriceChange={handlePriceChange} selectedRanges={selectedRanges} cetegorey={cetegorey} handleCategoriesChange={handleCategoriesChange} selectedCategories={selectedCategories} brand={brand} handleBrandChange={handleBrandChange} selectedBrand={selectedBrand}></Sidebar>
+                        <Sidebar handleDiscountChange={handleDiscountChange} selectedDiscount={selectedDiscount} discount={discount} handlebrandfilter={handlebrandfilter} colors={colors}  handlePriceChange={handlePriceChange} selectedRanges={selectedRanges} cetegorey={cetegorey} handleCategoriesChange={handleCategoriesChange} selectedCategories={selectedCategories} brand={brand} handleBrandChange={handleBrandChange} selectedBrand={selectedBrand}></Sidebar>
                     </div>
                     <div className='flex flex-wrap gap-8 w-full'>
                         {data ? content : <p>no product</p>}

@@ -95,8 +95,8 @@ const Navbar = () => {
                     <div className='flex justify-between items-center'>
                         <div>
                             <ul className='flex gap-12 items-center'>
-                                <li className='flex gap-2 items-center text-white hover:text-[#FB2E86] transition-all duration-300 text-[16px]  font-josefin font-semibold'><span></span> mhhasanul@gmail.com</li>
-                                <li className='flex gap-2 items-center text-white hover:text-[#FB2E86] transition-all duration-300 text-[16px]  font-josefin font-semibold'><span></span> (12345)67890</li>
+                                <li className='flex gap-2 items-center text-white hover:text-[#FB2E86] transition-all duration-300 text-[16px]  font-josefin font-semibold'><span></span> devmdmainuddin@gmail.com</li>
+                                <li className='flex gap-2 items-center text-white hover:text-[#FB2E86] transition-all duration-300 text-[16px]  font-josefin font-semibold'><span></span> 01759483544</li>
                             </ul>
 
                         </div>
@@ -135,7 +135,7 @@ const Navbar = () => {
                                     </div>
                                 )}
                                 <li className=' text-white '> <button className='flex gap-1 items-center'> wishlist <FaRegHeart className='text-white' /><span></span></button></li>
-                                <li className=' text-white '><button ref={cartRef} className='flex gap-1 items-center relative'><FaCartPlus className='text-white text-lg ' /> {carts?.length > 0 ? <span className="text-red-500 bg-white w-5 h-5 border p-1 rounded-full text-center absolute -top-3 -right-3 flex justify-center items-center">{carts?.length}</span> : ''}</button></li>
+                                <li  className=' text-white'><button ref={cartRef} className='flex gap-1 items-center relative'><FaCartPlus className='text-white text-lg ' /> {carts?.length > 0 ? <span className="text-red-500 bg-white w-5 h-5 border p-1 rounded-full text-center absolute -top-3 -right-3 flex justify-center items-center">{carts?.length}</span> : ''}</button></li>
                                 {cartOpen && (
                                     <div className="block w-[360px]  absolute z-50 top-full right-0 bg-slate-50 border translate-y-6">
                                         <div className={`w-full  overflow-y-scroll ${carts.length > 0 ? 'h-[320px]' : ''}`}>
@@ -197,20 +197,13 @@ const Navbar = () => {
                         {/* <ul className={`lg:flex gap-[35px] bg-slate-300 lg:bg-transparent p-6 lg:p-0 text-[#0D0E43] text-[16px] font-normal text-center lg:text-start absolute lg:static transition-all duration-300 ease-in-out z-[9999999]  top-full -left-full ${menu?'left-1/2 -translate-x-1/2':'top-0 '}`}> */}
                         <ul className={`flex flex-col lg:flex-row lg:justify-center lg:items-center gap-y-3 lg:gap-x-10 lg:bg-transparent bg-[#ebeaeae9] text-center  transition-all duration-500  lg:static p-6 lg:p-0  absolute top-full -left-8 w-full z-50 -translate-x-full lg:translate-x-0 ${menu ? "translate-x-8" : "  "} `}>
                             <li className="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/">Home</NavLink></li>
-                            <li className="text-[#0D0E43] hover:text-[#FB2E86] group transition-all duration-500 relative "><NavLink to='/ShopGridDefault'>Pages</NavLink>
-                                <ul className='w-[170px] p-3 mt-[25px] md:mt-[75px] bg-[#d4d3d33c]  absolute -top-full right-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-50 transition-all duration-500'>
-                                    <li className='text-[#0D0E43] hover:text-[#FB2E86]'><NavLink to='/ShopGridDefault'>Shop Grid Default</NavLink> </li>
-                                    <li className='text-[#0D0E43] hover:text-[#FB2E86] my-1'> <NavLink to='/shopList'>Shop List</NavLink> </li>
-                                    <li className='text-[#0D0E43] hover:text-[#FB2E86]'><NavLink to='shop_Left_Sidebar'>Shop Left Sidebar</NavLink> </li>
-                                </ul>
-                            </li>
                             <li className="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/products">Products</NavLink></li>
                             <li className="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/blogs">Blog</NavLink></li>
                             <li className="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/shop">Shop</NavLink></li>
                             <li className="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/about">About</NavLink></li>
                             <li className="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/contact">Contact</NavLink></li>
                             <li className="text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500"><NavLink to="/FAQ">FAQ</NavLink></li>
-                            <li className=" text-[#0D0E43] hover:text-[#FB2E86] transition-all duration-500 lg:hidden flex justify-center items-center"><button ref={cartRef} className='flex gap-1 items-center justify-center relative'><FaCartPlus className='text-[#262626] text-lg ' /> {carts?.length > 0 ? <span className="text-red-500 bg-white w-5 h-5 border p-1 rounded-full text-center absolute -top-3 -right-3 flex justify-center items-center">{carts?.length}</span> : ''}</button></li>
+                           
 
                         </ul>
                     </div>
