@@ -24,27 +24,25 @@ const Checkout = () => {
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
-
+const id=carts.map(item=>item._id)
     const handlePayment = () => {
-        fetch('http://localhost:5000/create-payment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                amount: 5000,
-                currency: 'USD'
-            }),
+        axios.post('http://localhost:5000/create-payment', {
+            
+          
+            productID: id,
+            shippingInfo: data,
+            
         })
-            .then(response => response.text()) // Change to .text() for plain text response
-            .then(data => {
-                console.log(data); // Will log "result"
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+            .then(response => {
+                console.log(response);
+                const redirecturl = response.data.paymentUrl
+                // redirectGatewayURL
+                if (redirecturl) {
+                    window.location.replace(redirecturl);
+                }
+            }) 
     };
-    
+
 
     return (
         <div>

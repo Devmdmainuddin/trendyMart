@@ -31,6 +31,8 @@ import ManageProduct from "../pages/Dashboard/Admin/ManageProduct";
 import EdditProductCard from "../pages/Dashboard/Admin/EdditProductCard";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import AdminRoute from './AdminRoute'
+import OrderCancle from "../pages/cart/OrderCancle";
+import OrderFail from "../pages/cart/OrderFail";
 
 export const router = createBrowserRouter([
     {
@@ -96,6 +98,14 @@ export const router = createBrowserRouter([
               {
                 path: "/orderComplete",
                 element:<PrivateRoute><OrderComplete /></PrivateRoute>,
+              },
+              {
+                path: "/orderCancle",
+                element:<PrivateRoute><OrderCancle/></PrivateRoute>,
+              },
+              {
+                path: "/orderfail",
+                element:<PrivateRoute><OrderFail /></PrivateRoute>,
               },
               {
                 path: "/checkout",
