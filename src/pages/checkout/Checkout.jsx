@@ -4,6 +4,8 @@ import Container from '../../components/Shared/Container';
 import { useGetUserByEmailQuery } from '../../Featured/auth/authApi';
 import useAuth from '../../hooks/useAuth';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Checkout = () => {
     const { user, logOut, setLoading, loading } = useAuth()
@@ -22,6 +24,28 @@ const Checkout = () => {
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
+
+    const handlePayment = () => {
+        fetch('http://localhost:5000/create-payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                amount: 5000,
+                currency: 'USD'
+            }),
+        })
+            .then(response => response.text()) // Change to .text() for plain text response
+            .then(data => {
+                console.log(data); // Will log "result"
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    };
+    
+
     return (
         <div>
             <Bredcumb></Bredcumb>
@@ -33,7 +57,7 @@ const Checkout = () => {
                                 <h3 className='text-[#1D3178] text-lg font-josefin font-bold'>Contact Information</h3>
                                 <div className='flex gap-2 text-sm text-[#C1C8E1] font-josefin font-medium '>
                                     <p>Already have an account?</p>
-                                    <button className='text-[#1D3178]'>Login</button>
+                                    <Link to='/myAccount/login'> <button className='text-[#1D3178]'>Login</button></Link>
                                 </div>
 
                             </div>
@@ -101,20 +125,20 @@ const Checkout = () => {
                                         <div className="text-sm font-josefin font-normal text-[#000000] capitalize">{item.title}</div>
                                         <div>
                                             <h5 className="text-[#A1A8C1] text-sm font-josefin font-normal capitalize">Color: <span>{
-                                            item?.color === "#FF0000" ? 'red' : ''
-              || item?.color === "#FFFF00" ? 'Yellow' : ''
-                || item?.color === "#0000FF" ? 'Blue' : ''
-                  || item?.color === "#FFA500" ? 'Orange' : ''
-                    || item?.color === "#A52A2A" ? 'Brown' : ''
-                      || item?.color === "#008000" ? 'Green' : ''
-                        || item?.color === "#800080" ? 'Purple' : ''
-                          || item?.color === "#87CEEB" ? 'Sky' : ''}</span> </h5>
+                                                item?.color === "#FF0000" ? 'red' : ''
+                                                    || item?.color === "#FFFF00" ? 'Yellow' : ''
+                                                        || item?.color === "#0000FF" ? 'Blue' : ''
+                                                            || item?.color === "#FFA500" ? 'Orange' : ''
+                                                                || item?.color === "#A52A2A" ? 'Brown' : ''
+                                                                    || item?.color === "#008000" ? 'Green' : ''
+                                                                        || item?.color === "#800080" ? 'Purple' : ''
+                                                                            || item?.color === "#87CEEB" ? 'Sky' : ''}</span> </h5>
                                             <h5 className="text-[#A1A8C1] text-sm font-josefin font-normal capitalize">Quantity: <span>{item.qun}</span> </h5>
                                         </div>
 
                                     </div>
                                 </div>
-                                <p></p>  <span className="text-sm text-[#15245E] font-josefin font-normal">${item.discount? parseInt(item?.price) - ((parseInt(item?.price) * parseInt(item?.discount)) / 100) :  item.price}</span>
+                                <p></p>  <span className="text-sm text-[#15245E] font-josefin font-normal">${item.discount ? parseInt(item?.price) - ((parseInt(item?.price) * parseInt(item?.discount)) / 100) : item.price}</span>
 
                             </div>
                         )}
@@ -125,7 +149,7 @@ const Checkout = () => {
 
                             <h4 className="border-b border-[#E8E6F1] text-[#1D3178] text-lg font-josefin font-semibold flex justify-between items-center">Subtotals: <p>$ <span>{totalprice}</span></p> </h4>
                             <h4 className="border-b border-[#E8E6F1] text-[#1D3178] text-lg font-josefin font-semibold flex justify-between items-center mt-8">shipping cost: <p>$ <span>50</span></p> </h4>
-                            <h4 className="border-b border-[#E8E6F1] text-[#1D3178] text-lg font-josefin font-semibold flex justify-between items-center mt-8">Totals: <p>$ <span>{totalprice+50}</span></p> </h4>
+                            <h4 className="border-b border-[#E8E6F1] text-[#1D3178] text-lg font-josefin font-semibold flex justify-between items-center mt-8">Totals: <p>$ <span>{totalprice + 50}</span></p> </h4>
 
                             <div className="mt-4">
 
@@ -140,7 +164,7 @@ const Checkout = () => {
                                 <label htmlFor="shipping" className='text-[#8A91AB] text-[12px] font-normal'>Shipping & taxes calculated at checkout</label>
                             </div>
 
-                            <button className="text-sm font-josefin font-semibold py-3 w-full bg-[#19D16F] text-white rounded-sm mt-8">Proceed To Checkout</button>
+                            <button onClick={handlePayment} className="text-sm font-josefin font-semibold py-3 w-full bg-[#19D16F] text-white rounded-sm mt-8">Proceed To Checkout</button>
 
 
                         </div>
