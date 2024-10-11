@@ -2,6 +2,7 @@ import { IoMdCheckmark } from "react-icons/io";
 import Bredcumb from "../../components/Shared/Bredcumb";
 import Container from "../../components/Shared/Container";
 import Company from "../../components/Home/Company";
+import { Link } from "react-router-dom";
 
 
 const OrderComplete = () => {
@@ -18,7 +19,7 @@ const OrderComplete = () => {
                             hours. You will receive an email confirmation when your order is completed.
                         </p>
                         <div className="flex justify-center items-center">
-                        <button className="inline-block text-sm font-josefin font-semibold py-3 px-5  bg-[#FB2E86] text-white rounded-sm capitalize mt-4 ">Continue Shopping</button>
+                     <Link to='/shop'> <button className="inline-block text-sm font-josefin font-semibold py-3 px-5  bg-[#FB2E86] text-white rounded-sm capitalize mt-4 ">Continue Shopping</button> </Link>  
                         </div>
                        
                     </div>

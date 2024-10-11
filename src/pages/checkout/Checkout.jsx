@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Bredcumb from '../../components/Shared/Bredcumb';
 import Container from '../../components/Shared/Container';
 import { useGetUserByEmailQuery } from '../../Featured/auth/authApi';
 import useAuth from '../../hooks/useAuth';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { clearCart } from '../../Featured/CartAPI/cartSlice';
 
 const Checkout = () => {
     const { user, logOut, setLoading, loading } = useAuth()
     const carts = useSelector((state) => state.cart.cartItem)
+    const dispatch = useDispatch();
     const email = user?.email;
     const { data, error, isLoading } = useGetUserByEmailQuery(email);
     const [isChecked, setIsChecked] = useState(false);
@@ -24,24 +26,40 @@ const Checkout = () => {
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
-const id=carts.map(item=>item._id)
+    
+    const id = carts?.map(item => item._id)
+
     const handlePayment = () => {
         axios.post('http://localhost:5000/create-payment', {
-            
-          
+
             productID: id,
-            shippingInfo: data,
-            
+            cus_name: data?.firstName + ' ' + data?.lastName,
+            cus_email: data?.email,
+            cus_add: data?.address,
+            cus_country: data?.country,
+            cus_postcode: data?.postCode,
+            cus_city: data?.city,
+            cartItems: carts.map(item => { 
+                return {
+                    productID: item._id,
+                    product_price: item.price,
+                    product_quantity: item.qun,
+                    product_name: item.name,
+                    product_image: item.image
+                };
+            }),
+
         })
             .then(response => {
-                console.log(response);
                 const redirecturl = response.data.paymentUrl
-                // redirectGatewayURL
                 if (redirecturl) {
                     window.location.replace(redirecturl);
+                    dispatch(clearCart());
                 }
-            }) 
+
+            })
     };
+
 
 
     return (
