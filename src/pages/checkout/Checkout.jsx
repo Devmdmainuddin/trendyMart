@@ -26,11 +26,11 @@ const Checkout = () => {
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
-    
+
     const id = carts?.map(item => item._id)
 
     const handlePayment = () => {
-        axios.post('http://localhost:5000/create-payment', {
+        axios.post('https://trendy-mart-server.vercel.app/create-payment', {
 
             productID: id,
             cus_name: data?.firstName + ' ' + data?.lastName,
