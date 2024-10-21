@@ -13,6 +13,7 @@ import Blogs from '../../components/Home/Blogs';
 import Banner03 from '../../components/Home/Banner03';
 import FeaturesBanner from '../../components/Home/FeaturesBanner';
 import DiscountItem from '../../components/Home/DiscountItem';
+import ScrollToTop from "react-scroll-to-top";
 
 const Home = () => {
     return (
@@ -29,7 +30,7 @@ const Home = () => {
            <SingleBanner></SingleBanner>
            <Company></Company>
            <Blogs></Blogs>
-           
+           <ScrollToTop smooth className='flex justify-center items-center'/>
         </div>
     );
 };
